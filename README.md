@@ -13,7 +13,7 @@ BlueReader is an unofficial, open source Android client for Bluesky. It is forke
 * Lower the minimum required Android version from 4.1 (Jelly Bean) to 4.0 (Ice Cream Sandwich)
 * Increase the target Android version from Android 12 to Android 14
 * Improve shipped icons for Material You adaptive design
-* Add TLS 1.2 support to the application on Android 4.x
+* Add TLS 1.2 and 1.3 support to the application on Android 4.x
 * Change dialogs from using forced Material Design to using the system style (Holo on Android 4.x, Material on Android 5+, Samsung's on TouchWiz/OneUI, etc...)
 * And much more
   
