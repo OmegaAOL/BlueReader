@@ -17,7 +17,7 @@ BlueReader is an unofficial, open source Android client for Bluesky. It is forke
 * Change dialogs from using forced Material Design to using the system style (Holo on Android 4.x, Material on Android 5+, Samsung's on TouchWiz/OneUI, etc...)
 * And much more
   
-# Features
+## Features
 
 * Free and open source, with no ads or tracking
 * Lightweight and fast
@@ -35,33 +35,32 @@ BlueReader is an unofficial, open source Android client for Bluesky. It is forke
 * Accessibility features and optimization for screen reader use
 
 
-# Downloading
+## Downloading
 
 Currently if you want to get BlueReader you will have to download from 
 releases, GitHub Actions, or build from source.
 
 
-# Pull Requests
+## Pull requests
 
 Please see the contribution guidelines in
  [CONTRIBUTING.md](CONTRIBUTING.md). 
 
 
-# Building
+## Building
 
 BlueReader is built using Gradle. On Linux, simply run:
 
     ./gradlew installDebug
 
 
-# License
+## License
 
 BlueReader, like RedReader, is licensed under the GPLv3. A copy of 
 the license is included in [LICENSE.txt](LICENSE.txt).
 
 
-Thanks
-------
+## Thanks
 
 A full list of contributors is included in the 
 [changelog](src/main/assets/changelog.txt).
