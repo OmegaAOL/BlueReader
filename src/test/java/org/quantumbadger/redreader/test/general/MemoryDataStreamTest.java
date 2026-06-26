@@ -1,9 +1,9 @@
-package org.quantumbadger.redreader.test.general;
+package org.omegaaol.bluereader.test.general;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.quantumbadger.redreader.common.General;
-import org.quantumbadger.redreader.common.datastream.MemoryDataStream;
+import org.omegaaol.bluereader.common.General;
+import org.omegaaol.bluereader.common.datastream.MemoryDataStream;
 
 import java.io.IOException;
 

@@ -6,7 +6,7 @@
 		xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd"
 		name="Custom ruleset">
 
-	<description>RedReader custom PMD rules</description>
+	<description>BlueReader custom PMD rules</description>
 
 	<!--
 	 	List of rules to be added in future, once the code is cleaned up:

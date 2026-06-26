@@ -25,8 +25,8 @@ jobs:
             -   name: Upload artifact to GitHub
                 uses: actions/upload-artifact@v2
                 with:
-                    name: RedReader-debug.apk
-                    path: build/outputs/apk/debug/RedReader-debug.apk
+                    name: BlueReader-debug.apk
+                    path: build/outputs/apk/debug/BlueReader-debug.apk
 
             -   name: Run PMD
                 run: ./gradlew pmd

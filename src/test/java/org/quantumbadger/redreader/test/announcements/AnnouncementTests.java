@@ -1,28 +1,28 @@
 /*******************************************************************************
- * This file is part of RedReader.
+ * This file is part of BlueReader.
  *
- * RedReader is free software: you can redistribute it and/or modify
+ * BlueReader is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * RedReader is distributed in the hope that it will be useful,
+ * BlueReader is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with RedReader.  If not, see <http://www.gnu.org/licenses/>.
+ * along with BlueReader.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package org.quantumbadger.redreader.test.announcements;
+package org.omegaaol.bluereader.test.announcements;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.quantumbadger.redreader.common.time.TimeDuration;
-import org.quantumbadger.redreader.common.time.TimestampUTC;
-import org.quantumbadger.redreader.receivers.announcements.Announcement;
-import org.quantumbadger.redreader.receivers.announcements.Payload;
+import org.omegaaol.bluereader.common.time.TimeDuration;
+import org.omegaaol.bluereader.common.time.TimestampUTC;
+import org.omegaaol.bluereader.receivers.announcements.Announcement;
+import org.omegaaol.bluereader.receivers.announcements.Payload;
 
 import java.io.IOException;
 

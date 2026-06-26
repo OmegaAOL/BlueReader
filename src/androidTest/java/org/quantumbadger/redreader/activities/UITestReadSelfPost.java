@@ -1,4 +1,4 @@
-package org.quantumbadger.redreader.activities;
+package org.omegaaol.bluereader.activities;
 
 
 import android.view.View;
@@ -15,7 +15,7 @@ import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.quantumbadger.redreader.R;
+import org.omegaaol.bluereader.R;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -57,7 +57,7 @@ public class UITestReadSelfPost {
 		onView(allOf(
 				withId(R.id.dialog_mainmenu_custom_value),
 				isDisplayed(),
-				isFocused())).perform(typeTextIntoFocusedView("redreader_public_test"));
+				isFocused())).perform(typeTextIntoFocusedView("bluereader_public_test"));
 
 		onView(allOf(withId(android.R.id.button1), withText("Go")))
 				.perform(click());

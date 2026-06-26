@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ This file is part of RedReader.
+  ~ This file is part of BlueReader.
   ~
-  ~ RedReader is free software: you can redistribute it and/or modify
+  ~ BlueReader is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ RedReader is distributed in the hope that it will be useful,
+  ~ BlueReader is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with RedReader.  If not, see <http://www.gnu.org/licenses/>.
+  ~ along with BlueReader.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <LinearLayout
@@ -40,7 +40,7 @@
 			android:elevation="10dp"
 			tools:ignore="UnusedAttribute">
 
-		<org.quantumbadger.redreader.views.IndentView
+		<org.omegaaol.bluereader.views.IndentView
 				android:id="@+id/view_reddit_comment_indentview"
 				android:layout_width="10dp"
 				android:layout_height="match_parent"/>

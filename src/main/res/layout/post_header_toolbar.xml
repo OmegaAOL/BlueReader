@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ This file is part of RedReader.
+  ~ This file is part of BlueReader.
   ~
-  ~ RedReader is free software: you can redistribute it and/or modify
+  ~ BlueReader is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ RedReader is distributed in the hope that it will be useful,
+  ~ BlueReader is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with RedReader.  If not, see <http://www.gnu.org/licenses/>.
+  ~ along with BlueReader.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <LinearLayout
@@ -36,7 +36,7 @@
 			android:layout_height="wrap_content"
 			android:padding="12dp"
 			android:background="?rrThemedButtonSelector"
-			android:contentDescription="@string/action_upvote"
+			android:contentDescription="@string/action_like"
 			android:src="?rrIconArrowUpBold"/>
 
 	<ImageButton
@@ -46,7 +46,7 @@
 			android:layout_height="wrap_content"
 			android:padding="12dp"
 			android:background="?rrThemedButtonSelector"
-			android:contentDescription="@string/action_upvote_remove"
+			android:contentDescription="@string/action_like_remove"
 			android:src="@drawable/arrow_up_bold_orangered"/>
 
 	<ImageButton
@@ -55,7 +55,7 @@
 			android:layout_height="wrap_content"
 			android:padding="12dp"
 			android:background="?rrThemedButtonSelector"
-			android:contentDescription="@string/action_downvote"
+			android:contentDescription="@string/action_repost"
 			android:src="?rrIconArrowDownBold"/>
 
 	<ImageButton
@@ -65,7 +65,7 @@
 			android:layout_height="wrap_content"
 			android:padding="12dp"
 			android:background="?rrThemedButtonSelector"
-			android:contentDescription="@string/action_downvote_remove"
+			android:contentDescription="@string/action_repost_remove"
 			android:src="@drawable/arrow_down_bold_periwinkle"/>
 
 	<ImageButton

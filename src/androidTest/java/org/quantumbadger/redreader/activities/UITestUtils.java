@@ -1,4 +1,4 @@
-package org.quantumbadger.redreader.activities;
+package org.omegaaol.bluereader.activities;
 
 import android.view.View;
 import androidx.test.espresso.NoMatchingViewException;

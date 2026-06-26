@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ This file is part of RedReader.
+  ~ This file is part of BlueReader.
   ~
-  ~ RedReader is free software: you can redistribute it and/or modify
+  ~ BlueReader is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ RedReader is distributed in the hope that it will be useful,
+  ~ BlueReader is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with RedReader.  If not, see <http://www.gnu.org/licenses/>.
+  ~ along with BlueReader.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <resources>
@@ -32,19 +32,19 @@
     </string-array>
 
     <string-array name="pref_behaviour_fling_post_actions">
-        <item>@string/action_upvote</item>
-        <item>@string/action_downvote</item>
+        <item>@string/action_like</item>
+        <item>@string/action_repost</item>
         <item>@string/action_save</item>
         <item>@string/action_hide</item>
         <item>@string/action_comments</item>
         <item>@string/action_link</item>
         <item>@string/action_external</item>
         <item>@string/action_report</item>
-        <item>@string/action_save_image</item>
-        <item>@string/action_gotosubreddit</item>
+        <item>@string/action_save_media</item>
+        <item>@string/action_toggle_search_feeds</item>
         <item>@string/action_share</item>
         <item>@string/action_share_comments</item>
-        <item>@string/action_share_image</item>
+        <item>@string/action_share_media</item>
         <item>@string/action_copy_link</item>
         <item>@string/action_user_profile</item>
         <item>@string/action_properties</item>
@@ -88,8 +88,8 @@
 	</string-array>
 
 	<string-array name="pref_behaviour_fling_comment_actions">
-		<item>@string/action_upvote</item>
-		<item>@string/action_downvote</item>
+		<item>@string/action_like</item>
+		<item>@string/action_repost</item>
 		<item>@string/action_save</item>
 		<item>@string/action_report</item>
 		<item>@string/action_reply</item>
@@ -189,13 +189,13 @@
 		<item>qa</item>
 	</string-array>
 
-	<string-array name="pref_behaviour_pinned_subredditsort_array">
-		<item>@string/sort_pinned_subreddit_name</item>
-		<item>@string/sort_pinned_subreddit_date</item>
+	<string-array name="pref_behaviour_homeitemsort_array">
+		<item>@string/sort_home_item_name</item>
+		<item>@string/sort_home_item_date</item>
 	</string-array>
 
 	<!-- Constants. Do not change. -->
-	<string-array name="pref_behaviour_pinned_subredditsort_array_return">
+	<string-array name="pref_behaviour_homeitemsort_array_return">
 		<item>name</item>
 		<item>date</item>
 	</string-array>
@@ -224,44 +224,60 @@
         <item>nothing</item>
     </string-array>
 
-    <string-array name="pref_appearance_navbar_color_options">
+    <string-array name="pref_appearance_navbar_color">
+		<item>@string/pref_appearance_navbar_color_option_theme</item>
         <item>@string/pref_appearance_navbar_color_option_black</item>
 		<item>@string/pref_appearance_navbar_color_option_white</item>
-        <item>@string/pref_appearance_navbar_color_option_primary</item>
-        <item>@string/pref_appearance_navbar_color_option_primarydark</item>
+        <item>@string/pref_appearance_navbar_color_option_accentlight</item>
+        <item>@string/pref_appearance_navbar_color_option_accentdark</item>
+		<item>@string/pref_appearance_navbar_color_option_system</item>
     </string-array>
 
     <!-- Constants. Do not change. -->
     <string-array name="pref_appearance_navbar_color_options_return">
-        <item>black</item>
-		<item>white</item>
-        <item>primary</item>
-        <item>primarydark</item>
+        <item>theme</item>
+		<item>black</item>
+        <item>white</item>
+		<item>accentlight</item>
+		<item>accentdark</item>
+        <item>system</item>
     </string-array>
 
 	<string-array name="pref_appearance_theme">
-		<item>@string/theme_name_red</item>
-		<item>@string/theme_name_night</item>
-		<item>@string/theme_name_night_lowcontrast</item>
-		<item>@string/theme_name_green</item>
-		<item>@string/theme_name_blue</item>
-		<item>@string/theme_name_ltblue</item>
-		<item>@string/theme_name_orange</item>
-		<item>@string/theme_name_gray</item>
-		<item>@string/theme_name_ultrablack</item>
+		<item>@string/theme_type_system</item>
+		<item>@string/theme_name_light</item>
+		<item>@string/theme_name_dim</item>
+		<item>@string/theme_name_dark</item>
+		<item>@string/theme_name_black</item>
+	</string-array>
+
+	<string-array name="pref_appearance_accent">
+		<item>@string/accent_name_default</item>
+		<item>@string/accent_name_redreader</item>
+		<item>@string/accent_name_green</item>
+		<item>@string/accent_name_navy</item>
+		<item>@string/accent_name_orange</item>
+		<item>@string/accent_name_gray</item>
+		<item>@string/accent_name_none</item>
 	</string-array>
 
 	<!-- Constants. Do not change. -->
 	<string-array name="pref_appearance_theme_return">
-		<item>red</item>
-		<item>night</item>
-		<item>night_lowcontrast</item>
+		<item>system</item>
+		<item>light</item>
+		<item>dim</item>
+		<item>dark</item>
+		<item>black</item>
+	</string-array>
+
+	<string-array name="pref_appearance_accent_return">
+		<item>default</item>
+		<item>redreader</item>
 		<item>green</item>
-		<item>blue</item>
-		<item>ltblue</item>
+		<item>navy</item>
 		<item>orange</item>
 		<item>gray</item>
-		<item>ultrablack</item>
+		<item>none</item>
 	</string-array>
 
     <string-array name="pref_appearance_langforce">
@@ -436,8 +452,8 @@
     </string-array>
 
     <string-array name="pref_menus_post_context_items">
-        <item>@string/action_upvote</item>
-        <item>@string/action_downvote</item>
+        <item>@string/action_like</item>
+        <item>@string/action_repost</item>
 		<item>@string/action_comments</item>
         <item>@string/action_save</item>
         <item>@string/action_hide</item>
@@ -446,14 +462,14 @@
         <item>@string/action_reply</item>
         <item>@string/action_external</item>
         <item>@string/action_selftext_links</item>
-        <item>@string/action_save_image</item>
-        <item>@string/action_gotosubreddit</item>
+        <item>@string/action_save_media</item>
+        <item>@string/action_toggle_search_feeds</item>
 		<item>@string/action_pin_subreddit</item>
 		<item>@string/action_subscribe_subreddit</item>
 		<item>@string/action_block_subreddit</item>
         <item>@string/action_share</item>
         <item>@string/action_share_comments</item>
-        <item>@string/action_share_image</item>
+        <item>@string/action_share_media</item>
         <item>@string/action_copy_link</item>
 		<item>@string/action_copy_selftext</item>
         <item>@string/action_user_profile</item>
@@ -520,13 +536,13 @@
         <item>@string/action_actionmenu</item>
         <item>@string/action_comments_switch</item>
         <item>@string/action_link_switch</item>
-        <item>@string/action_upvote</item>
-        <item>@string/action_downvote</item>
+        <item>@string/action_like</item>
+        <item>@string/action_repost</item>
         <item>@string/action_save</item>
         <item>@string/action_hide</item>
         <item>@string/action_reply</item>
         <item>@string/action_external</item>
-        <item>@string/action_save_image</item>
+        <item>@string/action_save_media</item>
         <item>@string/action_share</item>
         <item>@string/action_copy_link</item>
         <item>@string/action_user_profile</item>
@@ -553,9 +569,9 @@
 
 	<string-array name="pref_menus_link_context_items">
 		<item>@string/action_external</item>
-		<item>@string/action_save_image</item>
+		<item>@string/action_save_media</item>
 		<item>@string/action_share</item>
-		<item>@string/action_share_image</item>
+		<item>@string/action_share_media</item>
 		<item>@string/action_copy_link</item>
 	</string-array>
 
@@ -829,10 +845,10 @@
 	<!-- 2018-10-6 -->
 
 	<string-array name="pref_menus_mainmenu_shortcutitems_items">
-		<item>@string/mainmenu_frontpage</item>
+		<item>@string/mainmenu_feed_discover</item>
 		<item>@string/mainmenu_popular</item>
-		<item>@string/mainmenu_all</item>
-		<item>@string/find_location</item>
+		<item>@string/mainmenu_feed_following</item>
+		<item>@string/search_content</item>
 		<item>@string/mainmenu_custom_destination</item>
 		<item>@string/mainmenu_random</item>
 		<item>@string/mainmenu_random_nsfw</item>
@@ -1223,8 +1239,8 @@
   <!-- 2021-02-16 -->
 
 	<string-array name="pref_menus_comment_context_items">
-		<item>@string/action_upvote</item>
-		<item>@string/action_downvote</item>
+		<item>@string/action_like</item>
+		<item>@string/action_repost</item>
 		<item>@string/action_save</item>
 		<item>@string/action_report</item>
 		<item>@string/action_reply</item>

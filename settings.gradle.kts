@@ -3,6 +3,7 @@ pluginManagement {
 		gradlePluginPortal()
 		google()
 		mavenCentral()
+		maven { url = uri("https://a8c-libs.s3.amazonaws.com/android/jcenter-mirror/") }
 	}
 }
 
@@ -11,11 +12,13 @@ dependencyResolutionManagement {
 	repositories {
 		google()
 		mavenCentral()
+		maven { url = uri("https://a8c-libs.s3.amazonaws.com/android/jcenter-mirror/") }
 	}
 }
+include(":bluereader-app")
+include(":bluereader-common")
 
-include(":redreader-common")
-project(":redreader-common").projectDir = File("./libs/redreader-common")
+project(":bluereader-common").projectDir = File("./libs/bluereader-common")
 
-include(":redreader-datamodel")
-project(":redreader-datamodel").projectDir = File("./libs/redreader-datamodel")
+include(":bluereader-datamodel")
+project(":bluereader-datamodel").projectDir = File("./libs/bluereader-datamodel")

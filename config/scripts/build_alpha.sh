@@ -15,7 +15,7 @@ BUILD_NUMBER="$(echo $(<$STATE_DIR/last_build_number)+1 | bc)"
 
 echo "Build number $BUILD_NUMBER"
 
-cd RedReader
+cd BlueReader
 
 git reset --hard
 git clean -xdf
@@ -39,7 +39,7 @@ fi
 
 echo "Changing package..."
 git mv src/main/java/org/quantumbadger/redreader src/main/java/org/quantumbadger/redreaderalpha
-find . -type f -not -path "*/.git/*" -not -path "*/config/scripts/*" -not -name "README.md" -exec sed -i 's/org\.quantumbadger\.redreader/org.quantumbadger.redreaderalpha/g' {} \;
+find . -type f -not -path "*/.git/*" -not -path "*/config/scripts/*" -not -name "README.md" -exec sed -i 's/org\.quantumbadger\.redreader/org.omegaaol.bluereaderalpha/g' {} \;
 find . -type f -not -path "*/.git/*" -not -path "*/config/scripts/*" -exec sed -i 's/org\/quantumbadger\/redreader/org\/quantumbadger\/redreaderalpha/g' {} \;
 
 echo "Changing icon..."
@@ -47,7 +47,7 @@ sed -i 's/@drawable\/icon/@drawable\/icon_inv/g' src/main/AndroidManifest.xml
 sed -i 's/@mipmap\/icon/@mipmap\/icon_inv/g' src/main/AndroidManifest.xml
 
 echo "Changing name..."
-find src/main/res -name "strings.xml" -exec sed -i 's/RedReader/RedReader Alpha '"$BUILD_NUMBER"'/g' {} \;
+find src/main/res -name "strings.xml" -exec sed -i 's/BlueReader/BlueReader Alpha '"$BUILD_NUMBER"'/g' {} \;
 sed -i 's/versionName = ".*/versionName = "Alpha '"${BUILD_NUMBER}"'"/g' build.gradle.kts
 sed -i 's/versionCode .*/versionCode = '"$((${BUILD_NUMBER} + 10000))"'/g' build.gradle.kts
 
@@ -57,21 +57,21 @@ echo "Building..."
 
 echo "Signing..."
 
-zipalign -v 4 build/outputs/apk/release/RedReader-release-unsigned.apk RedReader_Alpha_${BUILD_NUMBER}.apk
-~/android-sdk-linux/build-tools/30.0.3/apksigner sign --ks ../key/rralpha.keystore --v1-signing-enabled true --v2-signing-enabled true --v3-signing-enabled true -v --ks-pass env:RR_KS_PASS --key-pass env:RR_KEY_PASS RedReader_Alpha_${BUILD_NUMBER}.apk
+zipalign -v 4 build/outputs/apk/release/BlueReader-release-unsigned.apk BlueReader_Alpha_${BUILD_NUMBER}.apk
+~/android-sdk-linux/build-tools/30.0.3/apksigner sign --ks ../key/rralpha.keystore --v1-signing-enabled true --v2-signing-enabled true --v3-signing-enabled true -v --ks-pass env:RR_KS_PASS --key-pass env:RR_KEY_PASS BlueReader_Alpha_${BUILD_NUMBER}.apk
 
 echo "Writing build info..."
 
-echo $BUILD_NUMBER > RedReader_Alpha_${BUILD_NUMBER}.txt
-echo $CURRENT_COMMIT >> RedReader_Alpha_${BUILD_NUMBER}.txt
-date >> RedReader_Alpha_${BUILD_NUMBER}.txt
-echo $(sha256sum RedReader_Alpha_${BUILD_NUMBER}.apk | head -c 64) >> RedReader_Alpha_${BUILD_NUMBER}.txt
-echo "RedReader_Alpha_${BUILD_NUMBER}.apk" >> RedReader_Alpha_${BUILD_NUMBER}.txt
+echo $BUILD_NUMBER > BlueReader_Alpha_${BUILD_NUMBER}.txt
+echo $CURRENT_COMMIT >> BlueReader_Alpha_${BUILD_NUMBER}.txt
+date >> BlueReader_Alpha_${BUILD_NUMBER}.txt
+echo $(sha256sum BlueReader_Alpha_${BUILD_NUMBER}.apk | head -c 64) >> BlueReader_Alpha_${BUILD_NUMBER}.txt
+echo "BlueReader_Alpha_${BUILD_NUMBER}.apk" >> BlueReader_Alpha_${BUILD_NUMBER}.txt
 
 echo "Uploading..."
 
-cat RedReader_Alpha_${BUILD_NUMBER}.apk | pv | ssh user@localhost -p 1234 "cat > /var/www/html/alpha/builds/RedReader_Alpha_${BUILD_NUMBER}.apk"
-cat RedReader_Alpha_${BUILD_NUMBER}.txt | pv | ssh user@localhost -p 1234 "cat > /var/www/html/alpha/builds/RedReader_Alpha_${BUILD_NUMBER}.txt"
+cat BlueReader_Alpha_${BUILD_NUMBER}.apk | pv | ssh user@localhost -p 1234 "cat > /var/www/html/alpha/builds/BlueReader_Alpha_${BUILD_NUMBER}.apk"
+cat BlueReader_Alpha_${BUILD_NUMBER}.txt | pv | ssh user@localhost -p 1234 "cat > /var/www/html/alpha/builds/BlueReader_Alpha_${BUILD_NUMBER}.txt"
 
 echo "Updating f-droid..."
 

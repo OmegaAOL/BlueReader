@@ -618,7 +618,7 @@ Action bar back button extended to allow clicking on text
 Ability to copy comment URL
 Migrated post list to a RecyclerView, fixing lots of bugs
 Made blue theme darker
-Ability to change navbar colour
+Ability to change navbar color
 Removed "Beta" from the app name
 Lots of bugfixes
 
@@ -783,7 +783,7 @@ Updated Arabic translation (thanks to Husam Bilal)
 
 50/1.8.6.2
 Post flair support
-Better comment flair colour
+Better comment flair color
 Fixed rare crash bug during subreddit (un)subscription
 Fixed rare crash bug when pruning cache
 Fixed bug where searching for multiple words didn't work

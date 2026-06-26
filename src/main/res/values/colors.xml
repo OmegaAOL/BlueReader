@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ This file is part of RedReader.
+  ~ This file is part of BlueReader.
   ~
-  ~ RedReader is free software: you can redistribute it and/or modify
+  ~ BlueReader is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ RedReader is distributed in the hope that it will be useful,
+  ~ BlueReader is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with RedReader.  If not, see <http://www.gnu.org/licenses/>.
+  ~ along with BlueReader.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <resources>
 
-	<color name="lightWindowBackground">#FBFBFB</color>
-	<color name="darkWindowBackground">#000000</color>
+	<color name="lightBc">#FBFBFB</color>
+	<color name="darkBc">#111111</color>
+	<color name="blackBc">#000000</color>
+	<color name="dimBc">#222222</color>
 	<color name="settingsWindowBackground">#333333</color>
 	<color name="actionbarSelectBackground">#44FFFFFF</color>
 	<color name="actionbarSelectBackgroundLight">#44000000</color>
 	<color name="listitemSelectBackground">#33888888</color>
-	<color name="redReaderRed">#C6001F</color>
-	<color name="redReaderAlphaIconBackground">#E0E0E0</color>
+	<color name="blueReaderBlue">#008bc6</color>
+	<color name="blueReaderAlphaIconBackground">#E0E0E0</color>
 
 </resources>

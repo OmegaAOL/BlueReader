@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ This file is part of RedReader.
+  ~ This file is part of BlueReader.
   ~
-  ~ RedReader is free software: you can redistribute it and/or modify
+  ~ BlueReader is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ RedReader is distributed in the hope that it will be useful,
+  ~ BlueReader is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with RedReader.  If not, see <http://www.gnu.org/licenses/>.
+  ~ along with BlueReader.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="app_name" translatable="false">RedReader</string>
+    <string name="app_name" translatable="false">BlueReader</string>
 
     <!-- First Run Dialog -->
 
@@ -26,6 +26,10 @@
     <string name="firstrun_login_message">You are not currently logged in. You can access the account list by selecting "Accounts" from the menu.</string>
     <string name="firstrun_login_button_now">Log in now</string>
     <string name="firstrun_login_button_later">Be anonymous</string>
+	<string name="firstrun_kitkat_navbar_warning_title">Warning: Android KitKat detected</string>
+	<string name="firstrun_kitkat_navbar_warning_message">Android 5.0 Lollipop was the first version to support true status and navigation bar coloring. BlueReader\'s implementation of this on Android 4.4 KitKat is hacky and often does not work on devices with physical navigation buttons.</string>
+	<string name="firstrun_jellybean_navbar_warning_title">Warning: Android Jelly Bean or older detected</string>
+	<string name="firstrun_jellybean_navbar_warning_message">Status and navigation bar coloring will not work on your device. If you want this feature, upgrade to Android 4.4 KitKat or newer. There will never be a fix for this.</string>
 
     <!-- Preference Headers -->
 
@@ -45,6 +49,9 @@
 
     <string name="pref_appearance_theme_key" translatable="false">pref_appearance_theme</string>
     <string name="pref_appearance_theme_title">Theme</string>
+
+	<string name="pref_appearance_accent_key" translatable="false">pref_appearance_accent</string>
+	<string name="pref_appearance_accent_title">Accent color</string>
 
     <string name="pref_appearance_fontscale_posts_key" translatable="false">pref_appearance_fontscale_posts</string>
     <string name="pref_appearance_fontscale_posts_title">Post titles</string>
@@ -117,8 +124,9 @@
     <!-- Options Menu -->
 
     <string name="options_accounts">Accounts</string>
-    <string name="options_accounts_long">Reddit Accounts</string>
-    <string name="options_theme">Themes</string>
+    <string name="options_accounts_long">Bluesky Accounts</string>
+    <string name="options_theme">Theme</string>
+	<string name="options_accent">Accent color</string>
     <string name="options_settings">Settings</string>
 
     <string name="options_submit_post">Submit Post</string>
@@ -139,8 +147,8 @@
 
     <!-- Main Menu -->
 
-    <string name="mainmenu_frontpage">Front Page</string>
-    <string name="mainmenu_all">All Subreddits</string>
+    <string name="mainmenu_feed_discover">Discover</string>
+    <string name="mainmenu_feed_following">Following</string>
     <string name="mainmenu_custom">Custom Subreddit</string>
     <string name="mainmenu_custom_invalid_name">Invalid subreddit name.</string>
     <string name="mainmenu_saved">Saved Posts</string>
@@ -153,25 +161,28 @@
     <!-- General Listing -->
 
     <string name="listing_cached">Viewing cached copy from %s</string>
+    <string name="notification_prompt_title">Enable notifications?</string>
+    <string name="notification_prompt_message">Would you like to get notifications from Bluesky? These include replies, likes, and follows. Notifications can be turned off in your system settings or on Bluesky.</string>
 
     <!-- Accounts Dialog -->
 
     <string name="accounts_anon">Anonymous</string>
     <string name="accounts_active">Active</string>
-    <string name="accounts_add">Add Reddit Account</string>
+    <string name="accounts_add">Add Bluesky Account</string>
     <string name="accounts_setactive">Make Active</string>
     <string name="accounts_reauth">Reauthenticate</string>
-    <string name="accounts_delete">Delete</string>
+    <string name="accounts_remove">Remove</string>
 
     <string name="accounts_loggingin">Logging in…</string>
     <string name="accounts_loggingin_msg">Just a moment…</string>
 
-    <string name="accounts_username">Username</string>
+    <string name="accounts_handle">Handle</string>
     <string name="accounts_password">Password</string>
 
+	<string name="accounts_title">Login to Bluesky</string>
     <string name="accounts_login">Log in</string>
 
-    <string name="accounts_delete_sure">Are you sure you want to delete this account?</string>
+    <string name="accounts_removal_confirmation">Are you sure you want to remove this account?</string>
 
     <!-- Post Sorts -->
 
@@ -200,6 +211,8 @@
 
     <string name="dialog_close">Close</string>
     <string name="dialog_cancel">Cancel</string>
+	<string name="dialog_apply">Apply</string>
+	<string name="dialog_save">Save</string>
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
     <string name="dialog_go">Go</string>
@@ -208,11 +221,11 @@
 
     <string name="action_menu_post_title">Post Actions</string>
 
-    <string name="action_upvote">Upvote</string>
-    <string name="action_downvote">Downvote</string>
+    <string name="action_like">Like</string>
+    <string name="action_repost">Repost</string>
     <string name="action_vote_remove">Remove Vote</string>
-    <string name="action_upvote_remove">Remove Upvote</string>
-    <string name="action_downvote_remove">Remove Downvote</string>
+    <string name="action_like_remove">Remove Like</string>
+    <string name="action_repost_remove">Remove Repost</string>
     <string name="action_save">Save</string>
     <string name="action_hide">Hide</string>
     <string name="action_unsave">Unsave</string>
@@ -226,7 +239,7 @@
     <string name="action_share">Share</string>
     <string name="action_share_comments">Share Comments</string>
     <string name="action_copy">Copy</string>
-    <string name="action_gotosubreddit">Go to Subreddit</string>
+    <string name="action_toggle_search_feeds">Feeds</string>
     <string name="action_reply">Reply</string>
     <string name="action_edit">Edit</string>
     <string name="action_user_profile">User Profile</string>
@@ -244,8 +257,8 @@
     <string name="action_report">Report</string>
     <string name="action_report_sure">Are you sure you want to report this?</string>
 
-    <string name="action_save_image">Save Media</string>
-    <string name="action_save_image_success">Saved to Pictures folder as</string>
+    <string name="action_save_media">Save Media</string>
+    <string name="action_save_media_success">Saved to Pictures folder as</string>
 
     <!-- Download Messages -->
 
@@ -281,14 +294,15 @@
     <!-- Bug Reporting -->
 
     <string name="bug_title">An error has occurred.</string>
-    <string name="bug_message">RedReader has encountered an error.\n\nWould you like to send a bug report to the developer? If so, an email will be filled in for you with all the relevant information, and you can inspect the contents before sending.</string>
+    <string name="bug_message">Oops! BlueReader crashed!.\n\nWould you like to send a bug report to me, the developer? An email will be filled in for you with all the relevant information; you can inspect its contents before sending it.</string>
     <string name="bug_button_send">Send bug report by email</string>
+	<string name="bug_button_show_trace">Show stack trace (for developers)</string>
     <string name="bug_button_ignore">Don\'t send bug report</string>
 
     <!-- General errors -->
 
-    <string name="error_403_title">Permission Denied</string>
-    <string name="error_403_message">Reddit says the current user does not have permission to do that.</string>
+    <string name="error_403_title">[403] Forbidden</string>
+    <string name="error_403_message">Bluesky says the current user does not have permission to do that.</string>
 
     <string name="error_subreddit_required_title">Subreddit Required</string>
     <string name="error_subreddit_required_message">You must specify a subreddit.</string>
@@ -296,40 +310,40 @@
     <string name="error_bad_captcha_title">Invalid CAPTCHA</string>
     <string name="error_bad_captcha_message">The CAPTCHA you entered was incorrect. Please try again.</string>
 
-    <string name="error_404_title">Not Found (404)</string>
+    <string name="error_404_title">[404] Not Found</string>
     <string name="error_404_message">The data you requested could not be found.</string>
 
-    <string name="error_unknown_api_title">Error</string>
+    <string name="error_unknown_api_title">Unknown API error</string>
     <string name="error_unknown_api_message">The server did not accept the request for an unknown reason. Please try again.</string>
 
-    <string name="error_redditdown_title">Reddit is Down</string>
-    <string name="error_redditdown_message">Reddit is under heavy load at the moment. Please try again.</string>
+    <string name="error_redditdown_title">Your PDS is down</string>
+    <string name="error_redditdown_message">Your PDS server is under heavy load at the moment. Please try again.</string>
 
     <string name="error_cancelled_title">Operation Cancelled</string>
     <string name="error_cancelled_message">The current operation was cancelled.</string>
 
-    <string name="error_parse_title">Parse Error</string>
-    <string name="error_parse_message">Reddit sent some data I couldn\'t understand.</string>
+    <string name="error_parse_title">Parse error</string>
+    <string name="error_parse_message">BlueReader is unable to read some data. This is almost certainly a client-side error.</string>
 
-    <string name="error_unexpected_cache_title">Unexpected Cache Miss Error</string>
+    <string name="error_unexpected_cache_title">Unexpected cache error</string>
     <string name="error_unexpected_cache_message">An unknown internal error has occurred, related to the cache.</string>
 
-    <string name="error_unexpected_storage_title">Unexpected Storage Error</string>
-    <string name="error_unexpected_storage_message">An unknown internal error has occurred, related to the cache storage. You are probably running out of space.</string>
+    <string name="error_unexpected_storage_title">Cache storage error</string>
+    <string name="error_unexpected_storage_message">The cache storage medium has either been removed, is inaccessible, or is full.</string>
 
-    <string name="error_connection_title">Connection Error</string>
+    <string name="error_connection_title">Connection error</string>
     <string name="error_connection_message">There was a problem connecting to the server. Please check your connection and try again.</string>
 
     <string name="error_malformed_url_title">Malformed URL</string>
     <string name="error_malformed_url_message">An attempt was made to access an invalid URL.</string>
 
-    <string name="error_unknown_title">Unknown Error</string>
+    <string name="error_unknown_title">Unknown error</string>
     <string name="error_unknown_message">An unknown error occurred. Please try again.</string>
 
     <!-- Post list specific errors -->
 
     <string name="error_postlist_cache_title">End of Cached Data</string>
-    <string name="error_postlist_cache_message">You are viewing a past version of this content, and no more posts from this session are in the cache. Press refresh to download the latest posts, or select a different past version from the menu.</string>
+    <string name="error_postlist_cache_message">You are viewing a locally saved (offline) version of this content, and no more data from this session has been saved. Press refresh to synchronize with the Internet, or select another cached session from the menu.</string>
 
     <string name="error_postlist_redditdown_title">Reddit is Down</string>
     <string name="error_postlist_redditdown_message">Reddit is under heavy load at the moment. Press refresh to download the latest posts, or select a different past version from the menu.</string>
@@ -338,7 +352,7 @@
 
     <string name="session_active">Active</string>
 
-    <!-- Time -->
+	<string name="error_login_fields_empty">Please fill in both the handle and password fields. Remember, the handle is your Bluesky handle, not your email.</string>
 
     <string name="time_ago">%s ago</string>
 
@@ -392,13 +406,15 @@
     <string name="pref_appearance_twopane_landscape">Landscape Only</string>
     <string name="pref_appearance_twopane_force">Always (may look odd)</string>
 
-    <string name="theme_name_red">Red</string>
-    <string name="theme_name_night">Night</string>
-    <string name="theme_name_green">Green</string>
-    <string name="theme_name_blue">Blue</string>
-    <string name="theme_name_ltblue">Light Blue</string>
-    <string name="theme_name_orange">Orange</string>
-    <string name="theme_name_gray">Gray</string>
+	<string name="theme_name_light">Light</string>
+	<string name="theme_name_dark">Dark</string>
+	<string name="accent_name_default">BlueReader (default)</string>
+	<string name="accent_name_redreader">RedReader</string>
+	<string name="accent_name_green">Green</string>
+	<string name="accent_name_navy">Navy</string>
+	<string name="accent_name_orange">Orange</string>
+	<string name="accent_name_gray">Gray</string>
+	<string name="accent_name_none">No accent color</string>
 
     <string name="time_1hr">1 hour</string>
     <string name="time_6hr">6 hours</string>
@@ -423,15 +439,18 @@
     <string name="pref_appearance_scale_normal">Normal</string>
 
     <string name="error_invalid_password_title">Invalid Password</string>
-    <string name="error_invalid_password_message">Your username or password was incorrect.</string>
+    <string name="error_invalid_password_message">Your username or password is incorrect.</string>
 
-    <string name="error_ratelimit_title">Too many invalid attempts.</string>
-    <string name="error_ratelimit_message">Blocked due to too many invalid login attempts from this IP. Reddit says:</string>
+    <string name="error_ratelimit_title">IP Temporarily Blocked</string>
+    <string name="error_ratelimit_message">Your IP has been temporarily blocked due to too many invalid login attempts. The PDS says:</string>
 
     <string name="general_success">Success</string>
 
     <string name="message_nowloggedin">You are now logged in.</string>
     <string name="message_cannotlogin">Could not log in.</string>
+
+	<string name="title_error_400">HTTP 400</string>
+	<string name="message_error_400">Could not log in. Your PDS host cannot or will not process the request due to a client-side error.</string>
 
     <string name="error_toast_no_urls_in_comment">No URLs found in this comment.</string>
     <string name="error_toast_no_urls_in_self">No URLs found in this self text.</string>
@@ -462,6 +481,12 @@
 
     <string name="pref_about_changelog_key" translatable="false">pref_about_changelog</string>
     <string name="prefs_category_about">About</string>
+
+    <string name="pref_developer_header" translatable="false">Developer Options</string>
+    <string name="pref_developer_test_notification_key" translatable="false">pref_developer_test_notification_key</string>
+    <string name="pref_developer_test_notification_title" translatable="false">Test notification</string>
+    <string name="prefs_category_developer" translatable="false">@string/pref_developer_header</string>
+    <string name="prefs_category_developer_key" translatable="false">prefs_category_developer</string>
 
     <!-- 2013-06-07 -->
 
@@ -534,8 +559,8 @@
 
     <!-- 2014-03-18 -->
 
-    <string name="error_disk_space_title">Out of disk space</string>
-    <string name="error_disk_space_message">The download failed because your device is full. Please free up some space and try again.</string>
+    <string name="error_disk_space_title">Not Enough Storage</string>
+    <string name="error_disk_space_message">There is not enough storage to download this file. Free up some space and try again.</string>
 
     <!-- 2014-03-23 -->
 
@@ -608,11 +633,12 @@
     <string name="mark_all_as_read">Mark all as read</string>
     <string name="mark_all_as_read_success">All messages marked as read.</string>
 
+	<string name="error_login_failed">Login failed</string>
     <!-- 2015-05-17 -->
-    <string name="error_title_login_user_denied_permission">Permission Denied</string>
+    <string name="error_title_login_user_denied_permission">Permission denied</string>
     <string name="error_message_login_user_denied_permission">Permission to access the account was denied. Please try again.</string>
 
-    <string name="error_title_login_unknown_reddit_error">Unknown Reddit error: %s</string>
+    <string name="error_title_login_unknown_bsky_error">Unknown PDS error: %s</string>
 
     <!-- 2015-05-23 -->
     <string name="imageview_invalid_video">Invalid video. Trying web browser.</string>
@@ -672,14 +698,14 @@
     <string name="album_already_first_image">Already at first image in album.</string>
     <string name="album_already_last_image">Already at last image in album.</string>
 
-    <string name="upgrade_v190_login_message">RedReader has upgraded, and now uses OAuth for Reddit authentication. If you were signed in to an account before the upgrade, you are now logged out.</string>
+    <string name="upgrade_v190_login_message">BlueReader has upgraded, and now uses OAuth for Reddit authentication. If you were signed in to an account before the upgrade, you are now logged out.</string>
 
     <string name="pref_behaviour_videoview_mode_title">Video viewer</string>
     <string name="pref_behaviour_videoview_mode_key" translatable="false">pref_behaviour_videoview_mode</string>
-    <string name="pref_behaviour_videoview_mode_internal_videoview">Internal VideoView (recommended)</string>
-    <string name="pref_behaviour_videoview_mode_external_app_vlc">External App: VLC</string>
+    <string name="pref_behaviour_videoview_mode_internal_videoview">Internal video player (recommended)</string>
+    <string name="pref_behaviour_videoview_mode_external_app_vlc">VLC media player</string>
 
-    <string name="videoview_mode_app_vlc_launch_failed">Could not start VLC. Please upgrade VLC or change your Video Viewer preference.</string>
+    <string name="videoview_mode_app_vlc_launch_failed">Could not start VLC. Try reinstalling it, or change your preferred video player.</string>
 
     <!-- 2015-10-05 -->
     <string name="error_url_required_title">URL Required</string>
@@ -701,11 +727,11 @@
     <string name="pref_cache_precache_comments_wifionly_key" translatable="false">pref_cache_precache_comments_wifionly</string>
     <string name="pref_cache_precache_comments_wifionly_title">Only on Wi-Fi</string>
 
-    <string name="mainmenu_header_subreddits_subscribed">Subscribed Subreddits</string>
-    <string name="mainmenu_header_subreddits_pinned">Pinned Subreddits</string>
+    <string name="mainmenu_header_feeds_subscribed">Subscribed Feeds</string>
+    <string name="mainmenu_header_feeds_pinned">Pinned Feeds</string>
 
-    <string name="pin_subreddit">Pin to Main Menu</string>
-    <string name="unpin_subreddit">Unpin from Main Menu</string>
+    <string name="pin_subreddit">Pin to main menu</string>
+    <string name="unpin_subreddit">Unpin from main menu</string>
     <string name="pref_pinned_subreddits_key" translatable="false">pref_pinned_subreddits</string>
 
     <!-- 2015-11-22 -->
@@ -800,12 +826,22 @@
 	<string name="pm_send_hint_subject">Subject</string>
 	<string name="pm_send_hint_message_text">Message text</string>
 
+	<string name="error_message_prefix">Error:</string>
+
+	<string name="error_authentication_required">Your handle or password is incorrect. Please double-check your login details.</string>
+	<string name="error_2fa_required">Your account has two-factor authentication enabled. Either use an app password or disable it.</string>
+	<string name="error_rate_limit">Your IP or account is being rate limited by the server (not BlueReader\'s fault!). Please try again in some time.</string>
+
+	<string name="error_authentication_required_code">AuthenticationRequired</string>
+	<string name="error_2fa_required_code">AuthFactorTokenRequired</string>
+	<string name="error_rate_limit_code">RateLimitExceeded</string>
+
 	<string name="pm_send_done">Message sent.</string>
 
 	<string name="userprofile_pm">Send Message</string>
 
 	<string name="error_too_long_title">Too long</string>
-	<string name="error_too_long_message">Reddit says that the text you entered is too long.</string>
+	<string name="error_too_long_message">Bluesky says that the text you entered is too long.</string>
 
 	<string name="pm_send_actionbar">Send Message</string>
 	<string name="submit_post_actionbar">Submit Post</string>
@@ -828,13 +864,15 @@
 
 	<!-- 2016-07-29 -->
 	<string name="pref_appearance_navbar_color_key" translatable="false">pref_appearance_navbar_color</string>
-	<string name="pref_appearance_navbar_color_title">Navigation and status bar colour</string>
+	<string name="pref_appearance_navbar_color_title">Navigation and status bar color</string>
 
+	<string name="pref_appearance_navbar_color_option_theme">Specified by theme</string>
 	<string name="pref_appearance_navbar_color_option_black">Black</string>
-	<string name="pref_appearance_navbar_color_option_primary">Primary (light)</string>
-	<string name="pref_appearance_navbar_color_option_primarydark">Primary (dark)</string>
+	<string name="pref_appearance_navbar_color_option_accentlight">Accent color (light)</string>
+	<string name="pref_appearance_navbar_color_option_accentdark">Accent color (dark)</string>
+	<string name="pref_appearance_navbar_color_option_system">System default</string>
 
-	<string name="pref_not_supported_before_lollipop">Not supported before Android Lollipop</string>
+	<string name="pref_not_supported_before_kitkat">You need Android 4.4+ for this</string>
 
 	<!-- 2016-08-03 -->
 	<string name="action_copy_text">Copy Text</string>
@@ -865,16 +903,16 @@
 	<string name="error_cache_dir_does_not_exist_message">Could not access the cache directory. Please choose a different location in the cache settings.</string>
 
 	<!-- 2016-08-15 -->
-	<string name="pref_behaviour_pinned_subredditsort_key" translatable="false">pref_behaviour_pinned_subreddit_sort</string>
-	<string name="pref_behaviour_pinned_subredditsort">Pinned subreddits</string>
-	<string name="sort_pinned_subreddit_name">By Name</string>
-	<string name="sort_pinned_subreddit_date">By Added Date</string>
+	<string name="pref_behaviour_homeitemsort_key" translatable="false">pref_behaviour_home_item_sort</string>
+	<string name="pref_behaviour_homeitemsort">Homescreen feeds, collections, starter packs</string>
+	<string name="sort_home_item_name">By name</string>
+	<string name="sort_home_item_date">By date added</string>
 
 	<!-- 2016-09-01 -->
 	<string name="load_more_comments_failed_unknown_url_type">Cannot load more comments: unknown URL type.</string>
 
 	<!-- 2016-09-04 -->
-	<string name="pref_appearance_image_viewer_header">Image Viewer</string>
+	<string name="pref_appearance_image_viewer_header">Image viewer</string>
 
 	<string name="pref_appearance_image_viewer_show_floating_toolbar_title">Show floating buttons over images and videos</string>
 	<string name="pref_appearance_image_viewer_show_floating_toolbar_key" translatable="false">pref_appearance_image_viewer_show_floating_toolbar</string>
@@ -887,7 +925,7 @@
 	<string name="pref_appearance_hide_android_status_key" translatable="false">pref_appearance_hide_android_status</string>
 
 	<!-- 2016-09-08 -->
-	<string name="pref_behaviour_enable_swipe_refresh_title">Swipe down to refresh</string>
+	<string name="pref_behaviour_enable_swipe_refresh_title">Pull down to refresh</string>
 	<string name="pref_behaviour_enable_swipe_refresh_key" translatable="false">pref_behaviour_enable_swipe_refresh</string>
 
 	<!-- 2016-09-10 -->
@@ -920,14 +958,15 @@
 	<string name="lang_hu" translatable="false">Magyar</string>
 
 	<!-- 2016-12-03 -->
-	<string name="theme_name_night_lowcontrast">Night (low contrast)</string>
-	<string name="theme_name_ultrablack">Ultra Black</string>
+	<string name="theme_name_dim">Dim</string>
+	<string name="theme_name_black">AMOLED Black</string>
+	<string name="theme_type_system">Follow system theme</string>
 
 	<!-- 2016-12-07 -->
 	<string name="send_replies_to_inbox">Send replies to my inbox</string>
 
 	<!-- 2016-12-11 -->
-	<string name="action_share_image">Share Media</string>
+	<string name="action_share_media">Share Media</string>
 
 	<!-- 2017-01-15 -->
 	<string name="error_403_title_nonreddit">Permission Denied</string>
@@ -1226,6 +1265,7 @@
 	<string name="pref_menus_appbar_sidebar_key" translatable="false">pref_menus_appbar_sidebar</string>
 	<string name="pref_menus_appbar_accounts_key" translatable="false">pref_menus_appbar_accounts</string>
 	<string name="pref_menus_appbar_theme_key" translatable="false">pref_menus_appbar_theme</string>
+	<string name="pref_menus_appbar_accent_key" translatable="false">pref_menus_appbar_accent</string>
 	<string name="pref_menus_appbar_settings_key" translatable="false">pref_menus_appbar_settings</string>
 	<string name="pref_menus_appbar_close_all_key" translatable="false">pref_menus_appbar_close_all</string>
 	<string name="pref_menus_appbar_reply_key" translatable="false">pref_menus_appbar_reply</string>
@@ -1273,7 +1313,7 @@
 
 	<!-- 2020-09-04 -->
 	<string name="reddit_login_browser_popup_line_1">To log in, you will now be taken to Reddit in a web browser.</string>
-	<string name="reddit_login_browser_popup_line_2">When the login is complete, you should be redirected back to RedReader. If the login fails, you can try a different browser using the checkbox below.</string>
+	<string name="reddit_login_browser_popup_line_2">When the login is complete, you should be redirected back to BlueReader. If the login fails, you can try a different browser using the checkbox below.</string>
 
 	<string name="reddit_login_browser_popup_use_internal_browser">Use internal browser (recommended)</string>
 	<string name="reddit_login_browser_popup_use_external_browser">Use external browser (recommended)</string>
@@ -1387,8 +1427,7 @@
 	<string name="accessibility_subtitle_edited_since_being_posted">Edited.</string>
 	<string name="accessibility_subtitle_comment_collapsed">Comment collapsed.</string>
 
-	<string name="accessibility_subtitle_domain_i_redd_it">Reddit images</string>
-	<string name="accessibility_subtitle_domain_v_redd_it">Reddit videos</string>
+	<string name="accessibility_subtitle_domain_cdn_bsky_app">Bluesky media</string>
 
 	<string name="pref_appearance_navbar_color_option_white">White</string>
 
@@ -1507,10 +1546,10 @@
 
 	<string name="restore_preferences_error_invalid_file_title">Invalid file</string>
 	<string name="restore_preferences_error_invalid_file_contents_message">The selected file is not a valid preference backup file.</string>
-	<string name="restore_preferences_error_invalid_file_version_message">The selected file was created by a newer version of RedReader and cannot be opened.</string>
+	<string name="restore_preferences_error_invalid_file_version_message">The selected file was created by a newer version of BlueReader and cannot be opened.</string>
 
 	<string name="restore_preferences_error_version_warning_title">Warning</string>
-	<string name="restore_preferences_error_version_warning_message">The selected file was created by a newer version of RedReader. Restoring the preferences from this file may lead to crashes and instability.</string>
+	<string name="restore_preferences_error_version_warning_message">The selected file was created by a newer version of BlueReader. Restoring the preferences from this file may lead to crashes and instability.</string>
 	
 	<string name="button_continue_anyway">Continue anyway</string>
 	<string name="button_cancel">Cancel</string>
@@ -1631,7 +1670,7 @@
 
 	<!-- 2022-01-09 -->
 	<string name="error_title_report_previous_crash">Report previous crash</string>
-	<string name="error_message_report_previous_crash">RedReader crashed the last time it was run. Would you like to report this?</string>
+	<string name="error_message_report_previous_crash">BlueReader crashed the last time it was run. Would you like to report this?</string>
 
 	<!-- 2021-01-21 -->
 	<string name="error_locked_reply">This has been locked and can no longer be replied to.</string>
@@ -1660,6 +1699,9 @@
 
 	<!-- 2022-03-25 -->
 	<string name="pref_accessibility_say_comment_indent_level_key">pref_accessibility_say_comment_indent_level</string>
+	<string name="pref_login_legacy_key">pref_login_legacy</string>
+	<string name="pref_login_legacy_title">Use legacy authentication</string>
+	<string name="pref_login_legacy_summary">Use the legacy username/password login flow instead of OAuth.</string>
 	<string name="pref_accessibility_say_comment_indent_level_title">Announce comment indent</string>
 	<string name="pref_accessibility_say_comment_indent_level_summary">Announce relative level (indent) of comments within a thread</string>
 	<string name="accessibility_comment_indent_level" tools:ignore="PluralsCandidate">Level %d comment.</string>
@@ -1705,7 +1747,7 @@
 	<!-- 2022-05-17 -->
 	<string name="pref_behaviour_keep_screen_awake_key">pref_behaviour_keep_screen_awake</string>
 	<string name="pref_behaviour_keep_screen_awake_title">Keep screen awake</string>
-	<string name="pref_behaviour_keep_screen_awake_summary">Keep screen awake when RedReader is running in the foreground</string>
+	<string name="pref_behaviour_keep_screen_awake_summary">Keep screen awake when BlueReader is running in the foreground</string>
 
 	<!-- 2022-05-23 -->
 	<string name="subtitle_comments">cmts</string>
@@ -1716,12 +1758,11 @@
 	</plurals>
 
 	<!-- 2022-05-29 -->
-	<string name="find_location">Find Location</string>
+	<string name="search_content">Search</string>
 
-	<string name="find_location_button_goto_subreddit">Go to subreddit</string>
-	<string name="find_location_button_goto_user">User</string>
-	<string name="find_location_button_goto_url">URL</string>
-	<string name="find_location_button_search_posts">Search Posts</string>
+	<string name="action_toggle_search_users">Users</string>
+	<string name="find_location_button_goto_url">Go to URL</string>
+	<string name="action_toggle_search_posts">Posts</string>
 
 	<!-- 2022-06-27 -->
 	<string name="pref_appearance_post_hide_subreddit_header_key">pref_appearance_post_hide_subreddit_header</string>
@@ -1734,17 +1775,17 @@
 	<string name="userprofile_avatar">Avatar</string>
 
 	<!-- 2023-06-18 -->
-	<string name="reddit_login_browser_popup_line_2_internal_browser_only">When the login is complete, you should be redirected back to RedReader.</string>
+	<string name="reddit_login_browser_popup_line_2_internal_browser_only">When the login is complete, you should be redirected back to BlueReader.</string>
 
-	<string name="reddit_terms_title">Reddit User Agreement</string>
-	<string name="reddit_terms_message">RedReader accesses content using the Reddit API. To access Reddit, please read the terms and conditions at the link below, and confirm that you accept them.</string>
-	<string name="reddit_terms_view_button">View Reddit User Agreement</string>
+	<string name="bsky_terms_title">Bluesky Terms of Service</string>
+	<string name="bsky_terms_message">BlueReader uses the Bluesky API to access and publish content. If you want to continue using the API, you must agree to the Bluesky Terms.</string>
+	<string name="bsky_terms_view_button">View Bluesky Terms of Service</string>
 	<string name="terms_accept">Accept</string>
 	<string name="terms_decline">Decline</string>
 
-	<string name="reddit_terms_error_title">Reddit user agreement not accepted</string>
-	<string name="reddit_terms_error_message">If you wish to access content through the Reddit API, please accept their user agreement.</string>
-	<string name="reddit_terms_error_resolution_button">View agreement</string>
+	<string name="bsky_terms_error_title">Bluesky terms not accepted</string>
+	<string name="bsky_terms_error_message">You have to accept the agreement in order to use Bluesky\'s PDS and API services.</string>
+	<string name="bsky_terms_error_resolution_button">Review Terms</string>
 
 	<string name="pref_reddit_client_id_override_key" translatable="false">pref_reddit_client_id_override</string>
 	<string name="pref_reddit_client_id_override_title" translatable="false">Reddit client ID override</string>
@@ -1752,8 +1793,8 @@
 	<string name="error_403_private_sr_title">Private subreddit</string>
 	<string name="error_403_private_sr_message">This subreddit has been set to private.</string>
 
-	<string name="reddit_relogin_error_title">Re-login necessary</string>
-	<string name="reddit_relogin_error_message">Due to recent changes to the Reddit API, it is necessary to log in to your account again.</string>
+	<string name="bsky_relogin_error_title">Reauthentication necessary</string>
+	<string name="bsky_relogin_error_message">Due to recent changes to your PDS\'s version of atproto, you have to log in again.</string>
 
 	<!-- 2023-07-05 -->
 	<string name="accessibility_subtitle_has_selftext_withperiod">Has self text.</string>

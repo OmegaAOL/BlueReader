@@ -1,6 +1,6 @@
 # Contributing
 
-Pull requests for RedReader are always gratefully received. New pull requests
+Pull requests for BlueReader are always gratefully received. New pull requests
 are reviewed whenever @QuantumBadger gets some spare time, which is usually
 within a couple of weeks of submitting (apologies if it takes longer!)
 
@@ -53,7 +53,7 @@ Pull requests for the following things may be rejected:
 
 ## Check before submitting
 
-RedReader uses a number of automated code checks. You can run these locally
+BlueReader uses a number of automated code checks. You can run these locally
 using the `pmd`, `checkstyle`, `lint`, and `test` Gradle targets:
 
 ```

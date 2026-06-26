@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ This file is part of RedReader.
+  ~ This file is part of BlueReader.
   ~
-  ~ RedReader is free software: you can redistribute it and/or modify
+  ~ BlueReader is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ RedReader is distributed in the hope that it will be useful,
+  ~ BlueReader is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with RedReader.  If not, see <http://www.gnu.org/licenses/>.
+  ~ along with BlueReader.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<CheckBoxPreference android:title="@string/pref_appearance_left_handed_title"
 						android:key="@string/pref_appearance_left_handed_key"
 						android:defaultValue="false"/>
+
+
 
 	<ListPreference android:title="@string/pref_appearance_twopane_title"
 					android:key="@string/pref_appearance_twopane_key"
@@ -35,13 +38,19 @@
                         android:key="@string/pref_appearance_theme_key"
                         android:entries="@array/pref_appearance_theme"
                         android:entryValues="@array/pref_appearance_theme_return"
-                        android:defaultValue="red"/>
+				android:defaultValue="system"/>
+
+		<ListPreference android:title="@string/pref_appearance_accent_title"
+				android:key="@string/pref_appearance_accent_key"
+				android:entries="@array/pref_appearance_accent"
+				android:entryValues="@array/pref_appearance_accent_return"
+				android:defaultValue="default"/>
 
 		<ListPreference android:title="@string/pref_appearance_navbar_color_title"
 						android:key="@string/pref_appearance_navbar_color_key"
-						android:entries="@array/pref_appearance_navbar_color_options"
+						android:entries="@array/pref_appearance_navbar_color"
 						android:entryValues="@array/pref_appearance_navbar_color_options_return"
-						android:defaultValue="black"/>
+						android:defaultValue="theme"/>
 
 		<ListPreference android:title="@string/pref_appearance_hide_android_status_title"
 						android:key="@string/pref_appearance_android_status_key"

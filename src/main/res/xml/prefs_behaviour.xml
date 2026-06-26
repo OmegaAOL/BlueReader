@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ This file is part of RedReader.
+  ~ This file is part of BlueReader.
   ~
-  ~ RedReader is free software: you can redistribute it and/or modify
+  ~ BlueReader is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
   ~ the Free Software Foundation, either version 3 of the License, or
   ~ (at your option) any later version.
   ~
-  ~ RedReader is distributed in the hope that it will be useful,
+  ~ BlueReader is distributed in the hope that it will be useful,
   ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
   ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   ~ GNU General Public License for more details.
   ~
   ~ You should have received a copy of the GNU General Public License
-  ~ along with RedReader.  If not, see <http://www.gnu.org/licenses/>.
+  ~ along with BlueReader.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
@@ -95,11 +95,11 @@
 						android:entryValues="@array/pref_behaviour_user_commentsort_array_return"
 						android:defaultValue="new"/>
 
-		<ListPreference android:title="@string/pref_behaviour_pinned_subredditsort"
-						android:key="@string/pref_behaviour_pinned_subredditsort_key"
-						android:entries="@array/pref_behaviour_pinned_subredditsort_array"
-						android:entryValues="@array/pref_behaviour_pinned_subredditsort_array_return"
-						android:defaultValue="name"/>
+		<ListPreference android:title="@string/pref_behaviour_homeitemsort"
+						android:key="@string/pref_behaviour_homeitemsort_key"
+						android:entries="@array/pref_behaviour_homeitemsort_array"
+						android:entryValues="@array/pref_behaviour_homeitemsort_array_return"
+						android:defaultValue="date"/>
 
 		<ListPreference android:title="@string/pref_behaviour_blocked_subredditsort"
 						android:key="@string/pref_behaviour_blocked_subredditsort_key"
