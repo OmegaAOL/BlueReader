@@ -1,6 +1,6 @@
 # BlueReader
 
-BlueReader is an unofficial, open source Android client for Bluesky. It is forked from [RedReader v1.22](https://github.com/QuantumBadger/RedReader/tree/v1.22), the last version to support Android 4.x. In addition to supporting BLuesky instead of Reddit, it has various improvements over the base application.
+BlueReader is an unofficial, open source Android client for Bluesky. It is forked from [RedReader v1.22](https://github.com/QuantumBadger/RedReader/tree/v1.22), the last version to support Android 4.x. In addition to supporting Bluesky instead of Reddit, it has various improvements over the base application.
 
 ## Improvements over RedReader
 
