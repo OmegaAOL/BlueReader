@@ -49,10 +49,10 @@ public class UITestReadSelfPost {
 								0)));
 		mainMenu.perform(actionOnItemAtPosition(2, click()));
 
-		final ViewInteraction customSubredditTextBox
+		final ViewInteraction customFeedTextBox
 				= onView(allOf(withId(R.id.dialog_mainmenu_custom_value), isDisplayed()));
 
-		customSubredditTextBox.perform(click());
+		customFeedTextBox.perform(click());
 
 		onView(allOf(
 				withId(R.id.dialog_mainmenu_custom_value),

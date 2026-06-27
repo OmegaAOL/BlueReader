@@ -28,9 +28,9 @@ import org.omegaaol.bluereader.common.Fonts;
 import org.omegaaol.bluereader.common.General;
 import org.omegaaol.bluereader.common.Optional;
 import org.omegaaol.bluereader.common.PrefsUtility;
-import org.omegaaol.bluereader.reddit.SubredditDetails;
-import org.omegaaol.bluereader.reddit.things.RedditSubreddit;
-import org.omegaaol.bluereader.reddit.url.PostListingURL;
+import org.omegaaol.bluereader.bluesky.FeedDetails;
+import org.omegaaol.bluereader.bluesky.things.Feed;
+import org.omegaaol.bluereader.bluesky.url.PostListingURL;
 
 
 public final class PostListingHeader extends LinearLayout {
@@ -40,7 +40,7 @@ public final class PostListingHeader extends LinearLayout {
 			final String titleText,
 			final String subtitleText,
 			final PostListingURL url,
-			@Nullable final RedditSubreddit feed) {
+			@Nullable final Feed feed) {
 
 		super(activity);
 
@@ -48,7 +48,7 @@ public final class PostListingHeader extends LinearLayout {
 
 		setOrientation(LinearLayout.VERTICAL);
 
-		if(!PrefsUtility.pref_appearance_post_hide_subreddit_header()) {
+		if(!PrefsUtility.pref_appearance_post_hide_feed_header()) {
 
 			final LinearLayout greyHeader = new LinearLayout(activity);
 			greyHeader.setOrientation(LinearLayout.VERTICAL);
@@ -86,12 +86,12 @@ public final class PostListingHeader extends LinearLayout {
 		if(feed != null
 				&& !PrefsUtility.pref_appearance_hide_headertoolbar_postlist()) {
 
-			final SubredditToolbar buttons =
-					inflate(activity, R.layout.subreddit_header_toolbar, this)
-							.findViewById(R.id.subreddit_toolbar_layout);
+			final FeedToolbar buttons =
+					inflate(activity, R.layout.feed_header_toolbar, this)
+							.findViewById(R.id.feed_toolbar_layout);
 
-			buttons.bindSubreddit(
-					SubredditDetails.newWithRuntimeException(feed),
+			buttons.bindFeed(
+					FeedDetails.newWithRuntimeException(feed),
 					Optional.of(url.browserUrl()));
 		}
 	}

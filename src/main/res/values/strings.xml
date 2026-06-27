@@ -103,7 +103,7 @@
     <string name="pref_cache_maxage_image_title">Delete cached images after</string>
 
 	<string name="pref_cache_maxage_entry_key" translatable="false">pref_cache_maxage_entry</string>
-	<string name="pref_cache_maxage_entry_title">Delete cached flags (read, upvoted, etc.) after</string>
+	<string name="pref_cache_maxage_entry_title">Delete cached flags (read, liked, etc.) after</string>
 
     <string name="pref_cache_precache_images_header">Precache Images</string>
 
@@ -132,7 +132,7 @@
     <string name="options_submit_post">Submit Post</string>
 
     <string name="options_refresh">Refresh</string>
-    <string name="options_refresh_subreddits">Refresh Subreddits</string>
+    <string name="options_refresh_feeds">Refresh Feeds</string>
     <string name="options_refresh_posts">Refresh Posts</string>
     <string name="options_refresh_comments">Refresh Comments</string>
 
@@ -141,7 +141,7 @@
     <string name="options_past_comments">Past Comment List Versions</string>
 
     <string name="options_sort">Sort</string>
-    <string name="options_sort_subreddits">Sort Subreddits</string>
+    <string name="options_sort_feeds">Sort Feeds</string>
     <string name="options_sort_posts">Sort Posts</string>
     <string name="options_sort_comments">Sort Comments</string>
 
@@ -149,14 +149,14 @@
 
     <string name="mainmenu_feed_discover">Discover</string>
     <string name="mainmenu_feed_following">Following</string>
-    <string name="mainmenu_custom">Custom Subreddit</string>
-    <string name="mainmenu_custom_invalid_name">Invalid subreddit name.</string>
+    <string name="mainmenu_custom">Custom Feed</string>
+    <string name="mainmenu_custom_invalid_name">Invalid feed name.</string>
     <string name="mainmenu_saved">Saved Posts</string>
     <string name="mainmenu_hidden">Hidden Posts</string>
-    <string name="mainmenu_upvoted">Upvoted Posts</string>
+    <string name="mainmenu_liked">Liked Posts</string>
     <string name="mainmenu_inbox">Inbox</string>
     <string name="mainmenu_profile">My Profile</string>
-    <string name="mainmenu_header_subreddits">Subreddits</string>
+    <string name="mainmenu_header_feeds">Feeds</string>
 
     <!-- General Listing -->
 
@@ -286,7 +286,7 @@
     <string name="comment_reply_done">Reply sent. The comment will appear after you refresh.</string>
     <string name="comment_edit_done">Comment edited. Changes will appear after you refresh.</string>
     <string name="post_submit_title_hint">Title</string>
-    <string name="subreddit_selection_textbox_hint">Subreddit</string>
+    <string name="feed_selection_textbox_hint">Feed</string>
     <string name="post_captcha_title">CAPTCHA</string>
     <string name="post_captcha_submit_button">Submit</string>
     <string name="post_submit_done">Post submitted.</string>
@@ -304,8 +304,8 @@
     <string name="error_403_title">[403] Forbidden</string>
     <string name="error_403_message">Bluesky says the current user does not have permission to do that.</string>
 
-    <string name="error_subreddit_required_title">Subreddit Required</string>
-    <string name="error_subreddit_required_message">You must specify a subreddit.</string>
+    <string name="error_feed_required_title">Feed Required</string>
+    <string name="error_feed_required_message">You must specify a feed.</string>
 
     <string name="error_bad_captcha_title">Invalid CAPTCHA</string>
     <string name="error_bad_captcha_message">The CAPTCHA you entered was incorrect. Please try again.</string>
@@ -377,7 +377,7 @@
     <string name="props_created">Created</string>
     <string name="props_edited">Edited</string>
     <string name="props_score">Score</string>
-    <string name="props_subreddit">Subreddit</string>
+    <string name="props_feed">Feed</string>
     <string name="props_url">URL</string>
     <string name="props_num_comments">Number of Comments</string>
     <string name="props_body_markdown">Body (Raw Markdown)</string>
@@ -427,7 +427,7 @@
     <string name="pref_appearance_comment_header_items_author">Author</string>
     <string name="pref_appearance_comment_header_items_flair">Flair</string>
     <string name="pref_appearance_comment_header_items_score">Score</string>
-    <string name="pref_appearance_comment_header_items_upsdowns">Upvotes/downvotes</string>
+    <string name="pref_appearance_comment_header_items_upsdowns">Likes/downvotes</string>
     <string name="pref_appearance_comment_header_items_age">Age</string>
 
     <!-- 2013-05-17 -->
@@ -456,7 +456,7 @@
     <string name="error_toast_no_urls_in_self">No URLs found in this self text.</string>
     <string name="error_toast_parent_post_not_downloaded">Parent post not downloaded yet.</string>
 
-    <string name="download_subreddits">Downloading subreddits…</string>
+    <string name="download_feeds">Downloading feeds…</string>
 
     <string name="subtitle_points">pts</string>
     <string name="subtitle_by">by</string>
@@ -465,7 +465,7 @@
     <string name="general_unknown">unknown</string>
 
     <string name="action_search">Search</string>
-    <string name="search_subreddit_restrict">Restrict search to</string>
+    <string name="search_feed_restrict">Restrict search to</string>
 
     <string name="title_changelog">What\'s New</string>
 
@@ -588,7 +588,7 @@
 
     <!-- 2014-04-21 -->
 
-    <string name="invalid_subreddit_name">Invalid subreddit name</string>
+    <string name="invalid_feed_name">Invalid feed name</string>
 
     <!-- 2014-04-26 -->
 
@@ -730,9 +730,9 @@
     <string name="mainmenu_header_feeds_subscribed">Subscribed Feeds</string>
     <string name="mainmenu_header_feeds_pinned">Pinned Feeds</string>
 
-    <string name="pin_subreddit">Pin to main menu</string>
-    <string name="unpin_subreddit">Unpin from main menu</string>
-    <string name="pref_pinned_subreddits_key" translatable="false">pref_pinned_subreddits</string>
+    <string name="pin_feed">Pin to main menu</string>
+    <string name="unpin_feed">Unpin from main menu</string>
+    <string name="pref_pinned_feeds_key" translatable="false">pref_pinned_feeds</string>
 
     <!-- 2015-11-22 -->
     <string name="props_image_title">Image Info</string>
@@ -744,11 +744,11 @@
     <string name="error_too_fast_message">Reddit says you are making submissions too quickly. Please wait a few minutes before trying again.</string>
 
     <!-- 2015-12-19 -->
-    <string name="block_subreddit">Block Subreddit</string>
-    <string name="unblock_subreddit">Unblock Subreddit</string>
-    <string name="pref_blocked_subreddits_key" translatable="false">pref_blocked_subreddits</string>
-    <string name="block_done">Subreddit blocked. Future visits to the front page, /r/popular, and /r/all will exclude this subreddit.</string>
-    <string name="unblock_done">Subreddit unblocked. Future visits to the front page, /r/popular, and /r/all will include this subreddit.</string>
+    <string name="block_feed">Block Feed</string>
+    <string name="unblock_feed">Unblock Feed</string>
+    <string name="pref_blocked_feeds_key" translatable="false">pref_blocked_feeds</string>
+    <string name="block_done">Feed blocked. Future visits to the front page, /r/popular, and /r/all will exclude this feed.</string>
+    <string name="unblock_done">Feed unblocked. Future visits to the front page, /r/popular, and /r/all will include this feed.</string>
 
     <!-- 2016-03-14-->
     <string name="pref_behaviour_comment_min_key" translatable="false">pref_behaviour_comment_min</string>
@@ -790,7 +790,7 @@
     <string name="image_selected_summary">Image selected: %1$dx%2$d, %3$s</string>
 
 	<!-- 2016-06-10 -->
-	<string name="submit_post_specify_subreddit">Specify subreddit</string>
+	<string name="submit_post_specify_feed">Specify feed</string>
 	<string name="submit_post_title_empty">Title cannot be empty</string>
 	<string name="submit_post_url_empty">URL cannot be empty</string>
 	<string name="submit_post_self_text_hint">Self Text</string>
@@ -883,12 +883,12 @@
 
 	<!-- 2016-08-06 -->
 	<string name="mainmenu_custom_destination">Custom Location</string>
-	<string name="mainmenu_custom_destination_subreddit">Subreddit</string>
+	<string name="mainmenu_custom_destination_feed">Feed</string>
 	<string name="mainmenu_custom_destination_user">User</string>
 	<string name="mainmenu_custom_destination_url">URL</string>
 	<string name="mainmenu_custom_destination_search">Search</string>
 
-	<string name="mainmenu_header_multireddits">Multireddits</string>
+	<string name="mainmenu_header_lists">Lists</string>
 
 	<string name="pref_behaviour_share_permalink_key" translatable="false">pref_behaviour_share_permalink</string>
 	<string name="pref_behaviour_share_permalink_title">Share as permalink</string>
@@ -929,15 +929,15 @@
 	<string name="pref_behaviour_enable_swipe_refresh_key" translatable="false">pref_behaviour_enable_swipe_refresh</string>
 
 	<!-- 2016-09-10 -->
-	<string name="mainmenu_header_subreddits_blocked">Blocked Subreddits</string>
-	<string name="pref_behaviour_blocked_subredditsort_key" translatable="false">pref_behaviour_blocked_subreddit_sort</string>
-	<string name="pref_behaviour_blocked_subredditsort">Blocked subreddits</string>
-	<string name="sort_blocked_subreddit_name">By Name</string>
-	<string name="sort_blocked_subreddit_date">By Added Date</string>
+	<string name="mainmenu_header_feeds_blocked">Blocked Feeds</string>
+	<string name="pref_behaviour_blocked_feedsort_key" translatable="false">pref_behaviour_blocked_feed_sort</string>
+	<string name="pref_behaviour_blocked_feedsort">Blocked feeds</string>
+	<string name="sort_blocked_feed_name">By Name</string>
+	<string name="sort_blocked_feed_date">By Added Date</string>
 
 	<!-- 2016-09-21 -->
-	<string name="pref_appearance_show_blocked_subreddits_main_menu_key" translatable="false">pref_appearance_show_blocked_subreddits_main_menu</string>
-	<string name="pref_appearance_show_blocked_subreddits_main_menu_title">Show blocked subreddits</string>
+	<string name="pref_appearance_show_blocked_feeds_main_menu_key" translatable="false">pref_appearance_show_blocked_feeds_main_menu</string>
+	<string name="pref_appearance_show_blocked_feeds_main_menu_title">Show blocked feeds</string>
 
 	<!-- 2016-10-02 -->
 	<string name="pref_cache_rerequest_postlist_age_key" translatable="false">pref_cache_rerequest_postlist_age</string>
@@ -977,7 +977,7 @@
 	<string name="pm_reply_done">Reply sent.</string>
 
 	<!-- 2017-02-15 -->
-	<string name="mainmenu_popular">Popular Subreddits</string>
+	<string name="mainmenu_popular">Popular Feeds</string>
 
 	<!-- 2017-02-23 -->
 	<string name="action_back">Back</string>
@@ -989,25 +989,25 @@
 	<string name="lang_pl" translatable="false">Polski</string>
 
 	<!-- 2017-03-07 -->
-	<string name="pref_menus_subreddit_context_items_key" translatable="false">pref_menus_subreddit_context_items</string>
-	<string name="pref_menus_subreddit_context_items_title">Subreddit action menu items</string>
-	<string name="mainmenu_toast_not_subscribed">You are not subscribed to this subreddit yet!</string>
-	<string name="mainmenu_toast_subscribed">You are already subscribed to this subreddit!</string>
-	<string name="mainmenu_toast_not_pinned">This subreddit is not pinned to the main menu!</string>
-	<string name="mainmenu_toast_pinned">This subreddit is already pinned to the main menu!</string>
-	<string name="mainmenu_toast_not_blocked">This subreddit is not blocked!</string>
-	<string name="mainmenu_toast_blocked">This subreddit is already blocked!</string>
+	<string name="pref_menus_feed_context_items_key" translatable="false">pref_menus_feed_context_items</string>
+	<string name="pref_menus_feed_context_items_title">Feed action menu items</string>
+	<string name="mainmenu_toast_not_subscribed">You are not subscribed to this feed yet!</string>
+	<string name="mainmenu_toast_subscribed">You are already subscribed to this feed!</string>
+	<string name="mainmenu_toast_not_pinned">This feed is not pinned to the main menu!</string>
+	<string name="mainmenu_toast_pinned">This feed is already pinned to the main menu!</string>
+	<string name="mainmenu_toast_not_blocked">This feed is not blocked!</string>
+	<string name="mainmenu_toast_blocked">This feed is already blocked!</string>
 	<string name="lang_pt" translatable="false">Português</string>
 
 	<!-- 2017-04-02 -->
 	<string name="edit_post_actionbar">Edit Post</string>
 	<string name="post_edit_done">Post edited. Changes will appear after you refresh.</string>
-	<string name="action_block_subreddit">Block Subreddit</string>
-	<string name="action_unblock_subreddit">Unblock Subreddit</string>
-	<string name="action_pin_subreddit">Pin Subreddit to Main Menu</string>
-	<string name="action_unpin_subreddit">Unpin Subreddit from Main Menu</string>
-	<string name="action_subscribe_subreddit">Subscribe to Subreddit</string>
-	<string name="action_unsubscribe_subreddit">Unsubscribe from Subreddit</string>
+	<string name="action_block_feed">Block Feed</string>
+	<string name="action_unblock_feed">Unblock Feed</string>
+	<string name="action_pin_feed">Pin Feed to Main Menu</string>
+	<string name="action_unpin_feed">Unpin Feed from Main Menu</string>
+	<string name="action_subscribe_feed">Subscribe to Feed</string>
+	<string name="action_unsubscribe_feed">Unsubscribe from Feed</string>
 
 	<!-- 2017-04-14 -->
 	<string name="collapsed_self_post">Self post collapsed</string>
@@ -1046,7 +1046,7 @@
 	<string name="disable_replies_to_infobox_failed">Could not turn off replies to inbox</string>
 
 	<!-- 2017-12-03 -->
-	<string name="mainmenu_random">Random Subreddit</string>
+	<string name="mainmenu_random">Random Feed</string>
 	<string name="pref_menus_show_random_main_menu_key" translatable="false">pref_menus_show_random_main_menu</string>
 	<string name="pref_menus_show_random_main_menu_title">Show /r/random in main menu</string>
 
@@ -1086,7 +1086,7 @@
 	<string name="post_submit_mark_spoiler">Mark as spoiler</string>
 
 	<string name="error_already_submitted_title">Already submitted</string>
-	<string name="error_already_submitted_message">This post has already been submitted to this subreddit.</string>
+	<string name="error_already_submitted_message">This post has already been submitted to this feed.</string>
 
 	<string name="comment_reply_done_norefresh">Reply sent.</string>
 
@@ -1105,14 +1105,14 @@
 	<string name="pref_menus_mainmenu_shortcutitems_title">Shortcuts</string>
 	<string name="pref_menus_mainmenu_shortcutitems_key" translatable="false">pref_menus_mainmenu_shortcutitems_key</string>
 
-	<string name="pref_menus_show_multireddit_main_menu_title">Show multireddits</string>
-	<string name="pref_menus_show_multireddit_main_menu_key" translatable="false">pref_menus_show_multireddit_main_menu_key</string>
+	<string name="pref_menus_show_list_main_menu_title">Show lists</string>
+	<string name="pref_menus_show_list_main_menu_key" translatable="false">pref_menus_show_list_main_menu_key</string>
 
-	<string name="pref_menus_show_subscribed_subreddits_main_menu_key" translatable="false">pref_menus_show_subscribed_main_menu</string>
-	<string name="pref_menus_show_subscribed_subreddits_main_menu_title">Show subscribed subreddits</string>
+	<string name="pref_menus_show_subscribed_feeds_main_menu_key" translatable="false">pref_menus_show_subscribed_main_menu</string>
+	<string name="pref_menus_show_subscribed_feeds_main_menu_title">Show subscribed feeds</string>
 
 	<!-- 2018-11-26 -->
-	<string name="mainmenu_random_nsfw">Random NSFW Subreddit</string>
+	<string name="mainmenu_random_nsfw">Random NSFW Feed</string>
 
 	<!-- 2019-01-26 -->
 	<string name="pref_appearance_show_aspect_ratio_indicator_key" translatable="false">pref_appearance_show_aspect_ratio_indicator_key</string>
@@ -1166,7 +1166,7 @@
 	<string name="pref_appearance_post_subtitle_items_sticky">Sticky tag</string>
 	<string name="pref_appearance_post_subtitle_items_spoiler">Spoiler tag</string>
 	<string name="pref_appearance_post_subtitle_items_nsfw">NSFW tag</string>
-	<string name="pref_appearance_post_subtitle_items_subreddit">Subreddit</string>
+	<string name="pref_appearance_post_subtitle_items_feed">Feed</string>
 	<string name="pref_appearance_post_subtitle_items_domain">Domain</string>
 	<string name="pref_appearance_post_subtitle_items_use_different_settings_key" translatable="false">pref_appearance_post_subtitle_items_use_different_settings_key</string>
 	<string name="pref_appearance_post_subtitle_items_use_different_settings_title">Use different settings for opened posts</string>
@@ -1182,8 +1182,8 @@
 	<string name="list_yes_no_or_wifi_never">Never</string>
 
 	<!-- 2020-02-08 -->
-	<string name="error_nsfw_subreddits_disabled_title">Blocked NSFW Subreddit</string>
-	<string name="error_nsfw_subreddits_disabled_message">NSFW content is currently turned off in the settings.</string>
+	<string name="error_nsfw_feeds_disabled_title">Blocked NSFW Feed</string>
+	<string name="error_nsfw_feeds_disabled_message">NSFW content is currently turned off in the settings.</string>
 
 	<!-- 2020-02-13 -->
 	<string name="search_results_short">Search Results</string>
@@ -1243,7 +1243,7 @@
 	<string name="link_copied_to_clipboard">Link copied to clipboard</string>
 	<string name="comment_link_copied_to_clipboard">Comment link copied to clipboard</string>
 	<string name="comment_text_copied_to_clipboard">Comment text copied to clipboard</string>
-	<string name="subreddit_link_copied_to_clipboard">Subreddit link copied to clipboard</string>
+	<string name="feed_link_copied_to_clipboard">Feed link copied to clipboard</string>
 
   <!-- 2020-07-16 -->
 	<string name="copied_to_clipboard">Copied to clipboard</string>
@@ -1284,7 +1284,7 @@
 	<string name="pref_behaviour_user_postsort_key" translatable="false">pref_behaviour_user_postsort</string>
 	<string name="pref_behaviour_user_postsort_title">User posts (default)</string>
 	<string name="pref_behaviour_multi_postsort_key" translatable="false">pref_behaviour_multi_postsort</string>
-	<string name="pref_behaviour_multi_postsort_title">Multireddit posts (default)</string>
+	<string name="pref_behaviour_multi_postsort_title">List posts (default)</string>
 	<string name="pref_behaviour_user_commentsort_key" translatable="false">pref_behaviour_user_commentsort</string>
 	<string name="pref_behaviour_user_commentsort_title">User comments (default)</string>
 	<string name="sort_comments_top_hour">Top: This Hour</string>
@@ -1420,7 +1420,7 @@
 	<string name="accessibility_subtitle_gold_withperiod">Gildings: %d.</string>
 	<string name="accessibility_subtitle_age_withperiod">%s.</string>
 	<string name="accessibility_subtitle_author_withperiod">Author: %s.</string>
-	<string name="accessibility_subtitle_subreddit_withperiod">Sub-reddit: %s.</string>
+	<string name="accessibility_subtitle_feed_withperiod">Sub-reddit: %s.</string>
 	<string name="accessibility_subtitle_domain_withperiod">Domain: %s.</string>
 	<string name="accessibility_subtitle_selfpost_withperiod">Self post.</string>
 	<string name="accessibility_subtitle_points_unknown_withperiod">Score hidden.</string>
@@ -1504,17 +1504,17 @@
 	<string name="post_submit_flair_none_available">No flairs available</string>
 	<string name="post_submit_flair_none_selected">No flair selected</string>
 
-	<string name="subreddit_selector_title">Select subreddit</string>
+	<string name="feed_selector_title">Select feed</string>
 
 	<string name="post_submit_heading">Submitting post to %1$s as user %2$s.</string>
 
-	<string name="error_subreddit_does_not_exist_title">Invalid subreddit</string>
-	<string name="error_subreddit_does_not_exist_message">The specified subreddit does not exist.</string>
+	<string name="error_feed_does_not_exist_title">Invalid feed</string>
+	<string name="error_feed_does_not_exist_message">The specified feed does not exist.</string>
 
-	<string name="error_subreddit_info_permission_denied_title">Permission denied</string>
-	<string name="error_subreddit_info_permission_denied_message">The logged in user is not able to access information about that subreddit.</string>
+	<string name="error_feed_info_permission_denied_title">Permission denied</string>
+	<string name="error_feed_info_permission_denied_message">The logged in user is not able to access information about that feed.</string>
 
-	<string name="invalid_subreddit_name_message">Please enter a valid subreddit name.</string>
+	<string name="invalid_feed_name_message">Please enter a valid feed name.</string>
 
 	<!-- 2021-05-09 -->
 	<string name="accessibility_subtitle_recipient_withperiod">Recipient: %s.</string>
@@ -1578,7 +1578,7 @@
 	<!-- 2021-06-13 -->
 
 	<string name="error_post_flair_required_title">Flair required</string>
-	<string name="error_post_flair_required_message">The rules of this subreddit require setting a flair on your post.</string>
+	<string name="error_post_flair_required_message">The rules of this feed require setting a flair on your post.</string>
 
 	<string name="error_post_submit_title">Error submitting post</string>
 
@@ -1685,12 +1685,12 @@
 	<string name="sort_comments_qa_suggested">Q&amp;A (suggested)</string>
 
 	<!-- 2022-01-26 -->
-	<string name="pref_appearance_post_subtitle_items_upvote_ratio">Percent upvoted</string>
-	<string name="subtitle_upvote_ratio">upvoted</string>
-	<string name="accessibility_subtitle_upvote_ratio_withperiod" tools:ignore="PluralsCandidate">%d percent up voted.</string>
+	<string name="pref_appearance_post_subtitle_items_like_ratio">Percent liked</string>
+	<string name="subtitle_like_ratio">liked</string>
+	<string name="accessibility_subtitle_like_ratio_withperiod" tools:ignore="PluralsCandidate">%d percent up voted.</string>
 
 	<!-- 2022-02-19 -->
-	<string name="find_subreddit">Find Subreddit</string>
+	<string name="find_feed">Find Feed</string>
 
 	<!-- 2022-02-10 -->
 	<string name="pref_behaviour_block_screenshots_key">pref_behaviour_block_screenshots</string>
@@ -1724,7 +1724,7 @@
 	</plurals>
 	<string name="accessibility_subtitle_author_withperiod_concise_post">u/%s.</string>
 	<string name="accessibility_subtitle_author_withperiod_concise_comment">%s.</string>
-	<string name="accessibility_subtitle_subreddit_withperiod_concise">r/%s.</string>
+	<string name="accessibility_subtitle_feed_withperiod_concise">r/%s.</string>
 	<string name="accessibility_subtitle_domain_withperiod_concise">%s.</string>
 	<string name="accessibility_subtitle_selfpost_withperiod_concise">Self.</string>
 	<string name="accessibility_subtitle_comment_collapsed_concise">Collapsed.</string>
@@ -1736,9 +1736,9 @@
 	<string name="accessibility_subtitle_author_submitter_moderator_withperiod_concise">%s, OP and mod.</string>
 	<string name="accessibility_subtitle_author_submitter_admin_withperiod_concise">%s, OP and admin.</string>
 	<string name="accessibility_subtitle_controversiality_withperiod_concise">Controversial.</string>
-	<string name="accessibility_subtitle_upvote_ratio_withperiod_concise" tools:ignore="PluralsCandidate">%d percent up.</string>
+	<string name="accessibility_subtitle_like_ratio_withperiod_concise" tools:ignore="PluralsCandidate">%d percent up.</string>
 	<string name="accessibility_comment_indent_level_concise" tools:ignore="PluralsCandidate">l%d.</string>
-	<string name="accessibility_subtitle_upvoted_withperiod">Upvoted.</string>
+	<string name="accessibility_subtitle_liked_withperiod">Liked.</string>
 	<string name="accessibility_subtitle_downvoted_withperiod">Downvoted.</string>
 
 	<!-- 2022-04-10 -->
@@ -1765,8 +1765,8 @@
 	<string name="action_toggle_search_posts">Posts</string>
 
 	<!-- 2022-06-27 -->
-	<string name="pref_appearance_post_hide_subreddit_header_key">pref_appearance_post_hide_subreddit_header</string>
-	<string name="pref_appearance_post_hide_subreddit_header_title">Hide subreddit header</string>
+	<string name="pref_appearance_post_hide_feed_header_key">pref_appearance_post_hide_feed_header</string>
+	<string name="pref_appearance_post_hide_feed_header_title">Hide feed header</string>
 
 	<!-- 2022-09-10 -->
 	<string name="post_domain_deleted">deleted</string>
@@ -1790,8 +1790,8 @@
 	<string name="pref_reddit_client_id_override_key" translatable="false">pref_reddit_client_id_override</string>
 	<string name="pref_reddit_client_id_override_title" translatable="false">Reddit client ID override</string>
 
-	<string name="error_403_private_sr_title">Private subreddit</string>
-	<string name="error_403_private_sr_message">This subreddit has been set to private.</string>
+	<string name="error_403_private_sr_title">Private feed</string>
+	<string name="error_403_private_sr_message">This feed has been set to private.</string>
 
 	<string name="bsky_relogin_error_title">Reauthentication necessary</string>
 	<string name="bsky_relogin_error_message">Due to recent changes to your PDS\'s version of atproto, you have to log in again.</string>
@@ -1800,12 +1800,12 @@
 	<string name="accessibility_subtitle_has_selftext_withperiod">Has self text.</string>
 
 	<!-- 2023-07-06 -->
-	<string name="error_403_quarantined_sr_title">Quarantined subreddit</string>
-	<string name="error_403_quarantined_sr_message">This subreddit has been quarantined. To access it, you must opt-in on reddit.com.</string>
-	<string name="error_403_premiumonly_sr_title">Premium-only subreddit</string>
-	<string name="error_403_premiumonly_sr_message">This subreddit only allows Reddit Premium members to visit.</string>
-	<string name="error_404_banned_sr_title">Banned subreddit</string>
-	<string name="error_404_banned_sr_message">This subreddit has been banned.</string>
+	<string name="error_403_quarantined_sr_title">Quarantined feed</string>
+	<string name="error_403_quarantined_sr_message">This feed has been quarantined. To access it, you must opt-in on reddit.com.</string>
+	<string name="error_403_premiumonly_sr_title">Premium-only feed</string>
+	<string name="error_403_premiumonly_sr_message">This feed only allows Reddit Premium members to visit.</string>
+	<string name="error_404_banned_sr_title">Banned feed</string>
+	<string name="error_404_banned_sr_message">This feed has been banned.</string>
 
 	<!-- 2023-07-07 -->
 	<string name="pref_appearance_user_header">User Profiles</string>

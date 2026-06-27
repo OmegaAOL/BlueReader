@@ -18,7 +18,7 @@
 package org.omegaaol.bluereader.adapters;
 
 import android.content.Context;
-import org.omegaaol.bluereader.reddit.RedditPostListItem;
+import org.omegaaol.bluereader.bluesky.RedditPostListItem;
 
 import java.util.Collection;
 import java.util.Collections;

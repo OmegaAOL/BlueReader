@@ -29,7 +29,7 @@ When you use BlueReader, data including (but not limited to) the following may b
 
 * App preferences
 * Your logged-in Reddit accounts
-* Information downloaded from Reddit about your account, such as subscribed subreddits/users, voting activity, your inbox contents, etc
+* Information downloaded from Reddit about your account, such as subscribed feeds/users, voting activity, your inbox contents, etc
 * A cache of previously visited/read pages
 
 ## Third Party Services

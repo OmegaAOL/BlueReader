@@ -43,7 +43,7 @@
 					android:entryValues="@array/pref_menus_appbar_items_return"
 					android:defaultValue="0"/>
 
-	<ListPreference android:title="@string/pin_subreddit"
+	<ListPreference android:title="@string/pin_feed"
 					android:key="@string/pref_menus_appbar_pin_key"
 					android:entries="@array/pref_menus_appbar_items"
 					android:entryValues="@array/pref_menus_appbar_items_return"
@@ -55,7 +55,7 @@
 					android:entryValues="@array/pref_menus_appbar_items_return"
 					android:defaultValue="0"/>
 
-	<ListPreference android:title="@string/block_subreddit"
+	<ListPreference android:title="@string/block_feed"
 					android:key="@string/pref_menus_appbar_block_key"
 					android:entries="@array/pref_menus_appbar_items"
 					android:entryValues="@array/pref_menus_appbar_items_return"

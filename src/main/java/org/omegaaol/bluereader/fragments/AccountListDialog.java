@@ -32,8 +32,6 @@ import org.omegaaol.bluereader.account.RedditAccountChangeListener;
 import org.omegaaol.bluereader.account.RedditAccountManager;
 import org.omegaaol.bluereader.adapters.AccountListAdapter;
 import org.omegaaol.bluereader.common.AndroidCommon;
-import org.omegaaol.bluereader.common.RunnableOnce;
-import org.omegaaol.bluereader.reddit.api.RedditOAuth;
 
 public class AccountListDialog extends AppCompatDialogFragment
 		implements RedditAccountChangeListener {

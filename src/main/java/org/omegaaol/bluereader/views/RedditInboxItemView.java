@@ -28,8 +28,8 @@ import org.omegaaol.bluereader.common.General;
 import org.omegaaol.bluereader.common.Optional;
 import org.omegaaol.bluereader.common.PrefsUtility;
 import org.omegaaol.bluereader.common.RRThemeAttributes;
-import org.omegaaol.bluereader.reddit.prepared.RedditChangeDataManager;
-import org.omegaaol.bluereader.reddit.prepared.RedditRenderableInboxItem;
+import org.omegaaol.bluereader.bluesky.prepared.RedditChangeDataManager;
+import org.omegaaol.bluereader.bluesky.prepared.RedditRenderableInboxItem;
 
 public class RedditInboxItemView extends LinearLayout {
 

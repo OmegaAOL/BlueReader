@@ -34,7 +34,7 @@ import org.omegaaol.bluereader.common.time.TimestampUTC;
 import org.omegaaol.bluereader.http.FailedRequestBody;
 import org.omegaaol.bluereader.jsonwrap.JsonObject;
 import org.omegaaol.bluereader.jsonwrap.JsonValue;
-import org.omegaaol.bluereader.reddit.url.PostCommentListingURL;
+import org.omegaaol.bluereader.bluesky.url.PostCommentListingURL;
 
 import java.util.UUID;
 

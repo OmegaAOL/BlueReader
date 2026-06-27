@@ -20,8 +20,8 @@ package org.omegaaol.bluereader.adapters;
 import android.content.Context;
 import androidx.annotation.Nullable;
 import org.omegaaol.bluereader.common.StringUtils;
-import org.omegaaol.bluereader.reddit.RedditCommentListItem;
-import org.omegaaol.bluereader.reddit.kthings.UrlEncodedString;
+import org.omegaaol.bluereader.bluesky.RedditCommentListItem;
+import org.omegaaol.bluereader.bluesky.kthings.UrlEncodedString;
 
 import java.util.ArrayList;
 import java.util.Collection;

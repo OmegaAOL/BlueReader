@@ -31,11 +31,11 @@ import org.omegaaol.bluereader.common.General;
 import org.omegaaol.bluereader.common.LinkHandler;
 import org.omegaaol.bluereader.common.PrefsUtility;
 import org.omegaaol.bluereader.fragments.CommentListingFragment;
-import org.omegaaol.bluereader.reddit.PostCommentSort;
-import org.omegaaol.bluereader.reddit.UserCommentSort;
-import org.omegaaol.bluereader.reddit.prepared.RedditPreparedPost;
-import org.omegaaol.bluereader.reddit.url.PostCommentListingURL;
-import org.omegaaol.bluereader.reddit.url.RedditURLParser;
+import org.omegaaol.bluereader.bluesky.PostCommentSort;
+import org.omegaaol.bluereader.bluesky.UserCommentSort;
+import org.omegaaol.bluereader.bluesky.prepared.RedditPreparedPost;
+import org.omegaaol.bluereader.bluesky.url.PostCommentListingURL;
+import org.omegaaol.bluereader.bluesky.url.RedditURLParser;
 import org.omegaaol.bluereader.views.RedditPostView;
 
 import java.util.ArrayList;

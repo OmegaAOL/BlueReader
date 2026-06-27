@@ -23,15 +23,11 @@ import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.Html;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentActivity;
@@ -41,7 +37,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import org.omegaaol.bluereader.BuildConfig;
 import org.omegaaol.bluereader.R;
@@ -58,11 +53,10 @@ import org.omegaaol.bluereader.common.FileUtils;
 import org.omegaaol.bluereader.common.General;
 import org.omegaaol.bluereader.common.PrefsBackup;
 import org.omegaaol.bluereader.common.PrefsUtility;
-import org.omegaaol.bluereader.common.SharedPrefsWrapper;
 import org.omegaaol.bluereader.common.TorCommon;
 import org.omegaaol.bluereader.common.time.TimeDuration;
 import org.omegaaol.bluereader.common.time.TimestampUTC;
-import org.omegaaol.bluereader.reddit.prepared.RedditChangeDataManager;
+import org.omegaaol.bluereader.bluesky.prepared.RedditChangeDataManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -164,7 +158,7 @@ public final class SettingsFragment extends PreferenceFragmentCompat {
 				R.string.pref_behaviour_screenorientation_key,
 				R.string.pref_behaviour_gallery_swipe_length_key,
 				R.string.pref_behaviour_homeitemsort_key,
-				R.string.pref_behaviour_blocked_subredditsort_key,
+				R.string.pref_behaviour_blocked_feedsort_key,
 				R.string.pref_behaviour_save_location_key,
 				R.string.pref_cache_rerequest_postlist_age_key,
 				R.string.pref_appearance_thumbnails_show_list_key,
@@ -721,8 +715,8 @@ public final class SettingsFragment extends PreferenceFragmentCompat {
 				new int[] {
 						Constants.FileType.POST_LIST,
 						Constants.FileType.COMMENT_LIST,
-						Constants.FileType.SUBREDDIT_LIST,
-						Constants.FileType.SUBREDDIT_ABOUT,
+						Constants.FileType.FEED_LIST,
+						Constants.FileType.FEED_ABOUT,
 						Constants.FileType.USER_ABOUT,
 						Constants.FileType.INBOX_LIST}),
 		THUMBNAILS(

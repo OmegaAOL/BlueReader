@@ -32,7 +32,7 @@ import org.omegaaol.bluereader.BlueReader;
 import org.omegaaol.bluereader.common.General;
 import org.omegaaol.bluereader.common.PrefsUtility;
 import org.omegaaol.bluereader.common.TorCommon;
-import org.omegaaol.bluereader.reddit.api.RedditOAuth;
+import org.omegaaol.bluereader.bluesky.api.RedditOAuth;
 
 import java.net.URI;
 

@@ -52,20 +52,20 @@ import org.omegaaol.bluereader.common.datastream.SeekableInputStream;
 import org.omegaaol.bluereader.common.time.TimeDuration;
 import org.omegaaol.bluereader.common.time.TimestampUTC;
 import org.omegaaol.bluereader.http.FailedRequestBody;
-import org.omegaaol.bluereader.reddit.APIResponseHandler;
-import org.omegaaol.bluereader.reddit.RedditAPI;
-import org.omegaaol.bluereader.reddit.kthings.JsonUtils;
-import org.omegaaol.bluereader.reddit.kthings.MaybeParseError;
-import org.omegaaol.bluereader.reddit.kthings.RedditComment;
-import org.omegaaol.bluereader.reddit.kthings.RedditFieldReplies;
-import org.omegaaol.bluereader.reddit.kthings.RedditListing;
-import org.omegaaol.bluereader.reddit.kthings.RedditMessage;
-import org.omegaaol.bluereader.reddit.kthings.RedditThing;
-import org.omegaaol.bluereader.reddit.prepared.RedditChangeDataManager;
-import org.omegaaol.bluereader.reddit.prepared.RedditParsedComment;
-import org.omegaaol.bluereader.reddit.prepared.RedditPreparedMessage;
-import org.omegaaol.bluereader.reddit.prepared.RedditRenderableComment;
-import org.omegaaol.bluereader.reddit.prepared.RedditRenderableInboxItem;
+import org.omegaaol.bluereader.bluesky.APIResponseHandler;
+import org.omegaaol.bluereader.bluesky.RedditAPI;
+import org.omegaaol.bluereader.bluesky.kthings.JsonUtils;
+import org.omegaaol.bluereader.bluesky.kthings.MaybeParseError;
+import org.omegaaol.bluereader.bluesky.kthings.RedditComment;
+import org.omegaaol.bluereader.bluesky.kthings.RedditFieldReplies;
+import org.omegaaol.bluereader.bluesky.kthings.RedditListing;
+import org.omegaaol.bluereader.bluesky.kthings.RedditMessage;
+import org.omegaaol.bluereader.bluesky.kthings.RedditThing;
+import org.omegaaol.bluereader.bluesky.prepared.RedditChangeDataManager;
+import org.omegaaol.bluereader.bluesky.prepared.RedditParsedComment;
+import org.omegaaol.bluereader.bluesky.prepared.RedditPreparedMessage;
+import org.omegaaol.bluereader.bluesky.prepared.RedditRenderableComment;
+import org.omegaaol.bluereader.bluesky.prepared.RedditRenderableInboxItem;
 import org.omegaaol.bluereader.views.RedditInboxItemView;
 import org.omegaaol.bluereader.views.ScrollbarRecyclerViewManager;
 import org.omegaaol.bluereader.views.liststatus.ErrorView;
@@ -303,7 +303,7 @@ public final class InboxListingActivity extends BaseActivity {
 								}
 							}
 
-							// TODO {"error": 403} is received for unauthorized subreddits
+							// TODO {"error": 403} is received for unauthorized feeds
 
 							int listPosition = 0;
 

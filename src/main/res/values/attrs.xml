@@ -47,7 +47,7 @@
     <attr name="rrPostTitleReadCol" format="color" />
     <attr name="rrPostSubtitleCol" format="color" />
     <attr name="rrPostSubtitleBoldCol" format="color" />
-    <attr name="rrPostSubtitleUpvoteCol" format="color" />
+    <attr name="rrPostSubtitleLikeCol" format="color" />
     <attr name="rrPostSubtitleDownvoteCol" format="color" />
     <attr name="rrPostCommentsButtonBackCol" format="color" />
     <attr name="rrPostCommentsButtonTextCol" format="color" />

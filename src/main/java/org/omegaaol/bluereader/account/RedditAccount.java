@@ -20,7 +20,7 @@ package org.omegaaol.bluereader.account;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.omegaaol.bluereader.reddit.api.RedditOAuth;
+import org.omegaaol.bluereader.bluesky.api.RedditOAuth;
 
 import java.util.Objects;
 

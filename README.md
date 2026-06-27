@@ -19,7 +19,7 @@ Features
 * Free and open source, with no ads or tracking
 * Lightweight and fast
 * Swipe posts left and right to perform customizable actions, such as
-    upvote/downvote, or save/hide
+    like/downvote, or save/hide
 * Advanced cache management - automatically stores past versions of posts and
     comments
 * Support for multiple accounts

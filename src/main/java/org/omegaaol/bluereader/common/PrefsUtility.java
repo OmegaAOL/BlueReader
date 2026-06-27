@@ -44,13 +44,13 @@ import org.omegaaol.bluereader.adapters.MainMenuListingManager;
 import org.omegaaol.bluereader.common.time.TimeDuration;
 import org.omegaaol.bluereader.fragments.MainMenuFragment;
 import org.omegaaol.bluereader.io.WritableHashSet;
-import org.omegaaol.bluereader.reddit.PostCommentSort;
-import org.omegaaol.bluereader.reddit.PostSort;
-import org.omegaaol.bluereader.reddit.UserCommentSort;
-import org.omegaaol.bluereader.reddit.api.RedditAPICommentAction;
-import org.omegaaol.bluereader.reddit.api.RedditPostActions;
-import org.omegaaol.bluereader.reddit.things.InvalidSubredditNameException;
-import org.omegaaol.bluereader.reddit.things.SubredditCanonicalId;
+import org.omegaaol.bluereader.bluesky.PostCommentSort;
+import org.omegaaol.bluereader.bluesky.PostSort;
+import org.omegaaol.bluereader.bluesky.UserCommentSort;
+import org.omegaaol.bluereader.bluesky.api.RedditAPICommentAction;
+import org.omegaaol.bluereader.bluesky.api.RedditPostActions;
+import org.omegaaol.bluereader.bluesky.things.InvalidFeedNameException;
+import org.omegaaol.bluereader.bluesky.things.FeedCanonicalId;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -128,7 +128,7 @@ public final class PrefsUtility {
 				|| key.equals(context.getString(R.string.pref_behaviour_comment_min_key))
 				|| key.equals(context.getString(R.string.pref_behaviour_homeitemsort_key))
 				|| key.equals(context.getString(
-						R.string.pref_behaviour_blocked_subredditsort_key))
+						R.string.pref_behaviour_blocked_feedsort_key))
 				|| key.equals(context.getString(
 						R.string.pref_appearance_hide_headertoolbar_commentlist_key))
 				|| key.equals(context.getString(
@@ -153,7 +153,7 @@ public final class PrefsUtility {
 				|| key.equals(context.getString(
 						R.string.pref_accessibility_concise_mode_key))
 				|| key.equals(context.getString(
-						R.string.pref_appearance_post_hide_subreddit_header_key))
+						R.string.pref_appearance_post_hide_feed_header_key))
 				|| key.equals(REDDIT_USER_AGREEMENT_PREF)
 				|| key.equals(context.getString(R.string.pref_reddit_client_id_override_key));
 	}
@@ -172,8 +172,8 @@ public final class PrefsUtility {
 				|| context.getString(R.string.pref_appearance_comments_show_floating_toolbar_key)
 						.equals(key)
 				|| context.getString(R.string.pref_behaviour_enable_swipe_refresh_key).equals(key)
-				|| context.getString(R.string.pref_menus_show_multireddit_main_menu_key).equals(key)
-				|| context.getString(R.string.pref_menus_show_subscribed_subreddits_main_menu_key)
+				|| context.getString(R.string.pref_menus_show_list_main_menu_key).equals(key)
+				|| context.getString(R.string.pref_menus_show_subscribed_feeds_main_menu_key)
 						.equals(key)
 				|| context.getString(R.string.pref_menus_mainmenu_dev_announcements_key).equals(key)
 				|| context.getString(R.string.pref_appearance_bottom_toolbar_key).equals(key)
@@ -589,15 +589,15 @@ public final class PrefsUtility {
 				false);
 	}
 
-	public static boolean pref_show_multireddit_main_menu() {
+	public static boolean pref_show_list_main_menu() {
 		return getBoolean(
-				R.string.pref_menus_show_multireddit_main_menu_key,
+				R.string.pref_menus_show_list_main_menu_key,
 				true);
 	}
 
-	public static boolean pref_show_subscribed_subreddits_main_menu() {
+	public static boolean pref_show_subscribed_feeds_main_menu() {
 		return getBoolean(
-				R.string.pref_menus_show_subscribed_subreddits_main_menu_key,
+				R.string.pref_menus_show_subscribed_feeds_main_menu_key,
 				true);
 	}
 
@@ -607,9 +607,9 @@ public final class PrefsUtility {
 				true);
 	}
 
-	public static boolean pref_appearance_show_blocked_subreddits_main_menu() {
+	public static boolean pref_appearance_show_blocked_feeds_main_menu() {
 		return getBoolean(
-				R.string.pref_appearance_show_blocked_subreddits_main_menu_key,
+				R.string.pref_appearance_show_blocked_feeds_main_menu_key,
 				false);
 	}
 
@@ -677,9 +677,9 @@ public final class PrefsUtility {
 				false);
 	}
 
-	public static boolean pref_appearance_post_hide_subreddit_header() {
+	public static boolean pref_appearance_post_hide_feed_header() {
 		return getBoolean(
-				R.string.pref_appearance_post_hide_subreddit_header_key,
+				R.string.pref_appearance_post_hide_feed_header_key,
 				false);
 	}
 
@@ -701,12 +701,12 @@ public final class PrefsUtility {
 		SCORE,
 		AGE,
 		GOLD,
-		SUBREDDIT,
+		FEED,
 		DOMAIN,
 		STICKY,
 		SPOILER,
 		NSFW,
-		UPVOTE_RATIO,
+		LIKE_RATIO,
 		COMMENTS
 	}
 
@@ -773,7 +773,7 @@ public final class PrefsUtility {
 	}
 
 	public enum AppearanceCommentHeaderItem {
-		AUTHOR, FLAIR, SCORE, CONTROVERSIALITY, AGE, GOLD, SUBREDDIT
+		AUTHOR, FLAIR, SCORE, CONTROVERSIALITY, AGE, GOLD, FEED
 	}
 
 	public static EnumSet<AppearanceCommentHeaderItem> appearance_comment_header_items() {
@@ -1067,7 +1067,7 @@ public final class PrefsUtility {
 	// pref_behaviour_fling_post
 
 	public enum PostFlingAction {
-		UPVOTE,
+		LIKE,
 		REPOST,
 		SAVE,
 		HIDE,
@@ -1078,7 +1078,7 @@ public final class PrefsUtility {
 		BACK,
 		REPORT,
 		SAVE_IMAGE,
-		GOTO_SUBREDDIT,
+		GOTO_FEED,
 		SHARE,
 		SHARE_COMMENTS,
 		SHARE_IMAGE,
@@ -1097,7 +1097,7 @@ public final class PrefsUtility {
 	public static PostFlingAction pref_behaviour_fling_post_right() {
 		return PostFlingAction.valueOf(StringUtils.asciiUppercase(getString(
 				R.string.pref_behaviour_fling_post_right_key,
-				"upvote")));
+				"like")));
 	}
 
 	public enum SelfpostAction {
@@ -1113,7 +1113,7 @@ public final class PrefsUtility {
 	// pref_behaviour_fling_comment
 
 	public enum CommentFlingAction {
-		UPVOTE,
+		LIKE,
 		DOWNVOTE,
 		SAVE,
 		REPORT,
@@ -1141,7 +1141,7 @@ public final class PrefsUtility {
 	public static CommentFlingAction pref_behaviour_fling_comment_right() {
 		return CommentFlingAction.valueOf(StringUtils.asciiUppercase(getString(
 				R.string.pref_behaviour_fling_comment_right_key,
-				"upvote")));
+				"like")));
 	}
 
 	public enum CommentAction {
@@ -1234,13 +1234,13 @@ public final class PrefsUtility {
 				"name")));
 	}
 
-	public enum BlockedSubredditSort {
+	public enum BlockedFeedSort {
 		NAME, DATE
 	}
 
-	public static BlockedSubredditSort pref_behaviour_blocked_subredditsort() {
-		return BlockedSubredditSort.valueOf(StringUtils.asciiUppercase(getString(
-				R.string.pref_behaviour_blocked_subredditsort_key,
+	public static BlockedFeedSort pref_behaviour_blocked_feedsort() {
+		return BlockedFeedSort.valueOf(StringUtils.asciiUppercase(getString(
+				R.string.pref_behaviour_blocked_feedsort_key,
 				"name")));
 	}
 
@@ -1348,8 +1348,8 @@ public final class PrefsUtility {
 
 		maxAgeMap.put(Constants.FileType.POST_LIST, listings);
 		maxAgeMap.put(Constants.FileType.COMMENT_LIST, listings);
-		maxAgeMap.put(Constants.FileType.SUBREDDIT_LIST, listings);
-		maxAgeMap.put(Constants.FileType.SUBREDDIT_ABOUT, listings);
+		maxAgeMap.put(Constants.FileType.FEED_LIST, listings);
+		maxAgeMap.put(Constants.FileType.FEED_ABOUT, listings);
 		maxAgeMap.put(Constants.FileType.USER_ABOUT, listings);
 		maxAgeMap.put(Constants.FileType.INBOX_LIST, listings);
 		maxAgeMap.put(Constants.FileType.THUMBNAIL, thumbnails);
@@ -1498,17 +1498,17 @@ public final class PrefsUtility {
 		return result;
 	}
 
-	public static EnumSet<MainMenuListingManager.SubredditAction>
-	pref_menus_subreddit_context_items() {
+	public static EnumSet<MainMenuListingManager.FeedAction>
+	pref_menus_feed_context_items() {
 
 		final Set<String> strings = getStringSet(
-				R.string.pref_menus_subreddit_context_items_key,
-				R.array.pref_menus_subreddit_context_items_return);
+				R.string.pref_menus_feed_context_items_key,
+				R.array.pref_menus_feed_context_items_return);
 
-		final EnumSet<MainMenuListingManager.SubredditAction> result = EnumSet.noneOf(
-				MainMenuListingManager.SubredditAction.class);
+		final EnumSet<MainMenuListingManager.FeedAction> result = EnumSet.noneOf(
+				MainMenuListingManager.FeedAction.class);
 		for(final String s : strings) {
-			result.add(MainMenuListingManager.SubredditAction.valueOf(StringUtils.asciiUppercase(
+			result.add(MainMenuListingManager.FeedAction.valueOf(StringUtils.asciiUppercase(
 					s)));
 		}
 
@@ -1669,106 +1669,106 @@ public final class PrefsUtility {
 	}
 
 	///////////////////////////////
-	// pref_pinned_subreddits
+	// pref_pinned_feeds
 	///////////////////////////////
 
-	public static List<SubredditCanonicalId> pref_pinned_subreddits() {
-		return pref_subreddits_list(R.string.pref_pinned_subreddits_key);
+	public static List<FeedCanonicalId> pref_pinned_feeds() {
+		return pref_feeds_list(R.string.pref_pinned_feeds_key);
 	}
 
-	public static void pref_pinned_subreddits_add(
+	public static void pref_pinned_feeds_add(
 			final Context context,
-			final SubredditCanonicalId subreddit) {
+			final FeedCanonicalId feed) {
 
-		pref_subreddits_add(
+		pref_feeds_add(
 				context,
-				subreddit,
-				R.string.pref_pinned_subreddits_key);
+				feed,
+				R.string.pref_pinned_feeds_key);
 
 		General.quickToast(context, context.getApplicationContext().getString(
 				R.string.pin_successful,
-				subreddit.toString()));
+				feed.toString()));
 	}
 
-	public static void pref_pinned_subreddits_remove(
+	public static void pref_pinned_feeds_remove(
 			final Context context,
-			final SubredditCanonicalId subreddit) {
+			final FeedCanonicalId feed) {
 
-		pref_subreddits_remove(
+		pref_feeds_remove(
 				context,
-				subreddit,
-				R.string.pref_pinned_subreddits_key);
+				feed,
+				R.string.pref_pinned_feeds_key);
 
 		General.quickToast(context, context.getApplicationContext().getString(
 				R.string.unpin_successful,
-				subreddit.toString()));
+				feed.toString()));
 	}
 
-	public static boolean pref_pinned_subreddits_check(final SubredditCanonicalId id) {
+	public static boolean pref_pinned_feeds_check(final FeedCanonicalId id) {
 
-		return pref_pinned_subreddits().contains(id);
+		return pref_pinned_feeds().contains(id);
 	}
 
 	///////////////////////////////
-	// pref_blocked_subreddits
+	// pref_blocked_feeds
 	///////////////////////////////
 
-	public static List<SubredditCanonicalId> pref_blocked_subreddits() {
+	public static List<FeedCanonicalId> pref_blocked_feeds() {
 
-		return pref_subreddits_list(R.string.pref_blocked_subreddits_key);
+		return pref_feeds_list(R.string.pref_blocked_feeds_key);
 	}
 
-	public static void pref_blocked_subreddits_add(
+	public static void pref_blocked_feeds_add(
 			final Context context,
-			final SubredditCanonicalId subreddit) {
+			final FeedCanonicalId feed) {
 
-		pref_subreddits_add(
+		pref_feeds_add(
 				context,
-				subreddit,
-				R.string.pref_blocked_subreddits_key);
+				feed,
+				R.string.pref_blocked_feeds_key);
 
 		General.quickToast(context, R.string.block_done);
 	}
 
-	public static void pref_blocked_subreddits_remove(
+	public static void pref_blocked_feeds_remove(
 			final Context context,
-			final SubredditCanonicalId subreddit) {
+			final FeedCanonicalId feed) {
 
-		pref_subreddits_remove(
+		pref_feeds_remove(
 				context,
-				subreddit,
-				R.string.pref_blocked_subreddits_key);
+				feed,
+				R.string.pref_blocked_feeds_key);
 
 		General.quickToast(context, R.string.unblock_done);
 	}
 
-	public static boolean pref_blocked_subreddits_check(final SubredditCanonicalId subreddit) {
+	public static boolean pref_blocked_feeds_check(final FeedCanonicalId feed) {
 
-		return pref_blocked_subreddits().contains(subreddit);
+		return pref_blocked_feeds().contains(feed);
 	}
 
 	///////////////////////////////
-	// Shared pref_subreddits methods
+	// Shared pref_feeds methods
 	///////////////////////////////
 
-	private static void pref_subreddits_add(
+	private static void pref_feeds_add(
 			final Context context,
-			final SubredditCanonicalId subreddit,
+			final FeedCanonicalId feed,
 			final int prefId) {
 
 		final String value = getString(prefId, "");
 		final ArrayList<String> list = WritableHashSet.escapedStringToList(value);
 
-		if(!list.contains(subreddit.toString())) {
-			list.add(subreddit.toString());
+		if(!list.contains(feed.toString())) {
+			list.add(feed.toString());
 			final String result = WritableHashSet.listToEscapedString(list);
 			sharedPrefs.edit().putString(context.getString(prefId), result).apply();
 		}
 	}
 
-	private static void pref_subreddits_remove(
+	private static void pref_feeds_remove(
 			final Context context,
-			final SubredditCanonicalId subreddit,
+			final FeedCanonicalId feed,
 			final int prefId) {
 
 		final String value = getString(prefId, "");
@@ -1780,7 +1780,7 @@ public final class PrefsUtility {
 
 			final String id = iterator.next();
 
-			if(id.equals(subreddit.toString())) {
+			if(id.equals(feed.toString())) {
 				iterator.remove();
 				break;
 			}
@@ -1791,18 +1791,18 @@ public final class PrefsUtility {
 		sharedPrefs.edit().putString(context.getString(prefId), resultStr).apply();
 	}
 
-	public static List<SubredditCanonicalId> pref_subreddits_list(final int prefId) {
+	public static List<FeedCanonicalId> pref_feeds_list(final int prefId) {
 
 		final String value = getString(prefId, "");
 		final ArrayList<String> list = WritableHashSet.escapedStringToList(value);
 
-		final ArrayList<SubredditCanonicalId> result = new ArrayList<>(list.size());
+		final ArrayList<FeedCanonicalId> result = new ArrayList<>(list.size());
 
 		try {
 			for(final String str : list) {
-				result.add(new SubredditCanonicalId(str));
+				result.add(new FeedCanonicalId(str));
 			}
-		} catch(final InvalidSubredditNameException e) {
+		} catch(final InvalidFeedNameException e) {
 			throw new RuntimeException(e);
 		}
 

@@ -34,7 +34,7 @@
 			android:background="?rrListItemBackgroundCol">
 
 		<androidx.constraintlayout.widget.ConstraintLayout
-				android:id="@+id/subreddit_search_link"
+				android:id="@+id/feed_search_link"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:padding="8dp"
@@ -64,7 +64,7 @@
 					app:layout_constraintBottom_toBottomOf="parent"
 					app:layout_constraintStart_toEndOf="@id/search_icon"
 					app:layout_constraintEnd_toEndOf="parent"
-					android:text="@string/find_subreddit"
+					android:text="@string/find_feed"
 					android:textSize="18sp"
 					android:textColor="?rrSubTextCol"/>
 

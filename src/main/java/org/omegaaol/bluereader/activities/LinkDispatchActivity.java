@@ -26,8 +26,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import org.omegaaol.bluereader.common.General;
 import org.omegaaol.bluereader.common.LinkHandler;
-import org.omegaaol.bluereader.common.RunnableOnce;
-import org.omegaaol.bluereader.reddit.api.RedditOAuth;
 
 public class LinkDispatchActivity extends AppCompatActivity {
 

@@ -38,10 +38,10 @@ import org.omegaaol.bluereader.common.TimestampBound;
 import org.omegaaol.bluereader.common.time.TimeDuration;
 import org.omegaaol.bluereader.common.time.TimestampUTC;
 import org.omegaaol.bluereader.io.RequestResponseHandler;
-import org.omegaaol.bluereader.reddit.api.RedditMultiredditSubscriptionManager;
-import org.omegaaol.bluereader.reddit.api.RedditSubredditSubscriptionManager;
-import org.omegaaol.bluereader.reddit.things.SubredditCanonicalId;
-import org.omegaaol.bluereader.reddit.url.PostListingURL;
+import org.omegaaol.bluereader.bluesky.api.BlueskyListSubscriptionManager;
+import org.omegaaol.bluereader.bluesky.api.FeedSubscriptionManager;
+import org.omegaaol.bluereader.bluesky.things.FeedCanonicalId;
+import org.omegaaol.bluereader.bluesky.url.PostListingURL;
 import org.omegaaol.bluereader.views.ScrollbarRecyclerViewManager;
 import org.omegaaol.bluereader.views.liststatus.ErrorView;
 
@@ -52,14 +52,14 @@ import java.util.HashSet;
 
 public class MainMenuFragment extends RRFragment implements
 		MainMenuSelectionListener,
-		RedditSubredditSubscriptionManager.SubredditSubscriptionStateChangeListener,
-		RedditMultiredditSubscriptionManager.MultiredditListChangeListener {
+		FeedSubscriptionManager.FeedSubscriptionStateChangeListener,
+		BlueskyListSubscriptionManager.BlueskyListChangeListener {
 
 	public static final int MENU_MENU_ACTION_FEED_DISCOVER = 0;
 	public static final int MENU_MENU_ACTION_PROFILE = 1;
 	public static final int MENU_MENU_ACTION_INBOX = 2;
 	public static final int MENU_MENU_ACTION_SUBMITTED = 3;
-	public static final int MENU_MENU_ACTION_UPVOTED = 4;
+	public static final int MENU_MENU_ACTION_LIKED = 4;
 	public static final int MENU_MENU_ACTION_DOWNVOTED = 5;
 	public static final int MENU_MENU_ACTION_SAVED = 6;
 	public static final int MENU_MENU_ACTION_MODMAIL = 7;
@@ -70,14 +70,14 @@ public class MainMenuFragment extends RRFragment implements
 	public static final int MENU_MENU_ACTION_RANDOM = 12;
 	public static final int MENU_MENU_ACTION_RANDOM_NSFW = 13;
 	public static final int MENU_MENU_ACTION_SENT_MESSAGES = 14;
-	public static final int MENU_MENU_ACTION_FIND_SUBREDDIT = 15;
+	public static final int MENU_MENU_ACTION_FIND_FEED = 15;
 
 	@IntDef({
 			MENU_MENU_ACTION_FEED_DISCOVER,
 			MENU_MENU_ACTION_PROFILE,
 			MENU_MENU_ACTION_INBOX,
 			MENU_MENU_ACTION_SUBMITTED,
-			MENU_MENU_ACTION_UPVOTED,
+			MENU_MENU_ACTION_LIKED,
 			MENU_MENU_ACTION_DOWNVOTED,
 			MENU_MENU_ACTION_SAVED,
 			MENU_MENU_ACTION_MODMAIL,
@@ -88,7 +88,7 @@ public class MainMenuFragment extends RRFragment implements
 			MENU_MENU_ACTION_RANDOM,
 			MENU_MENU_ACTION_RANDOM_NSFW,
 			MENU_MENU_ACTION_SENT_MESSAGES,
-			MENU_MENU_ACTION_FIND_SUBREDDIT})
+			MENU_MENU_ACTION_FIND_FEED})
 	@Retention(RetentionPolicy.SOURCE)
 	public @interface MainMenuAction {
 	}
@@ -114,12 +114,12 @@ public class MainMenuFragment extends RRFragment implements
 		mOuter = recyclerViewManager.getOuterView();
 		final RecyclerView recyclerView = recyclerViewManager.getRecyclerView();
 
-		if(parent instanceof OptionsMenuUtility.OptionsMenuSubredditsListener
+		if(parent instanceof OptionsMenuUtility.OptionsMenuFeedsListener
 				&& PrefsUtility.pref_behaviour_enable_swipe_refresh()) {
 
 			recyclerViewManager.enablePullToRefresh(
-					((OptionsMenuUtility.OptionsMenuSubredditsListener)parent)
-							::onRefreshSubreddits);
+					((OptionsMenuUtility.OptionsMenuFeedsListener)parent)
+							::onRefreshFeeds);
 		}
 
 		mManager = new MainMenuListingManager(getActivity(), this, user);
@@ -140,19 +140,19 @@ public class MainMenuFragment extends RRFragment implements
 			appearance.recycle();
 		}
 
-		final RedditMultiredditSubscriptionManager multiredditSubscriptionManager
-				= RedditMultiredditSubscriptionManager.getSingleton(context, user);
+		final BlueskyListSubscriptionManager listSubscriptionManager
+				= BlueskyListSubscriptionManager.getSingleton(context, user);
 
-		final RedditSubredditSubscriptionManager subredditSubscriptionManager
-				= RedditSubredditSubscriptionManager.getSingleton(context, user);
+		final FeedSubscriptionManager feedSubscriptionManager
+				= FeedSubscriptionManager.getSingleton(context, user);
 
 		if(force) {
-			multiredditSubscriptionManager.triggerUpdate(
+			listSubscriptionManager.triggerUpdate(
 					new RequestResponseHandler<HashSet<String>, RRError>() {
 
 						@Override
 						public void onRequestFailed(final RRError failureReason) {
-							onMultiredditError(failureReason);
+							onListError(failureReason);
 						}
 
 						@Override
@@ -160,57 +160,57 @@ public class MainMenuFragment extends RRFragment implements
 								final HashSet<String> result,
 								final TimestampUTC timeCached) {
 
-							multiredditSubscriptionManager.addListener(MainMenuFragment.this);
-							onMultiredditSubscriptionsChanged(result);
+							listSubscriptionManager.addListener(MainMenuFragment.this);
+							onListSubscriptionsChanged(result);
 						}
 					}, TimestampBound.NONE);
 
-			subredditSubscriptionManager.triggerUpdate(
+			feedSubscriptionManager.triggerUpdate(
 					new RequestResponseHandler<
-							HashSet<SubredditCanonicalId>,
+							HashSet<FeedCanonicalId>,
 							RRError>() {
 						@Override
 						public void onRequestFailed(final RRError failureReason) {
-							onSubredditError(failureReason);
+							onFeedError(failureReason);
 						}
 
 						@Override
 						public void onRequestSuccess(
-								final HashSet<SubredditCanonicalId> result,
+								final HashSet<FeedCanonicalId> result,
 								final TimestampUTC timeCached) {
-							subredditSubscriptionManager.addListener(MainMenuFragment.this);
-							onSubredditSubscriptionsChanged(result);
+							feedSubscriptionManager.addListener(MainMenuFragment.this);
+							onFeedSubscriptionsChanged(result);
 						}
 					}, TimestampBound.NONE);
 
 		} else {
 
-			multiredditSubscriptionManager.addListener(this);
-			subredditSubscriptionManager.addListener(this);
+			listSubscriptionManager.addListener(this);
+			feedSubscriptionManager.addListener(this);
 
-			if(multiredditSubscriptionManager.areSubscriptionsReady()) {
-				onMultiredditSubscriptionsChanged(
-						multiredditSubscriptionManager.getSubscriptionList());
+			if(listSubscriptionManager.areSubscriptionsReady()) {
+				onListSubscriptionsChanged(
+						listSubscriptionManager.getSubscriptionList());
 			}
 
-			if(subredditSubscriptionManager.areSubscriptionsReady()) {
-				onSubredditSubscriptionsChanged(
-						subredditSubscriptionManager.getSubscriptionList());
+			if(feedSubscriptionManager.areSubscriptionsReady()) {
+				onFeedSubscriptionsChanged(
+						feedSubscriptionManager.getSubscriptionList());
 			}
 
 			final TimestampBound.MoreRecentThanBound oneHour
 					= TimestampBound.notOlderThan(TimeDuration.hours(1));
-			multiredditSubscriptionManager.triggerUpdate(null, oneHour);
-			subredditSubscriptionManager.triggerUpdate(null, oneHour);
+			listSubscriptionManager.triggerUpdate(null, oneHour);
+			feedSubscriptionManager.triggerUpdate(null, oneHour);
 		}
 	}
 
 	public enum MainMenuUserItems {
-		PROFILE, INBOX, SUBMITTED, SAVED, HIDDEN, UPVOTED, DOWNVOTED, MODMAIL, SENT_MESSAGES
+		PROFILE, INBOX, SUBMITTED, SAVED, HIDDEN, LIKED, DOWNVOTED, MODMAIL, SENT_MESSAGES
 	}
 
 	public enum MainMenuShortcutItems {
-		FRONTPAGE, POPULAR, ALL, SUBREDDIT_SEARCH, CUSTOM, RANDOM, RANDOM_NSFW
+		FRONTPAGE, POPULAR, ALL, FEED_SEARCH, CUSTOM, RANDOM, RANDOM_NSFW
 	}
 
 	@Override
@@ -223,21 +223,21 @@ public class MainMenuFragment extends RRFragment implements
 		return null;
 	}
 
-	public void onSubredditSubscriptionsChanged(
-			final Collection<SubredditCanonicalId> subscriptions) {
-		mManager.setSubreddits(subscriptions);
+	public void onFeedSubscriptionsChanged(
+			final Collection<FeedCanonicalId> subscriptions) {
+		mManager.setFeeds(subscriptions);
 	}
 
-	public void onMultiredditSubscriptionsChanged(final Collection<String> subscriptions) {
-		mManager.setMultireddits(subscriptions);
+	public void onListSubscriptionsChanged(final Collection<String> subscriptions) {
+		mManager.setLists(subscriptions);
 	}
 
-	private void onSubredditError(final RRError error) {
-		mManager.setSubredditsError(new ErrorView(getActivity(), error));
+	private void onFeedError(final RRError error) {
+		mManager.setFeedsError(new ErrorView(getActivity(), error));
 	}
 
-	private void onMultiredditError(final RRError error) {
-		mManager.setMultiredditsError(new ErrorView(getActivity(), error));
+	private void onListError(final RRError error) {
+		mManager.setListsError(new ErrorView(getActivity(), error));
 	}
 
 	@Override
@@ -251,25 +251,25 @@ public class MainMenuFragment extends RRFragment implements
 	}
 
 	@Override
-	public void onSubredditSubscriptionListUpdated(
-			final RedditSubredditSubscriptionManager subredditSubscriptionManager) {
-		onSubredditSubscriptionsChanged(subredditSubscriptionManager.getSubscriptionList());
+	public void onFeedSubscriptionListUpdated(
+			final FeedSubscriptionManager feedSubscriptionManager) {
+		onFeedSubscriptionsChanged(feedSubscriptionManager.getSubscriptionList());
 	}
 
 	@Override
-	public void onMultiredditListUpdated(
-			final RedditMultiredditSubscriptionManager multiredditSubscriptionManager) {
-		onMultiredditSubscriptionsChanged(multiredditSubscriptionManager.getSubscriptionList());
+	public void onBlueskyListUpdated(
+			final BlueskyListSubscriptionManager listSubscriptionManager) {
+		onListSubscriptionsChanged(listSubscriptionManager.getSubscriptionList());
 	}
 
 	@Override
-	public void onSubredditSubscriptionAttempted(
-			final RedditSubredditSubscriptionManager subredditSubscriptionManager) {
+	public void onFeedSubscriptionAttempted(
+			final FeedSubscriptionManager feedSubscriptionManager) {
 	}
 
 	@Override
-	public void onSubredditUnsubscriptionAttempted(
-			final RedditSubredditSubscriptionManager subredditSubscriptionManager) {
+	public void onFeedUnsubscriptionAttempted(
+			final FeedSubscriptionManager feedSubscriptionManager) {
 	}
 
 	public void onUpdateAnnouncement() {

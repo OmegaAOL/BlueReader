@@ -22,7 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import org.omegaaol.bluereader.cache.CacheManager;
-import org.omegaaol.bluereader.reddit.prepared.RedditChangeDataManager;
+import org.omegaaol.bluereader.bluesky.prepared.RedditChangeDataManager;
 
 public class RegularCachePruner extends BroadcastReceiver {
 

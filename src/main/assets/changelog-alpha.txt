@@ -7,7 +7,7 @@ Upgraded video player to fix playback issues
 /Alpha 336 (2023-07-09)
 Show self text for link posts (thanks to Cameron Merkel)
 Announce self-text presence with link posts in screen readers (thanks to Cameron Merkel)
-Add more specific error messages for blocked, quarantined, and premium-only subreddits (thanks to Cameron Merkel)
+Add more specific error messages for blocked, quarantined, and premium-only feeds (thanks to Cameron Merkel)
 Add option to disable user avatars (thanks to Cameron Merkel)
 
 /Alpha 335 (2023-07-02)
@@ -23,7 +23,7 @@ Simplified error handling
 Imgur links on non-standard subdomains are now handled correctly
 Added ability to set your own Reddit client ID in the settings
 Fix for stack overflow when parsing comments on old Android devices
-More specific error message when a subreddit is private
+More specific error message when a feed is private
 
 /Alpha 332 (2023-04-08)
 Big refactor of time handling code
@@ -51,7 +51,7 @@ Rewrote JSON parsing code for posts and comments to use kotlinx serialization
 Show post side toolbar items in the correct order
 
 /Alpha 326 (2023-02-05)
-Subreddit emotes now supported in comments (thanks to bharatknv)
+Feed emotes now supported in comments (thanks to bharatknv)
 Replace click/long click accessibility actions on comments with more descriptive hints (thanks to codeofdusk)
 Additional accessibility actions for posts and comments (thanks to codeofdusk)
 
@@ -89,12 +89,12 @@ Fixed parse error when viewing deleted posts
 Find Location: Existing subscriptions now appear immediately with no loading time, and descriptions are hidden
 
 /Alpha 317 (2022-06-27)
-Ability to hide subreddit header (thanks to Cameron Merkel)
+Ability to hide feed header (thanks to Cameron Merkel)
 Find Location: Fix for missing loading spinner
 
 /Alpha 316 (2022-06-27)
-Renamed "Find Subreddit" to "Find Location"
-Find Location now lets you jump to a specific subreddit/user without waiting for the search
+Renamed "Find Feed" to "Find Location"
+Find Location now lets you jump to a specific feed/user without waiting for the search
 
 /Alpha 315 (2022-06-11)
 In post subtitle, move (optional) comment count indicator before score (thank to codeofdusk)
@@ -105,7 +105,7 @@ Ability to show comment count in post subtitle (thanks to Cameron Merkel)
 Use non-breaking spaces for post/comment age (thanks to Cameron Merkel)
 
 /Alpha 313 (2022-04-23)
-Accessibility: move subreddit and domain before author in accessibility subtitle (thanks to codeofdusk)
+Accessibility: move feed and domain before author in accessibility subtitle (thanks to codeofdusk)
 
 /Alpha 312 (2022-04-23)
 Potential fix for login issue
@@ -123,7 +123,7 @@ Accessibility: announce if a post has been previously read (thanks to codeofdusk
 
 /Alpha 309 (2022-04-06)
 Accessibility: add option to use concise language when possible (disabled by default) for more efficient navigation (thanks to codeofdusk)
-Accessibility: announce if the current user has upvoted/downvoted posts and comments (thanks to codeofdusk)
+Accessibility: announce if the current user has liked/downvoted posts and comments (thanks to codeofdusk)
 
 /Alpha 308 (2022-03-30)
 More accessibility improvements (thanks to codeofdusk)
@@ -133,25 +133,25 @@ Collapse sticky comments from bots (on by default) -- this was actually in an ea
 Accessibility improvements (thanks to codeofdusk)
 
 /Alpha 306 (2022-03-25)
-Added long-click menu to grey subreddit heading bar (thanks to Cameron Merkel)
-Updated default subreddit list (thanks to Cameron Merkel)
+Added long-click menu to grey feed heading bar (thanks to Cameron Merkel)
+Updated default feed list (thanks to Cameron Merkel)
 Accessibility: announce relative level of comments within a thread (on by default)
 
 /Alpha 305 (2022-03-19)
-Fix search bar width in find subreddit activity
+Fix search bar width in find feed activity
 
 /Alpha 304 (2022-03-19)
-Fix for "find subreddit" feature flag upgrade
+Fix for "find feed" feature flag upgrade
 
 /Alpha 303 (2022-03-19)
 Added option to block screenshots (thanks to Cameron Merkel)
-Improved appearance of find subreddit option
+Improved appearance of find feed option
 
 /Alpha 302 (2022-02-19)
-Ability to search for subreddits
+Ability to search for feeds
 
 /Alpha 301 (2022-02-04)
-Ability to show upvote percentage in post subtitle (thanks to Cameron Merkel)
+Ability to show like percentage in post subtitle (thanks to Cameron Merkel)
 
 /Alpha 300 (2022-01-21)
 Highlight suggested sort in sort menu (thanks to Cameron Merkel)
@@ -188,7 +188,7 @@ Translation updates (thanks to Eric, Gediminas Murauskas, Ihor Hordiichuk, phlos
 Show radio buttons on sort menus (thanks to Cameron Merkel)
 
 /Alpha 292 (2021-10-12)
-Search multireddits and subreddit combinations (thanks to Cameron Merkel)
+Search lists and feed combinations (thanks to Cameron Merkel)
 Allow status bar to be hidden only when viewing media (thanks to Cameron Merkel)
 Show tooltips when long-pressing toolbar buttons (thanks to Cameron Merkel)
 Search queries are no longer forced to lowercase (thanks to Cameron Merkel)
@@ -201,7 +201,7 @@ Translation updates (thanks to Andrey F, Atrate, Dan McElroy, Dwaris, Gediminas 
 /Alpha 291 (2021-08-16)
 Various code cleanup (thanks to TacoTheDank)
 Update post header even when the toolbar is disabled (thanks to Cameron Merkel)
-Subreddit blocking now applies to /r/popular and the front page (thanks to Cameron Merkel)
+Feed blocking now applies to /r/popular and the front page (thanks to Cameron Merkel)
 Handle non-HTTP URLs using native apps in WebView (thanks to Avik Das)
 
 /Alpha 290 (2021-07-25)
@@ -256,8 +256,8 @@ Translation updates (thanks to Andrey F, Axus Wizix, Eric, FintasticMan, Gontzal
 Allow custom text selection actions in Android 11
 
 /Alpha 278 (2021-06-13)
-Better errors for subreddit content rules when submitting posts
-Handle inbox messages from subreddits correctly
+Better errors for feed content rules when submitting posts
+Handle inbox messages from feeds correctly
 Make some errors not reportable
 Improve imgur upload error message
 Show better error message when DNS content blocker detected
@@ -353,7 +353,7 @@ Fixed error message when marking all inbox messages as read
 
 /Alpha 254 (2020-11-29)
 Alpha changelog is now more granular
-Show subreddit of comments in user profile/inbox (thanks to Cameron Merkel)
+Show feed of comments in user profile/inbox (thanks to Cameron Merkel)
 
 95/1.15
 Inline image previews (and preference to disable)
@@ -395,7 +395,7 @@ Fixed redirect loop when visiting deleted Reddit galleries
 Added ability to send reports from the error details dialog
 Improved responsiveness of video seek bar (thanks to Cameron Merkel)
 Enable swipe-to-refresh in the main menu (thanks to Cameron Merkel)
-Add default sort preference for multireddits and user posts/comments (thanks to Cameron Merkel)
+Add default sort preference for lists and user posts/comments (thanks to Cameron Merkel)
 Translation updates (thanks to Allan Nordhøy, Bopol, Emerson Castaneda, Eric, Fırat Altay, Gerry, JoC, Matthias Paulmier, Meiru, Verdulo, zeritti, and zmni)
 
 92/1.12
@@ -420,16 +420,16 @@ Crash fix for users with some non-English locales
 Reorganised menu preferences (thanks to Cameron Merkel)
 
 90/1.10
-Added toolbar when viewing subreddits and comments
+Added toolbar when viewing feeds and comments
 Avoid showing old comment listings (by refreshing if the cached copy is too old)
 Preference to hide items in post subtitle (thanks to Cameron Merkel)
 Fine-grained control over font scaling (thanks to Cameron Merkel)
 Added custom share dialog with prioritisation, off by default (thanks to LizardWithHat)
 Preserve fields when returning to post submission activity (thanks to fguibourt)
 Fixed issue with HTTP cleartext websites
-Display error when NSFW subreddits are blocked (thanks for Cameron Merkel)
+Display error when NSFW feeds are blocked (thanks for Cameron Merkel)
 Various image viewer performance improvements
-Fixed subreddit sidebar on Android 4.x
+Fixed feed sidebar on Android 4.x
 Added support for more image hosts (thanks to Tim Coombs)
 Assorted bug fixes (thanks for Cameron Merkel)
 Added Hindi translation (thanks to Chandra Mohan Jha)
@@ -494,7 +494,7 @@ Updated Portuguese translation (thanks to Rafael Andrade)
 Updated German translation (thanks to Andreas Kleinert)
 
 83/1.9.8.4
-Preference to add "Random Subreddit" item to main menu (thanks to Andrew Philipchik)
+Preference to add "Random Feed" item to main menu (thanks to Andrew Philipchik)
 Fixed handling of /r/random (thanks to Andrew Philipchik)
 Ability to disable inbox replies when commenting (thanks to Clubfan22)
 Fix for fullscreen video in internal browser (thanks to Clubfan22)
@@ -543,16 +543,16 @@ Added ability to edit self-posts (thanks to Clubfan22)
 Added long-click menu for links and album list items (thanks to Clubfan22)
 Image captions are now shown in the album list view (thanks to Clubfan22)
 Tapping self-posts now collapses them (thanks to Clubfan22)
-Added long-click menu for subreddits in main menu (thanks to Clubfan22)
+Added long-click menu for feeds in main menu (thanks to Clubfan22)
 Added share/open option to internal browser (thanks to Clubfan22)
-Added block/subscribe/pin subreddit to post context menu (thanks to Clubfan22)
+Added block/subscribe/pin feed to post context menu (thanks to Clubfan22)
 Added post/comment fling action preference for "go back"
 Subject is now shown for private messages
 Private message replies are now part of the original conversion, rather than starting a new one
 Support keyboard Go-action in custom location dialog (thanks to gaudecker)
 Enable sorting for users' submitted posts/comments (thanks to gaudecker)
-Show subreddit names in /r/popular
-Subreddit autocomplete is now account-specific (thanks to Clubfan22)
+Show feed names in /r/popular
+Feed autocomplete is now account-specific (thanks to Clubfan22)
 Markdown parsing improvements (thanks to Clubfan22)
 Various build improvements (thanks to mvdan)
 Translation fix (thanks to philipwhiuk)
@@ -567,7 +567,7 @@ Added low-contrast night theme
 Added Ultra Black theme
 Added higher font scale options
 Added accessibility descriptions to bezel toolbar
-Subreddits autocomplete in "Custom Location"
+Feeds autocomplete in "Custom Location"
 Ability to disable inbox replies when submitting posts
 Ability to share image directly rather than link (thanks to Sérgio Sampaio)
 Fix for saving images with no file extension (thanks to Luís Coelho)
@@ -584,18 +584,18 @@ Updated Spanish translation (thanks to Andrés Hernández)
 Added Romanian translation (thanks to Badita Viorel-Octavian)
 
 75/1.9.6
-Multireddit viewing support
+List viewing support
 Auto-refresh old post lists (with preference)
 Parent text shown (and copyable) when replying to comments
 Ability to view custom user pages
 Preference to hide Android status bar
 Preference to use un-shortened link for "Share Comments" (thanks to fhtagn)
 Preference for cache storage location (thanks to ShadowNinja)
-Preference to set pinned subreddit sort order (thanks to chippen)
+Preference to set pinned feed sort order (thanks to chippen)
 Preference to hide floating toolbar over images
 Preference to make link text non-clickable
 Preference to disable swipe-down-to-refresh
-Preference to show blocked subreddits in the main menu (thanks to gstraube)
+Preference to show blocked feeds in the main menu (thanks to gstraube)
 For albums with only one image, the image is now shown immediately
 When sending PMs, input fields are cleared if send succeeded
 Show action bar back button in two-pane mode (thanks to mariokmk)
@@ -655,19 +655,19 @@ Fixed issue with disabling minimum comment score
 Fixed issue with intent handling
 
 66/1.9.3
-Ability to hide subreddits from /r/all (thanks to Igor Shults)
+Ability to hide feeds from /r/all (thanks to Igor Shults)
 Added Swedish translation (thanks to tjernquist)
 Preference to collapse low score comments (thanks to Igor Shults)
 Fixed issue with reddit link handling (thanks to Igor Shults)
 Fix for some posts not being marked as read (thanks to Igor Shults)
 Fixed issues with "limit post count" feature
-Fixed issue where subreddit sidebar was inaccessible for logged out users
+Fixed issue where feed sidebar was inaccessible for logged out users
 Text in properties dialogs is now selectable
 Various build improvements (thanks to mvdan)
 
 65/1.9.2
 Ability to view image titles/captions
-Ability to pin subreddits to top of main menu
+Ability to pin feeds to top of main menu
 Precaching for comment threads
 Improved connection robustness
 Use .mp4 instead of .webm for imgur (should improve device compatibility)
@@ -682,7 +682,7 @@ Native support for Gfycat and Streamable
 Added album swipe length preference
 Darker image loading checkerboard in night mode
 Added Q&A comment sort
-Fix for subreddit list parse error
+Fix for feed list parse error
 Fix for account list crash
 "Share comment" no longer uses oAuth domain
 Spanish translation updates (thanks to moshpirit)
@@ -700,7 +700,7 @@ Fixed scrolling bug when collapsing large comments (thanks to chaitan94)
 Added preference to skip straight to the front page (thanks to chaitan94)
 Disallow voting on archived posts (thanks to Ciaran Curley)
 Fixed typo in German translation (thanks to Aruee)
-Fixed UTF-8 support in subreddit sidebars
+Fixed UTF-8 support in feed sidebars
 Added options menu item to close all open activities (hidden by default)
 Added preference to customise options menu
 Post context menu no longer shown if all items are disabled
@@ -708,7 +708,7 @@ Added preference to change bezel toolbar swipe zone size
 Added preference to change GIF viewer
 Added intent support for m.reddit.com (thanks to Septolum)
 Ability to hide username in main menu
-Strips all whitespace when entering custom subreddit
+Strips all whitespace when entering custom feed
 Removed dependency on HoloEverywhere
 Removed support for Android 2.x and 3.x
 
@@ -719,7 +719,7 @@ Added support for redd.it links (thanks to ajs124)
 Fixed image view bug when rotating screen while touching (thanks to ThomasKomarnicki)
 Markdown link parsing improvements
 Fixed gif-related hang
-Fixed bug with subreddit names containing colons
+Fixed bug with feed names containing colons
 
 61/1.8.7.7
 Ability to sort search results (thanks to chaitan94)
@@ -735,7 +735,7 @@ Added "Use HTTPS" menu option to web view.
 Bugfixes
 
 58/1.8.7.4
-Fixed bug when navigating to the /r/reddit.com subreddit
+Fixed bug when navigating to the /r/reddit.com feed
 Various crash fixes
 
 57/1.8.7.3
@@ -752,7 +752,7 @@ Notifications for new inbox messages/comment replies (thanks to NoNeedToBail)
 Image view now shows all images at full resolution
 Double-tap to zoom supported in image view
 Double-tap-and-drag to zoom supported in image view
-Show default subreddits to anonymous users (rather than most popular)
+Show default feeds to anonymous users (rather than most popular)
 Got rid of the red icon in night mode
 Lots of performance improvements
 
@@ -763,7 +763,7 @@ German translation improvements (thanks to andihorner)
 Spanish translation improvements (thanks to moshpirit)
 Fixed bug when searching in two-pane mode (thanks to Oleksiy Kovtun)
 Fixed parse error with invalid named Unicode characters
-Fixed bug where users subscribed to precisely 100 subreddits would be shown extra (unwanted) subreddits
+Fixed bug where users subscribed to precisely 100 feeds would be shown extra (unwanted) feeds
 Fixed crash bug when selecting "Submit Post"
 
 52/1.8.6.4
@@ -784,25 +784,25 @@ Updated Arabic translation (thanks to Husam Bilal)
 50/1.8.6.2
 Post flair support
 Better comment flair color
-Fixed rare crash bug during subreddit (un)subscription
+Fixed rare crash bug during feed (un)subscription
 Fixed rare crash bug when pruning cache
 Fixed bug where searching for multiple words didn't work
 Minor post list performance improvements
-Removed ability to see upvote/downvote counts (since reddit removed support for this)
+Removed ability to see like/downvote counts (since reddit removed support for this)
 Added Markdown parser support for named/hexadecimal Unicode
 Fixed crash when searching whole site
 
 48/1.8.6
 Added ability to save comments (but not list them, yet)
 Sticky posts highlighted green (thanks to Chris Jones)
-Fixed bug where not all subscribed subreddits were shown
+Fixed bug where not all subscribed feeds were shown
 Added Arabic translation (thanks to Husam Bilal)
 Added menu option to clear web view cache
 Web view cookies are now deleted when it is closed
 The homescreen icon should now take you to your last position in the app
 Main menu subscription list loads much more quickly when cached
 Post list header changes when new sort order is selected
-Ability to view sidebar of all subreddits, not just subscribed ones
+Ability to view sidebar of all feeds, not just subscribed ones
 Markdown formatting improvements
 Reverted "home" button action to behave the same as "back"
 Vine links should now work in the internal browser
@@ -810,9 +810,9 @@ Lots of bugfixes
 New icon
 
 47/1.8.5.2
-Added ability to subscribe to/unsubscribe from subreddits
-Added ability to view subreddit sidebar
-No longer cuts off subreddit list if you have 100+ subscriptions
+Added ability to subscribe to/unsubscribe from feeds
+Added ability to view feed sidebar
+No longer cuts off feed list if you have 100+ subscriptions
 Made main menu customisable (under Settings > Menus)
 Ability to view mod mail, submitted posts, downvoted posts
 Fixed bug where saved/hidden posts were marked as unsaved/unhidden
@@ -852,7 +852,7 @@ Better markdown support (superscript, multi-level quotes, code, etc)
 Links in comments are represented by buttons
 Better back button handling in internal browser (thanks to Evan Tatarka)
 Ability to switch from internal to external browser (thanks to trevor-e)
-Custom subreddit bugfix (thanks to DubHunt)
+Custom feed bugfix (thanks to DubHunt)
 Search bugfix
 Back button delay
 Samsung multi-window support (phone reboot required)
@@ -865,7 +865,7 @@ Bugfixes
 38/1.7.4
 Bugfix for user profile dialog crash
 Minor appearance improvement
-Bugfix where subreddit name wasn't always filled in when submitting posts
+Bugfix where feed name wasn't always filled in when submitting posts
 
 37/1.7.3
 Bugfix for users with saved comments
@@ -883,11 +883,11 @@ Potential bugfix when recycling images
 Basic search feature
 Preference to change the default comment sort
 Preference to override Android's default language
-Handles hidden comment scores on certain subreddits
+Handles hidden comment scores on certain feeds
 Adds saved images to the Android gallery
 Fixed profile 404 bug (caused by space after username when logging in)
 Added "up" button in internal browser action bar
-Replaced thumbs up icon with upvote icon in bezel swipe toolbar
+Replaced thumbs up icon with like icon in bezel swipe toolbar
 
 33/1.6.9
 Spoiler support
@@ -910,5 +910,5 @@ Reformats invalid youtube.com links provided by reddit
 29/1.6.6
 Massively sped up cache pruning (no more freezing on startup)
 Fixed a bug - everyone should now be able to edit their own comments
-Moved the subreddit loading bar
+Moved the feed loading bar
 

@@ -63,23 +63,23 @@ import org.omegaaol.bluereader.fragments.PostListingFragment;
 import org.omegaaol.bluereader.fragments.SessionListDialog;
 import org.omegaaol.bluereader.listingcontrollers.CommentListingController;
 import org.omegaaol.bluereader.listingcontrollers.PostListingController;
-import org.omegaaol.bluereader.reddit.PostCommentSort;
-import org.omegaaol.bluereader.reddit.PostSort;
-import org.omegaaol.bluereader.reddit.RedditSubredditHistory;
-import org.omegaaol.bluereader.reddit.UserCommentSort;
-import org.omegaaol.bluereader.reddit.api.RedditOAuth;
-import org.omegaaol.bluereader.reddit.api.RedditSubredditSubscriptionManager;
-import org.omegaaol.bluereader.reddit.api.SubredditSubscriptionState;
-import org.omegaaol.bluereader.reddit.prepared.RedditPreparedPost;
-import org.omegaaol.bluereader.reddit.things.InvalidSubredditNameException;
-import org.omegaaol.bluereader.reddit.things.SubredditCanonicalId;
-import org.omegaaol.bluereader.reddit.url.PostCommentListingURL;
-import org.omegaaol.bluereader.reddit.url.PostListingURL;
-import org.omegaaol.bluereader.reddit.url.RedditURLParser;
-import org.omegaaol.bluereader.reddit.url.SearchPostListURL;
-import org.omegaaol.bluereader.reddit.url.SubredditPostListURL;
-import org.omegaaol.bluereader.reddit.url.UserPostListingURL;
-import org.omegaaol.bluereader.reddit.url.UserProfileURL;
+import org.omegaaol.bluereader.bluesky.PostCommentSort;
+import org.omegaaol.bluereader.bluesky.PostSort;
+import org.omegaaol.bluereader.bluesky.FeedHistory;
+import org.omegaaol.bluereader.bluesky.UserCommentSort;
+import org.omegaaol.bluereader.bluesky.api.RedditOAuth;
+import org.omegaaol.bluereader.bluesky.api.FeedSubscriptionManager;
+import org.omegaaol.bluereader.bluesky.api.FeedSubscriptionState;
+import org.omegaaol.bluereader.bluesky.prepared.RedditPreparedPost;
+import org.omegaaol.bluereader.bluesky.things.InvalidFeedNameException;
+import org.omegaaol.bluereader.bluesky.things.FeedCanonicalId;
+import org.omegaaol.bluereader.bluesky.url.PostCommentListingURL;
+import org.omegaaol.bluereader.bluesky.url.PostListingURL;
+import org.omegaaol.bluereader.bluesky.url.RedditURLParser;
+import org.omegaaol.bluereader.bluesky.url.SearchPostListURL;
+import org.omegaaol.bluereader.bluesky.url.FeedPostListURL;
+import org.omegaaol.bluereader.bluesky.url.UserPostListingURL;
+import org.omegaaol.bluereader.bluesky.url.UserProfileURL;
 import org.omegaaol.bluereader.views.RedditPostView;
 
 import java.util.ArrayList;
@@ -90,11 +90,11 @@ public class MainActivity extends RefreshableActivity
 		implements MainMenuSelectionListener,
 		RedditAccountChangeListener,
 		RedditPostView.PostSelectionListener,
-		OptionsMenuUtility.OptionsMenuSubredditsListener,
+		OptionsMenuUtility.OptionsMenuFeedsListener,
 		OptionsMenuUtility.OptionsMenuPostsListener,
 		OptionsMenuUtility.OptionsMenuCommentsListener,
 		SessionChangeListener,
-		RedditSubredditSubscriptionManager.SubredditSubscriptionStateChangeListener {
+		FeedSubscriptionManager.FeedSubscriptionStateChangeListener {
 
 	private static final String TAG = "MainActivity";
 
@@ -117,8 +117,8 @@ public class MainActivity extends RefreshableActivity
 
 	private boolean isMenuShown = true;
 
-	private final AtomicReference<RedditSubredditSubscriptionManager.ListenerContext>
-			mSubredditSubscriptionListenerContext = new AtomicReference<>(null);
+	private final AtomicReference<FeedSubscriptionManager.ListenerContext>
+			mFeedSubscriptionListenerContext = new AtomicReference<>(null);
 
 	@Override
 	protected boolean baseActivityIsActionBarBackEnabled() {
@@ -218,15 +218,15 @@ public class MainActivity extends RefreshableActivity
 
 		if(savedInstanceState == null
 				&& PrefsUtility.pref_behaviour_skiptofrontpage()) {
-			onSelected(SubredditPostListURL.getFeedDiscover());
+			onSelected(FeedPostListURL.getFeedDiscover());
 		}
 	}
 
 	private void recreateSubscriptionListener() {
 
-		final RedditSubredditSubscriptionManager.ListenerContext oldContext
-				= mSubredditSubscriptionListenerContext.getAndSet(
-				RedditSubredditSubscriptionManager
+		final FeedSubscriptionManager.ListenerContext oldContext
+				= mFeedSubscriptionListenerContext.getAndSet(
+				FeedSubscriptionManager
 						.getSingleton(
 								this,
 								RedditAccountManager.getInstance(this)
@@ -242,8 +242,8 @@ public class MainActivity extends RefreshableActivity
 	protected void onDestroy() {
 		super.onDestroy();
 
-		final RedditSubredditSubscriptionManager.ListenerContext listenerContext
-				= mSubredditSubscriptionListenerContext.get();
+		final FeedSubscriptionManager.ListenerContext listenerContext
+				= mFeedSubscriptionListenerContext.get();
 
 		if(listenerContext != null) {
 			listenerContext.removeListener();
@@ -259,23 +259,23 @@ public class MainActivity extends RefreshableActivity
 		switch(type) {
 
 			case MainMenuFragment.MENU_MENU_ACTION_FEED_DISCOVER:
-				onSelected(SubredditPostListURL.getFeedDiscover());
+				onSelected(FeedPostListURL.getFeedDiscover());
 				break;
 
 			case MainMenuFragment.MENU_MENU_ACTION_POPULAR:
-				onSelected(SubredditPostListURL.getPopular());
+				onSelected(FeedPostListURL.getPopular());
 				break;
 
 			case MainMenuFragment.MENU_MENU_ACTION_RANDOM:
-				onSelected(SubredditPostListURL.getRandom());
+				onSelected(FeedPostListURL.getRandom());
 				break;
 
 			case MainMenuFragment.MENU_MENU_ACTION_RANDOM_NSFW:
-				onSelected(SubredditPostListURL.getRandomNsfw());
+				onSelected(FeedPostListURL.getRandomNsfw());
 				break;
 
 			case MainMenuFragment.MENU_MENU_ACTION_TIMELINE:
-				onSelected(SubredditPostListURL.getAll());
+				onSelected(FeedPostListURL.getAll());
 				break;
 
 			case MainMenuFragment.MENU_MENU_ACTION_SUBMITTED:
@@ -290,7 +290,7 @@ public class MainActivity extends RefreshableActivity
 				onSelected(UserPostListingURL.getHidden(username));
 				break;
 
-			case MainMenuFragment.MENU_MENU_ACTION_UPVOTED:
+			case MainMenuFragment.MENU_MENU_ACTION_LIKED:
 				onSelected(UserPostListingURL.getLiked(username));
 				break;
 
@@ -318,7 +318,7 @@ public class MainActivity extends RefreshableActivity
 						R.array.mainmenu_custom_destination_type_return);
 
 				if(PrefsUtility.pref_menus_mainmenu_shortcutitems().contains(
-						MainMenuFragment.MainMenuShortcutItems.SUBREDDIT_SEARCH)) {
+						MainMenuFragment.MainMenuShortcutItems.FEED_SEARCH)) {
 
 					for(int i = 0; i < typeReturnValues.length; i++) {
 						if(typeReturnValues[i].equals("user")) {
@@ -328,15 +328,15 @@ public class MainActivity extends RefreshableActivity
 					}
 				}
 
-				final ArrayList<SubredditCanonicalId> subredditHistory
-						= RedditSubredditHistory.getSubredditsSorted(
+				final ArrayList<FeedCanonicalId> feedHistory
+						= FeedHistory.getFeedsSorted(
 						RedditAccountManager.getInstance(this).getDefaultAccount());
 
 				final ArrayAdapter<String> autocompleteAdapter = new ArrayAdapter<>(
 						this,
 						android.R.layout.simple_dropdown_item_1line,
-						new CollectionStream<>(subredditHistory)
-								.map(SubredditCanonicalId::toString)
+						new CollectionStream<>(feedHistory)
+								.map(FeedCanonicalId::toString)
 								.collect(new ArrayList<>()));
 
 				editText.setAdapter(autocompleteAdapter);
@@ -383,7 +383,7 @@ public class MainActivity extends RefreshableActivity
 							type = "url";
 
 						} else if(value.startsWith("/r/") || value.startsWith("r/")) {
-							type = "subreddit";
+							type = "feed";
 
 						} else if(value.startsWith("/u/") || value.startsWith("u/")) {
 							type = "user";
@@ -414,7 +414,7 @@ public class MainActivity extends RefreshableActivity
 						final String typeName
 								= typeReturnValues[destinationType.getSelectedItemPosition()];
 
-						if("subreddit".equals(typeName)) {
+						if("feed".equals(typeName)) {
 							editText.setAdapter(autocompleteAdapter);
 						} else {
 							editText.setAdapter(null);
@@ -462,8 +462,8 @@ public class MainActivity extends RefreshableActivity
 				break;
 			}
 
-			case MainMenuFragment.MENU_MENU_ACTION_FIND_SUBREDDIT: {
-				startActivity(new Intent(this, SubredditSearchActivity.class));
+			case MainMenuFragment.MENU_MENU_ACTION_FIND_FEED: {
+				startActivity(new Intent(this, FeedSearchActivity.class));
 			}
 		}
 	}
@@ -477,25 +477,25 @@ public class MainActivity extends RefreshableActivity
 				= typeReturnValues[destinationType.getSelectedItemPosition()];
 
 		switch(typeName) {
-			case "subreddit": {
+			case "feed": {
 
-				final String subredditInput = editText.getText()
+				final String feedInput = editText.getText()
 						.toString()
 						.trim()
 						.replace(" ", "");
 
 				try {
-					final String normalizedName = subredditInput;
+					final String normalizedName = feedInput;
 					final RedditURLParser.RedditURL redditURL
-							= SubredditPostListURL.getSubreddit(normalizedName);
+							= FeedPostListURL.getFeed(normalizedName);
 					if(redditURL == null
 							|| redditURL.pathType()
-							!= RedditURLParser.SUBREDDIT_POST_LISTING_URL) {
+							!= RedditURLParser.FEED_POST_LISTING_URL) {
 						General.quickToast(this, R.string.mainmenu_custom_invalid_name);
 					} else {
-						onSelected(redditURL.asSubredditPostListURL());
+						onSelected(redditURL.asFeedPostListURL());
 					}
-				} catch(final InvalidSubredditNameException e) {
+				} catch(final InvalidFeedNameException e) {
 					General.quickToast(this, R.string.mainmenu_custom_invalid_name);
 				}
 				break;
@@ -755,52 +755,52 @@ public class MainActivity extends RefreshableActivity
 
 		final RedditAccount user = RedditAccountManager.getInstance(this)
 				.getDefaultAccount();
-		final SubredditSubscriptionState
-				subredditSubscriptionState;
-		final RedditSubredditSubscriptionManager subredditSubscriptionManager
-				= RedditSubredditSubscriptionManager.getSingleton(this, user);
+		final FeedSubscriptionState
+				feedSubscriptionState;
+		final FeedSubscriptionManager feedSubscriptionManager
+				= FeedSubscriptionManager.getSingleton(this, user);
 
-		Boolean subredditPinState = null;
-		Boolean subredditBlockedState = null;
+		Boolean feedPinState = null;
+		Boolean feedBlockedState = null;
 
 		if(postsVisible
 				&& !user.isAnonymous()
-				&& (postListingController.isSubreddit()
-				|| postListingController.isRandomSubreddit())
-				&& subredditSubscriptionManager.areSubscriptionsReady()
+				&& (postListingController.isFeed()
+				|| postListingController.isRandomFeed())
+				&& feedSubscriptionManager.areSubscriptionsReady()
 				&& postListingFragment != null
-				&& postListingFragment.getSubreddit() != null) {
+				&& postListingFragment.getFeed() != null) {
 
-			subredditSubscriptionState
-					= subredditSubscriptionManager.getSubscriptionState(
-					postListingController.subredditCanonicalName());
+			feedSubscriptionState
+					= feedSubscriptionManager.getSubscriptionState(
+					postListingController.feedCanonicalName());
 
 		} else {
-			subredditSubscriptionState = null;
+			feedSubscriptionState = null;
 		}
 
 		if(postsVisible
-				&& (postListingController.isSubreddit()
-				|| postListingController.isRandomSubreddit())
+				&& (postListingController.isFeed()
+				|| postListingController.isRandomFeed())
 				&& postListingFragment != null
-				&& postListingFragment.getSubreddit() != null) {
+				&& postListingFragment.getFeed() != null) {
 
 			try {
-				subredditPinState = PrefsUtility.pref_pinned_subreddits_check(
-						postListingFragment.getSubreddit().getCanonicalId());
+				feedPinState = PrefsUtility.pref_pinned_feeds_check(
+						postListingFragment.getFeed().getCanonicalId());
 
-				subredditBlockedState = PrefsUtility.pref_blocked_subreddits_check(
-						postListingFragment.getSubreddit().getCanonicalId());
+				feedBlockedState = PrefsUtility.pref_blocked_feeds_check(
+						postListingFragment.getFeed().getCanonicalId());
 
-			} catch(final InvalidSubredditNameException e) {
-				subredditPinState = null;
-				subredditBlockedState = null;
+			} catch(final InvalidFeedNameException e) {
+				feedPinState = null;
+				feedBlockedState = null;
 			}
 		}
 
-		final String subredditDescription = postListingFragment != null
-				&& postListingFragment.getSubreddit() != null
-				? postListingFragment.getSubreddit().description_html
+		final String feedDescription = postListingFragment != null
+				&& postListingFragment.getFeed() != null
+				? postListingFragment.getFeed().description_html
 				: null;
 
 		OptionsMenuUtility.prepare(
@@ -815,13 +815,13 @@ public class MainActivity extends RefreshableActivity
 				postsSortable,
 				commentsSortable,
 				isFrontPage,
-				subredditSubscriptionState,
+				feedSubscriptionState,
 				postsVisible
-						&& subredditDescription != null
-						&& !subredditDescription.isEmpty(),
+						&& feedDescription != null
+						&& !feedDescription.isEmpty(),
 				true,
-				subredditPinState,
-				subredditBlockedState);
+				feedPinState,
+				feedBlockedState);
 
 		if(commentListingFragment != null) {
 			commentListingFragment.onCreateOptionsMenu(menu);
@@ -891,10 +891,10 @@ public class MainActivity extends RefreshableActivity
 	@Override
 	public void onSubmitPost() {
 		final Intent intent = new Intent(this, PostSubmitActivity.class);
-		if(postListingController.isSubreddit()) {
+		if(postListingController.isFeed()) {
 			intent.putExtra(
-					"subreddit",
-					postListingController.subredditCanonicalName().toString());
+					"feed",
+					postListingController.feedCanonicalName().toString());
 		}
 		startActivity(intent);
 	}
@@ -926,7 +926,7 @@ public class MainActivity extends RefreshableActivity
 
 	@Override
 	public void onSidebar() {
-		postListingFragment.getSubreddit().showSidebarActivity(this);
+		postListingFragment.getFeed().showSidebarActivity(this);
 	}
 
 	@Override
@@ -937,11 +937,11 @@ public class MainActivity extends RefreshableActivity
 		}
 
 		try {
-			PrefsUtility.pref_pinned_subreddits_add(
+			PrefsUtility.pref_pinned_feeds_add(
 					this,
-					postListingFragment.getSubreddit().getCanonicalId());
+					postListingFragment.getFeed().getCanonicalId());
 
-		} catch(final InvalidSubredditNameException e) {
+		} catch(final InvalidFeedNameException e) {
 			throw new RuntimeException(e);
 		}
 
@@ -956,11 +956,11 @@ public class MainActivity extends RefreshableActivity
 		}
 
 		try {
-			PrefsUtility.pref_pinned_subreddits_remove(
+			PrefsUtility.pref_pinned_feeds_remove(
 					this,
-					postListingFragment.getSubreddit().getCanonicalId());
+					postListingFragment.getFeed().getCanonicalId());
 
-		} catch(final InvalidSubredditNameException e) {
+		} catch(final InvalidFeedNameException e) {
 			throw new RuntimeException(e);
 		}
 
@@ -974,11 +974,11 @@ public class MainActivity extends RefreshableActivity
 		}
 
 		try {
-			PrefsUtility.pref_blocked_subreddits_add(
+			PrefsUtility.pref_blocked_feeds_add(
 					this,
-					postListingFragment.getSubreddit().getCanonicalId());
+					postListingFragment.getFeed().getCanonicalId());
 
-		} catch(final InvalidSubredditNameException e) {
+		} catch(final InvalidFeedNameException e) {
 			throw new RuntimeException(e);
 		}
 
@@ -992,11 +992,11 @@ public class MainActivity extends RefreshableActivity
 		}
 
 		try {
-			PrefsUtility.pref_blocked_subreddits_remove(
+			PrefsUtility.pref_blocked_feeds_remove(
 					this,
-					postListingFragment.getSubreddit().getCanonicalId());
+					postListingFragment.getFeed().getCanonicalId());
 
-		} catch(final InvalidSubredditNameException e) {
+		} catch(final InvalidFeedNameException e) {
 			throw new RuntimeException(e);
 		}
 
@@ -1004,7 +1004,7 @@ public class MainActivity extends RefreshableActivity
 	}
 
 	@Override
-	public void onRefreshSubreddits() {
+	public void onRefreshFeeds() {
 		requestRefresh(RefreshableFragment.MAIN, true);
 	}
 
@@ -1083,20 +1083,20 @@ public class MainActivity extends RefreshableActivity
 	}
 
 	@Override
-	public void onSubredditSubscriptionListUpdated(
-			final RedditSubredditSubscriptionManager subredditSubscriptionManager) {
+	public void onFeedSubscriptionListUpdated(
+			final FeedSubscriptionManager feedSubscriptionManager) {
 		postInvalidateOptionsMenu();
 	}
 
 	@Override
-	public void onSubredditSubscriptionAttempted(
-			final RedditSubredditSubscriptionManager subredditSubscriptionManager) {
+	public void onFeedSubscriptionAttempted(
+			final FeedSubscriptionManager feedSubscriptionManager) {
 		postInvalidateOptionsMenu();
 	}
 
 	@Override
-	public void onSubredditUnsubscriptionAttempted(
-			final RedditSubredditSubscriptionManager subredditSubscriptionManager) {
+	public void onFeedUnsubscriptionAttempted(
+			final FeedSubscriptionManager feedSubscriptionManager) {
 		postInvalidateOptionsMenu();
 	}
 

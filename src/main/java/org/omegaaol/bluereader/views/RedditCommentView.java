@@ -37,12 +37,12 @@ import org.omegaaol.bluereader.common.PrefsUtility;
 import org.omegaaol.bluereader.common.RRThemeAttributes;
 import org.omegaaol.bluereader.common.time.TimestampUTC;
 import org.omegaaol.bluereader.fragments.CommentListingFragment;
-import org.omegaaol.bluereader.reddit.RedditCommentListItem;
-import org.omegaaol.bluereader.reddit.api.RedditAPICommentAction;
-import org.omegaaol.bluereader.reddit.kthings.RedditIdAndType;
-import org.omegaaol.bluereader.reddit.prepared.RedditChangeDataManager;
-import org.omegaaol.bluereader.reddit.prepared.RedditParsedComment;
-import org.omegaaol.bluereader.reddit.prepared.RedditRenderableComment;
+import org.omegaaol.bluereader.bluesky.RedditCommentListItem;
+import org.omegaaol.bluereader.bluesky.api.RedditAPICommentAction;
+import org.omegaaol.bluereader.bluesky.kthings.RedditIdAndType;
+import org.omegaaol.bluereader.bluesky.prepared.RedditChangeDataManager;
+import org.omegaaol.bluereader.bluesky.prepared.RedditParsedComment;
+import org.omegaaol.bluereader.bluesky.prepared.RedditRenderableComment;
 
 
 public class RedditCommentView extends FlingableItemView
@@ -102,14 +102,14 @@ public class RedditCommentView extends FlingableItemView
 
 		switch(pref) {
 
-			case UPVOTE:
-				if(mChangeDataManager.isUpvoted(comment.getIdAndType())) {
+			case LIKE:
+				if(mChangeDataManager.isLiked(comment.getIdAndType())) {
 					return new ActionDescriptionPair(
 							RedditAPICommentAction.RedditCommentAction.UNVOTE,
 							R.string.action_vote_remove);
 				} else {
 					return new ActionDescriptionPair(
-							RedditAPICommentAction.RedditCommentAction.UPVOTE,
+							RedditAPICommentAction.RedditCommentAction.LIKE,
 							R.string.action_like);
 				}
 
@@ -514,7 +514,7 @@ public class RedditCommentView extends FlingableItemView
 				chooseFlingAction(PrefsUtility.CommentFlingAction.DOWNVOTE));
 
 			addAccessibilityActionFromDescriptionPair(
-				chooseFlingAction(PrefsUtility.CommentFlingAction.UPVOTE));
+				chooseFlingAction(PrefsUtility.CommentFlingAction.LIKE));
 		}
 
 		mAccessibilityActionManager.setClickHint(

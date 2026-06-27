@@ -29,7 +29,7 @@ import android.widget.TextView;
 import org.apache.commons.lang3.StringUtils;
 import org.omegaaol.bluereader.R;
 import org.omegaaol.bluereader.activities.PostListingActivity;
-import org.omegaaol.bluereader.reddit.url.SearchPostListURL;
+import org.omegaaol.bluereader.bluesky.url.SearchPostListURL;
 
 
 public final class SearchListingHeader extends FrameLayout {
@@ -55,8 +55,8 @@ public final class SearchListingHeader extends FrameLayout {
 
 		mLocation = findViewById(R.id.search_listing_header_sub_editText);
 
-		if(url.type == SearchPostListURL.Type.SUB_OR_SUB_COMBO && url.subreddit != null) {
-			mLocation.setText(url.subreddit);
+		if(url.type == SearchPostListURL.Type.SUB_OR_SUB_COMBO && url.feed != null) {
+			mLocation.setText(url.feed);
 		} else if(url.type == SearchPostListURL.Type.MULTI && url.name != null) {
 			if(url.username != null) {
 				//noinspection SetTextI18n

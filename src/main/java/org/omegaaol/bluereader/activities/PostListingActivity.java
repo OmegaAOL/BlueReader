@@ -39,18 +39,17 @@ import org.omegaaol.bluereader.common.time.TimestampUTC;
 import org.omegaaol.bluereader.fragments.PostListingFragment;
 import org.omegaaol.bluereader.fragments.SessionListDialog;
 import org.omegaaol.bluereader.listingcontrollers.PostListingController;
-import org.omegaaol.bluereader.reddit.PostSort;
-import org.omegaaol.bluereader.reddit.api.RedditSubredditSubscriptionManager;
-import org.omegaaol.bluereader.reddit.api.SubredditSubscriptionState;
-import org.omegaaol.bluereader.reddit.prepared.RedditPreparedPost;
-import org.omegaaol.bluereader.reddit.things.InvalidSubredditNameException;
-import org.omegaaol.bluereader.reddit.things.RedditSubreddit;
-import org.omegaaol.bluereader.reddit.things.SubredditCanonicalId;
-import org.omegaaol.bluereader.reddit.url.PostCommentListingURL;
-import org.omegaaol.bluereader.reddit.url.PostListingURL;
-import org.omegaaol.bluereader.reddit.url.RedditURLParser;
-import org.omegaaol.bluereader.reddit.url.SearchPostListURL;
-import org.omegaaol.bluereader.reddit.url.SubredditPostListURL;
+import org.omegaaol.bluereader.bluesky.PostSort;
+import org.omegaaol.bluereader.bluesky.api.FeedSubscriptionManager;
+import org.omegaaol.bluereader.bluesky.api.FeedSubscriptionState;
+import org.omegaaol.bluereader.bluesky.prepared.RedditPreparedPost;
+import org.omegaaol.bluereader.bluesky.things.InvalidFeedNameException;
+import org.omegaaol.bluereader.bluesky.things.FeedCanonicalId;
+import org.omegaaol.bluereader.bluesky.url.PostCommentListingURL;
+import org.omegaaol.bluereader.bluesky.url.PostListingURL;
+import org.omegaaol.bluereader.bluesky.url.RedditURLParser;
+import org.omegaaol.bluereader.bluesky.url.SearchPostListURL;
+import org.omegaaol.bluereader.bluesky.url.FeedPostListURL;
 import org.omegaaol.bluereader.views.RedditPostView;
 
 import java.util.Locale;
@@ -62,7 +61,7 @@ public class PostListingActivity extends RefreshableActivity
 		RedditPostView.PostSelectionListener,
 		OptionsMenuUtility.OptionsMenuPostsListener,
 		SessionChangeListener,
-		RedditSubredditSubscriptionManager.SubredditSubscriptionStateChangeListener {
+		FeedSubscriptionManager.FeedSubscriptionStateChangeListener {
 
 	private static final String SAVEDSTATE_SESSION = "pla_session";
 	private static final String SAVEDSTATE_SORT = "pla_sort";
@@ -71,8 +70,8 @@ public class PostListingActivity extends RefreshableActivity
 	private PostListingFragment fragment;
 	private PostListingController controller;
 
-	private final AtomicReference<RedditSubredditSubscriptionManager.ListenerContext>
-			mSubredditSubscriptionListenerContext = new AtomicReference<>(null);
+	private final AtomicReference<FeedSubscriptionManager.ListenerContext>
+			mFeedSubscriptionListenerContext = new AtomicReference<>(null);
 
 	private long mDoubleTapBack_lastTapMs = -1;
 
@@ -168,8 +167,8 @@ public class PostListingActivity extends RefreshableActivity
 	protected void onDestroy() {
 		super.onDestroy();
 
-		final RedditSubredditSubscriptionManager.ListenerContext listenerContext
-				= mSubredditSubscriptionListenerContext.get();
+		final FeedSubscriptionManager.ListenerContext listenerContext
+				= mFeedSubscriptionListenerContext.get();
 
 		if(listenerContext != null) {
 			listenerContext.removeListener();
@@ -181,59 +180,59 @@ public class PostListingActivity extends RefreshableActivity
 
 		final RedditAccount user = RedditAccountManager.getInstance(this)
 				.getDefaultAccount();
-		final SubredditSubscriptionState
-				subredditSubscriptionState;
-		final RedditSubredditSubscriptionManager subredditSubscriptionManager
-				= RedditSubredditSubscriptionManager.getSingleton(this, user);
+		final FeedSubscriptionState
+				feedSubscriptionState;
+		final FeedSubscriptionManager feedSubscriptionManager
+				= FeedSubscriptionManager.getSingleton(this, user);
 
 		if(fragment != null
-				&& controller.isRandomSubreddit()
-				&& fragment.getSubreddit() != null) {
-			SubredditPostListURL url = SubredditPostListURL.parse(controller.getUri());
-			if(url != null && url.type == SubredditPostListURL.Type.RANDOM) {
+				&& controller.isRandomFeed()
+				&& fragment.getFeed() != null) {
+			FeedPostListURL url = FeedPostListURL.parse(controller.getUri());
+			if(url != null && url.type == FeedPostListURL.Type.RANDOM) {
 
-					final String newSubreddit = fragment.getSubreddit().url;
-					url = url.changeSubreddit(newSubreddit);
+					final String newFeed = fragment.getFeed().url;
+					url = url.changeFeed(newFeed);
 					controller = new PostListingController(url, this);
 
 			}
 		}
 
 		if(!user.isAnonymous()
-				&& (controller.isSubreddit() || controller.isRandomSubreddit())
-				&& subredditSubscriptionManager.areSubscriptionsReady()
+				&& (controller.isFeed() || controller.isRandomFeed())
+				&& feedSubscriptionManager.areSubscriptionsReady()
 				&& fragment != null
-				&& fragment.getSubreddit() != null) {
+				&& fragment.getFeed() != null) {
 
-			subredditSubscriptionState = subredditSubscriptionManager.getSubscriptionState(
-					controller.subredditCanonicalName());
+			feedSubscriptionState = feedSubscriptionManager.getSubscriptionState(
+					controller.feedCanonicalName());
 
 		} else {
-			subredditSubscriptionState = null;
+			feedSubscriptionState = null;
 		}
 
-		final String subredditDescription = fragment != null
-				&& fragment.getSubreddit() != null
-				? fragment.getSubreddit().description_html
+		final String feedDescription = fragment != null
+				&& fragment.getFeed() != null
+				? fragment.getFeed().description_html
 				: null;
 
-		Boolean subredditPinState = null;
-		Boolean subredditBlockedState = null;
+		Boolean feedPinState = null;
+		Boolean feedBlockedState = null;
 
-		if((controller.isSubreddit() || controller.isRandomSubreddit())
+		if((controller.isFeed() || controller.isRandomFeed())
 				&& fragment != null
-				&& fragment.getSubreddit() != null) {
+				&& fragment.getFeed() != null) {
 
 			try {
-				subredditPinState = PrefsUtility.pref_pinned_subreddits_check(
-						fragment.getSubreddit().getCanonicalId());
+				feedPinState = PrefsUtility.pref_pinned_feeds_check(
+						fragment.getFeed().getCanonicalId());
 
-				subredditBlockedState = PrefsUtility.pref_blocked_subreddits_check(
-						fragment.getSubreddit().getCanonicalId());
+				feedBlockedState = PrefsUtility.pref_blocked_feeds_check(
+						fragment.getFeed().getCanonicalId());
 
-			} catch(final InvalidSubredditNameException e) {
-				subredditPinState = null;
-				subredditBlockedState = null;
+			} catch(final InvalidFeedNameException e) {
+				feedPinState = null;
+				feedBlockedState = null;
 			}
 		}
 
@@ -249,20 +248,20 @@ public class PostListingActivity extends RefreshableActivity
 				controller.isSortable(),
 				true,
 				controller.isFrontPage(),
-				subredditSubscriptionState,
-				subredditDescription != null && !subredditDescription.isEmpty(),
+				feedSubscriptionState,
+				feedDescription != null && !feedDescription.isEmpty(),
 				false,
-				subredditPinState,
-				subredditBlockedState);
+				feedPinState,
+				feedBlockedState);
 
 		return true;
 	}
 
 	private void recreateSubscriptionListener() {
 
-		final RedditSubredditSubscriptionManager.ListenerContext oldContext
-				= mSubredditSubscriptionListenerContext.getAndSet(
-				RedditSubredditSubscriptionManager
+		final FeedSubscriptionManager.ListenerContext oldContext
+				= mFeedSubscriptionListenerContext.getAndSet(
+				FeedSubscriptionManager
 						.getSingleton(
 								this,
 								RedditAccountManager.getInstance(this)
@@ -328,8 +327,8 @@ public class PostListingActivity extends RefreshableActivity
 
 		final Intent intent = new Intent(this, PostSubmitActivity.class);
 
-		if(controller.isSubreddit()) {
-			intent.putExtra("subreddit", controller.subredditCanonicalName().toString());
+		if(controller.isFeed()) {
+			intent.putExtra("feed", controller.feedCanonicalName().toString());
 		}
 
 		startActivity(intent);
@@ -358,14 +357,14 @@ public class PostListingActivity extends RefreshableActivity
 
 			final SearchPostListURL url;
 
-			if(controller != null && (controller.isSubreddit()
-					|| controller.isSubredditCombination()
-					|| controller.isSubredditSearchResults())) {
+			if(controller != null && (controller.isFeed()
+					|| controller.isFeedCombination()
+					|| controller.isFeedSearchResults())) {
 
-				final SubredditCanonicalId subredditCanonicalId
-						= controller.subredditCanonicalName();
+				final FeedCanonicalId feedCanonicalId
+						= controller.feedCanonicalName();
 
-				if(subredditCanonicalId == null) {
+				if(feedCanonicalId == null) {
 					BugReportActivity.handleGlobalError(
 							activity,
 							new RuntimeException("Can't search post listing "
@@ -374,12 +373,12 @@ public class PostListingActivity extends RefreshableActivity
 				}
 
 				url = SearchPostListURL.build(
-						subredditCanonicalId.toString(),
+						feedCanonicalId.toString(),
 						query);
-			} else if(controller != null && controller.isMultireddit()) {
+			} else if(controller != null && controller.isList()) {
 
-				final String multiName = controller.multiredditName();
-				final String multiUsername = controller.multiredditUsername();
+				final String multiName = controller.listName();
+				final String multiUsername = controller.listUsername();
 
 				url = SearchPostListURL.build(multiUsername, multiName, query);
 			} else {
@@ -404,15 +403,15 @@ public class PostListingActivity extends RefreshableActivity
 
 	@Override
 	public void onSidebar() {
-		if(fragment.getSubreddit() != null) {
+		if(fragment.getFeed() != null) {
 			final Intent intent = new Intent(this, HtmlViewActivity.class);
 			intent.putExtra(
 					"html",
-					fragment.getSubreddit()
+					fragment.getFeed()
 							.getSidebarHtml(PrefsUtility.isNightMode()));
 			intent.putExtra("title", String.format(Locale.US, "%s: %s",
 					getString(R.string.sidebar_activity_title),
-					fragment.getSubreddit().url));
+					fragment.getFeed().url));
 			startActivityForResult(intent, 1);
 		}
 	}
@@ -424,7 +423,7 @@ public class PostListingActivity extends RefreshableActivity
 			return;
 		}
 
-		if(fragment.getSubreddit() == null) {
+		if(fragment.getFeed() == null) {
 			BugReportActivity.handleGlobalError(
 					this,
 					new RuntimeException("Can't pin post listing "
@@ -433,11 +432,11 @@ public class PostListingActivity extends RefreshableActivity
 		}
 
 		try {
-			PrefsUtility.pref_pinned_subreddits_add(
+			PrefsUtility.pref_pinned_feeds_add(
 					this,
-					fragment.getSubreddit().getCanonicalId());
+					fragment.getFeed().getCanonicalId());
 
-		} catch(final InvalidSubredditNameException e) {
+		} catch(final InvalidFeedNameException e) {
 			throw new RuntimeException(e);
 		}
 
@@ -451,7 +450,7 @@ public class PostListingActivity extends RefreshableActivity
 			return;
 		}
 
-		if(fragment.getSubreddit() == null) {
+		if(fragment.getFeed() == null) {
 			BugReportActivity.handleGlobalError(
 					this,
 					new RuntimeException("Can't unpin post listing "
@@ -460,11 +459,11 @@ public class PostListingActivity extends RefreshableActivity
 		}
 
 		try {
-			PrefsUtility.pref_pinned_subreddits_remove(
+			PrefsUtility.pref_pinned_feeds_remove(
 					this,
-					fragment.getSubreddit().getCanonicalId());
+					fragment.getFeed().getCanonicalId());
 
-		} catch(final InvalidSubredditNameException e) {
+		} catch(final InvalidFeedNameException e) {
 			throw new RuntimeException(e);
 		}
 
@@ -477,7 +476,7 @@ public class PostListingActivity extends RefreshableActivity
 			return;
 		}
 
-		if(fragment.getSubreddit() == null) {
+		if(fragment.getFeed() == null) {
 			BugReportActivity.handleGlobalError(
 					this,
 					new RuntimeException("Can't block post listing "
@@ -486,11 +485,11 @@ public class PostListingActivity extends RefreshableActivity
 		}
 
 		try {
-			PrefsUtility.pref_blocked_subreddits_add(
+			PrefsUtility.pref_blocked_feeds_add(
 					this,
-					fragment.getSubreddit().getCanonicalId());
+					fragment.getFeed().getCanonicalId());
 
-		} catch(final InvalidSubredditNameException e) {
+		} catch(final InvalidFeedNameException e) {
 			throw new RuntimeException(e);
 		}
 
@@ -503,7 +502,7 @@ public class PostListingActivity extends RefreshableActivity
 			return;
 		}
 
-		if(fragment.getSubreddit() == null) {
+		if(fragment.getFeed() == null) {
 			BugReportActivity.handleGlobalError(
 					this,
 					new RuntimeException("Can't unblock post listing "
@@ -512,11 +511,11 @@ public class PostListingActivity extends RefreshableActivity
 		}
 
 		try {
-			PrefsUtility.pref_blocked_subreddits_remove(
+			PrefsUtility.pref_blocked_feeds_remove(
 					this,
-					fragment.getSubreddit().getCanonicalId());
+					fragment.getFeed().getCanonicalId());
 
-		} catch(final InvalidSubredditNameException e) {
+		} catch(final InvalidFeedNameException e) {
 			throw new RuntimeException(e);
 		}
 
@@ -557,20 +556,20 @@ public class PostListingActivity extends RefreshableActivity
 	}
 
 	@Override
-	public void onSubredditSubscriptionListUpdated(
-			final RedditSubredditSubscriptionManager subredditSubscriptionManager) {
+	public void onFeedSubscriptionListUpdated(
+			final FeedSubscriptionManager feedSubscriptionManager) {
 		postInvalidateOptionsMenu();
 	}
 
 	@Override
-	public void onSubredditSubscriptionAttempted(
-			final RedditSubredditSubscriptionManager subredditSubscriptionManager) {
+	public void onFeedSubscriptionAttempted(
+			final FeedSubscriptionManager feedSubscriptionManager) {
 		postInvalidateOptionsMenu();
 	}
 
 	@Override
-	public void onSubredditUnsubscriptionAttempted(
-			final RedditSubredditSubscriptionManager subredditSubscriptionManager) {
+	public void onFeedUnsubscriptionAttempted(
+			final FeedSubscriptionManager feedSubscriptionManager) {
 		postInvalidateOptionsMenu();
 	}
 

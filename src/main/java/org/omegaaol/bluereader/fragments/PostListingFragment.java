@@ -68,26 +68,26 @@ import org.omegaaol.bluereader.image.GetImageInfoListener;
 import org.omegaaol.bluereader.image.ImageInfo;
 import org.omegaaol.bluereader.io.RequestResponseHandler;
 import org.omegaaol.bluereader.listingcontrollers.CommentListingController;
-import org.omegaaol.bluereader.reddit.PostSort;
-import org.omegaaol.bluereader.reddit.RedditPostListItem;
-import org.omegaaol.bluereader.reddit.RedditSubredditManager;
-import org.omegaaol.bluereader.reddit.api.RedditSubredditSubscriptionManager;
-import org.omegaaol.bluereader.reddit.kthings.JsonUtils;
-import org.omegaaol.bluereader.reddit.kthings.MaybeParseError;
-import org.omegaaol.bluereader.reddit.kthings.RedditIdAndType;
-import org.omegaaol.bluereader.reddit.kthings.RedditListing;
-import org.omegaaol.bluereader.reddit.kthings.RedditPost;
-import org.omegaaol.bluereader.reddit.kthings.RedditThing;
-import org.omegaaol.bluereader.reddit.prepared.RedditParsedPost;
-import org.omegaaol.bluereader.reddit.prepared.RedditPreparedPost;
-import org.omegaaol.bluereader.reddit.things.InvalidSubredditNameException;
-import org.omegaaol.bluereader.reddit.things.RedditSubreddit;
-import org.omegaaol.bluereader.reddit.things.SubredditCanonicalId;
-import org.omegaaol.bluereader.reddit.url.PostCommentListingURL;
-import org.omegaaol.bluereader.reddit.url.PostListingURL;
-import org.omegaaol.bluereader.reddit.url.RedditURLParser;
-import org.omegaaol.bluereader.reddit.url.SearchPostListURL;
-import org.omegaaol.bluereader.reddit.url.SubredditPostListURL;
+import org.omegaaol.bluereader.bluesky.PostSort;
+import org.omegaaol.bluereader.bluesky.RedditPostListItem;
+import org.omegaaol.bluereader.bluesky.FeedManager;
+import org.omegaaol.bluereader.bluesky.api.FeedSubscriptionManager;
+import org.omegaaol.bluereader.bluesky.kthings.JsonUtils;
+import org.omegaaol.bluereader.bluesky.kthings.MaybeParseError;
+import org.omegaaol.bluereader.bluesky.kthings.RedditIdAndType;
+import org.omegaaol.bluereader.bluesky.kthings.RedditListing;
+import org.omegaaol.bluereader.bluesky.kthings.RedditPost;
+import org.omegaaol.bluereader.bluesky.kthings.RedditThing;
+import org.omegaaol.bluereader.bluesky.prepared.RedditParsedPost;
+import org.omegaaol.bluereader.bluesky.prepared.RedditPreparedPost;
+import org.omegaaol.bluereader.bluesky.things.InvalidFeedNameException;
+import org.omegaaol.bluereader.bluesky.things.Feed;
+import org.omegaaol.bluereader.bluesky.things.FeedCanonicalId;
+import org.omegaaol.bluereader.bluesky.url.PostCommentListingURL;
+import org.omegaaol.bluereader.bluesky.url.PostListingURL;
+import org.omegaaol.bluereader.bluesky.url.RedditURLParser;
+import org.omegaaol.bluereader.bluesky.url.SearchPostListURL;
+import org.omegaaol.bluereader.bluesky.url.FeedPostListURL;
 import org.omegaaol.bluereader.views.PostListingHeader;
 import org.omegaaol.bluereader.views.RedditPostView;
 import org.omegaaol.bluereader.views.ScrollbarRecyclerViewManager;
@@ -112,7 +112,7 @@ public class PostListingFragment extends RRFragment
 
 	@NonNull private PostListingURL mPostListingURL;
 
-	@Nullable private RedditSubreddit mSubreddit;
+	@Nullable private Feed mFeed;
 
 	private UUID mSession;
 	private final int mPostCountLimit;
@@ -273,7 +273,7 @@ public class PostListingFragment extends RRFragment
 				break;
 
 			case RedditURLParser.USER_POST_LISTING_URL:
-			case RedditURLParser.MULTIREDDIT_POST_LISTING_URL:
+			case RedditURLParser.LIST_POST_LISTING_URL:
 				setHeader(
 						mPostListingURL.humanReadableName(getActivity(), true),
 						mPostListingURL.humanReadableUrl(),
@@ -281,16 +281,16 @@ public class PostListingFragment extends RRFragment
 				CacheManager.getInstance(context).makeRequest(mRequest);
 				break;
 
-			case RedditURLParser.SUBREDDIT_POST_LISTING_URL:
+			case RedditURLParser.FEED_POST_LISTING_URL:
 
-				final SubredditPostListURL subredditPostListURL
-						= (SubredditPostListURL)mPostListingURL;
+				final FeedPostListURL feedPostListURL
+						= (FeedPostListURL)mPostListingURL;
 
-				switch(subredditPostListURL.type) {
+				switch(feedPostListURL.type) {
 
 					case FEED_DISCOVER:
 					case TIMELINE:
-					case SUBREDDIT_COMBINATION:
+					case FEED_COMBINATION:
 					case ALL_SUBTRACTION:
 					case POPULAR:
 						setHeader(
@@ -301,13 +301,13 @@ public class PostListingFragment extends RRFragment
 						break;
 
 					case RANDOM:
-					case SUBREDDIT: {
+					case FEED: {
 
-						// Request the subreddit data
+						// Request the feed data
 
-						final RequestResponseHandler<RedditSubreddit, RRError>
-								subredditHandler = new RequestResponseHandler<
-								RedditSubreddit,
+						final RequestResponseHandler<Feed, RRError>
+								feedHandler = new RequestResponseHandler<
+								Feed,
 								RRError>() {
 							@Override
 							public void onRequestFailed(
@@ -319,20 +319,20 @@ public class PostListingFragment extends RRFragment
 
 							@Override
 							public void onRequestSuccess(
-									final RedditSubreddit result,
+									final Feed result,
 									final TimestampUTC timeCached) {
 								AndroidCommon.UI_THREAD_HANDLER.post(() -> {
-									mSubreddit = result;
+									mFeed = result;
 
-									if(mSubreddit.over18
+									if(mFeed.over18
 											&& !PrefsUtility.pref_behaviour_nsfw()) {
 										mPostListingManager.setLoadingVisible(false);
 
 										final int title
-												= R.string.error_nsfw_subreddits_disabled_title;
+												= R.string.error_nsfw_feeds_disabled_title;
 
 										final int message
-												= R.string.error_nsfw_subreddits_disabled_message;
+												= R.string.error_nsfw_feeds_disabled_message;
 
 										mPostListingManager.addFooterError(new ErrorView(
 												getActivity(),
@@ -341,7 +341,7 @@ public class PostListingFragment extends RRFragment
 														context.getString(message),
 														false)));
 									} else {
-										onSubredditReceived();
+										onFeedReceived();
 										CacheManager.getInstance(context)
 												.makeRequest(mRequest);
 									}
@@ -350,18 +350,18 @@ public class PostListingFragment extends RRFragment
 						};
 
 						try {
-							RedditSubredditManager
+							FeedManager
 									.getInstance(
 											getActivity(),
 											RedditAccountManager.getInstance(getActivity())
 													.getDefaultAccount())
-									.getSubreddit(
-											new SubredditCanonicalId(
-													subredditPostListURL.subreddit),
+									.getFeed(
+											new FeedCanonicalId(
+													feedPostListURL.feed),
 											TimestampBound.NONE,
-											subredditHandler,
+											feedHandler,
 											null);
-						} catch(final InvalidSubredditNameException e) {
+						} catch(final InvalidFeedNameException e) {
 							throw new RuntimeException(e);
 						}
 						break;
@@ -415,14 +415,14 @@ public class PostListingFragment extends RRFragment
 		}
 	}
 
-	private void onSubredditReceived() {
+	private void onFeedReceived() {
 
-		if(mPostListingURL.pathType() == RedditURLParser.SUBREDDIT_POST_LISTING_URL
-				&& mPostListingURL.asSubredditPostListURL().type
-				== SubredditPostListURL.Type.RANDOM) {
+		if(mPostListingURL.pathType() == RedditURLParser.FEED_POST_LISTING_URL
+				&& mPostListingURL.asFeedPostListURL().type
+				== FeedPostListURL.Type.RANDOM) {
 
-				mPostListingURL = mPostListingURL.asSubredditPostListURL()
-						.changeSubreddit(mSubreddit.url);
+				mPostListingURL = mPostListingURL.asFeedPostListURL()
+						.changeFeed(mFeed.url);
 				mRequest = createPostListingRequest(
 						mPostListingURL.generateJsonUri(),
 						RedditAccountManager.getInstance(getContext())
@@ -436,13 +436,13 @@ public class PostListingFragment extends RRFragment
 
 		if(mPostListingURL.getOrder() == null
 				|| mPostListingURL.getOrder() == PostSort.HOT) {
-			if(mSubreddit.subscribers == null) {
+			if(mFeed.subscribers == null) {
 				subtitle = getString(R.string.header_subscriber_count_unknown);
 			} else {
 				subtitle = getContext().getString(
 						R.string.header_subscriber_count,
 						NumberFormat.getNumberInstance(Locale.getDefault())
-								.format(mSubreddit.subscribers));
+								.format(mFeed.subscribers));
 			}
 
 		} else {
@@ -451,9 +451,9 @@ public class PostListingFragment extends RRFragment
 
 		getActivity().runOnUiThread(() -> {
 			setHeader(
-					StringEscapeUtils.unescapeHtml4(mSubreddit.title),
+					StringEscapeUtils.unescapeHtml4(mFeed.title),
 					subtitle,
-					mSubreddit);
+					mFeed);
 			getActivity().invalidateOptionsMenu();
 		});
 
@@ -462,24 +462,24 @@ public class PostListingFragment extends RRFragment
 	private void setHeader(
 			@NonNull final String title,
 			@NonNull final String subtitle,
-			@Nullable final RedditSubreddit subreddit) {
+			@Nullable final Feed feed) {
 
 		final PostListingHeader postListingHeader = new PostListingHeader(
 				getActivity(),
 				title,
 				subtitle,
 				mPostListingURL,
-				subreddit);
+				feed);
 
 		setHeader(postListingHeader);
 
-		if(subreddit != null) {
+		if(feed != null) {
 			postListingHeader.setOnLongClickListener(view -> {
 				try {
 					MainMenuListingManager.showActionMenu(
 							getActivity(),
-							subreddit.getCanonicalId());
-				} catch (final InvalidSubredditNameException e) {
+							feed.getCanonicalId());
+				} catch (final InvalidFeedNameException e) {
 					throw new RuntimeException(e);
 				}
 				return true;
@@ -575,39 +575,39 @@ public class PostListingFragment extends RRFragment
 
 	public void onSubscribe() {
 
-		if(mPostListingURL.pathType() != RedditURLParser.SUBREDDIT_POST_LISTING_URL) {
+		if(mPostListingURL.pathType() != RedditURLParser.FEED_POST_LISTING_URL) {
 			return;
 		}
 
 		try {
-			RedditSubredditSubscriptionManager
+			FeedSubscriptionManager
 					.getSingleton(
 							getActivity(),
 							RedditAccountManager.getInstance(getActivity())
 									.getDefaultAccount())
 					.subscribe(
-							new SubredditCanonicalId(
-									mPostListingURL.asSubredditPostListURL().subreddit),
+							new FeedCanonicalId(
+									mPostListingURL.asFeedPostListURL().feed),
 							getActivity());
-		} catch(final InvalidSubredditNameException e) {
+		} catch(final InvalidFeedNameException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	public void onUnsubscribe() {
 
-		if(mSubreddit == null) {
+		if(mFeed == null) {
 			return;
 		}
 
 		try {
-			RedditSubredditSubscriptionManager
+			FeedSubscriptionManager
 					.getSingleton(
 							getActivity(),
 							RedditAccountManager.getInstance(getActivity())
 									.getDefaultAccount())
-					.unsubscribe(mSubreddit.getCanonicalId(), getActivity());
-		} catch(final InvalidSubredditNameException e) {
+					.unsubscribe(mFeed.getCanonicalId(), getActivity());
+		} catch(final InvalidFeedNameException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -618,8 +618,8 @@ public class PostListingFragment extends RRFragment
 	}
 
 	@Nullable
-	public RedditSubreddit getSubreddit() {
-		return mSubreddit;
+	public Feed getFeed() {
+		return mFeed;
 	}
 
 	public void onPostsAdded() {
@@ -703,7 +703,7 @@ public class PostListingFragment extends RRFragment
 							PostListingFragment.this.mTimestamp = timestamp;
 						}
 
-						// TODO {"error": 403} is received for unauthorized subreddits
+						// TODO {"error": 403} is received for unauthorized feeds
 
 						try {
 
@@ -774,21 +774,21 @@ public class PostListingFragment extends RRFragment
 							final boolean leftHandedMode
 									= PrefsUtility.pref_appearance_left_handed();
 
-							final boolean subredditFilteringEnabled =
+							final boolean feedFilteringEnabled =
 									mPostListingURL.pathType()
-											== RedditURLParser.SUBREDDIT_POST_LISTING_URL
-											&& (mPostListingURL.asSubredditPostListURL().type
-											== SubredditPostListURL.Type.TIMELINE
-											|| mPostListingURL.asSubredditPostListURL().type
-											== SubredditPostListURL.Type.ALL_SUBTRACTION
-											|| mPostListingURL.asSubredditPostListURL().type
-											== SubredditPostListURL.Type.POPULAR
-											|| mPostListingURL.asSubredditPostListURL().type
-											== SubredditPostListURL.Type.FEED_DISCOVER);
+											== RedditURLParser.FEED_POST_LISTING_URL
+											&& (mPostListingURL.asFeedPostListURL().type
+											== FeedPostListURL.Type.TIMELINE
+											|| mPostListingURL.asFeedPostListURL().type
+											== FeedPostListURL.Type.ALL_SUBTRACTION
+											|| mPostListingURL.asFeedPostListURL().type
+											== FeedPostListURL.Type.POPULAR
+											|| mPostListingURL.asFeedPostListURL().type
+											== FeedPostListURL.Type.FEED_DISCOVER);
 
 							// Grab this so we don't have to pull from the prefs every post
-							final HashSet<SubredditCanonicalId> blockedSubreddits
-									= new HashSet<>(PrefsUtility.pref_blocked_subreddits());
+							final HashSet<FeedCanonicalId> blockedFeeds
+									= new HashSet<>(PrefsUtility.pref_blocked_feeds());
 
 							Log.i(TAG, "Inline previews: "
 									+ (inlinePreviews ? "ON" : "OFF"));
@@ -801,11 +801,11 @@ public class PostListingFragment extends RRFragment
 
 							final CacheManager cm = CacheManager.getInstance(activity);
 
-							final boolean showSubredditName = !(mPostListingURL != null
+							final boolean showFeedName = !(mPostListingURL != null
 									&& mPostListingURL.pathType()
-									== RedditURLParser.SUBREDDIT_POST_LISTING_URL
-									&& mPostListingURL.asSubredditPostListURL().type
-									== SubredditPostListURL.Type.SUBREDDIT);
+									== RedditURLParser.FEED_POST_LISTING_URL
+									&& mPostListingURL.asFeedPostListURL().type
+									== FeedPostListURL.Type.FEED);
 
 							final ArrayList<RedditPostListItem> downloadedPosts
 									= new ArrayList<>(25);
@@ -829,9 +829,9 @@ public class PostListingFragment extends RRFragment
 
 								mAfter = post.getName();
 
-								final boolean isPostBlocked = subredditFilteringEnabled
-										&& blockedSubreddits.contains(
-										new SubredditCanonicalId(post.getSubreddit().getDecoded()));
+								final boolean isPostBlocked = feedFilteringEnabled
+										&& blockedFeeds.contains(
+										new FeedCanonicalId(post.getFeed().getDecoded()));
 
 								if(!isPostBlocked
 										&& (!post.getOver_18() || isNsfwAllowed)
@@ -858,7 +858,7 @@ public class PostListingFragment extends RRFragment
 											positionInList,
 											parsedPost,
 											timestamp,
-											showSubredditName,
+											showFeedName,
 											downloadThisThumbnail,
 											allowHighResThumbnails,
 											downloadThisPreview);

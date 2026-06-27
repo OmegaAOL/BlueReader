@@ -18,7 +18,7 @@
 package org.omegaaol.bluereader.adapters;
 
 import org.omegaaol.bluereader.fragments.MainMenuFragment;
-import org.omegaaol.bluereader.reddit.url.PostListingURL;
+import org.omegaaol.bluereader.bluesky.url.PostListingURL;
 
 public interface MainMenuSelectionListener {
 	void onSelected(@MainMenuFragment.MainMenuAction int type);

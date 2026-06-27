@@ -25,9 +25,8 @@ import org.omegaaol.bluereader.cache.CacheManager
 import org.omegaaol.bluereader.common.*
 import org.omegaaol.bluereader.io.RedditChangeDataIO
 import org.omegaaol.bluereader.receivers.NewMessageChecker
-import org.omegaaol.bluereader.receivers.announcements.AnnouncementDownloader
-import org.omegaaol.bluereader.reddit.api.RedditOAuth
-import org.omegaaol.bluereader.reddit.prepared.RedditChangeDataManager
+import org.omegaaol.bluereader.bluesky.api.RedditOAuth
+import org.omegaaol.bluereader.bluesky.prepared.RedditChangeDataManager
 
 class BlueReader : MultiDexApplication() {
 

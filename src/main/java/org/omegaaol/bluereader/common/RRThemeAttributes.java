@@ -27,7 +27,7 @@ public class RRThemeAttributes {
 
 	public final int rrCommentHeaderBoldCol;
 	public final int rrCommentHeaderAuthorCol;
-	public final int rrPostSubtitleUpvoteCol;
+	public final int rrPostSubtitleLikeCol;
 	public final int rrPostSubtitleDownvoteCol;
 	public final int rrFlairBackCol;
 	public final int rrFlairTextCol;
@@ -48,7 +48,7 @@ public class RRThemeAttributes {
 		final TypedArray appearance = context.obtainStyledAttributes(new int[] {
 				R.attr.rrCommentHeaderBoldCol,
 				R.attr.rrCommentHeaderAuthorCol,
-				R.attr.rrPostSubtitleUpvoteCol,
+				R.attr.rrPostSubtitleLikeCol,
 				R.attr.rrPostSubtitleDownvoteCol,
 				R.attr.rrFlairBackCol,
 				R.attr.rrFlairTextCol,
@@ -62,7 +62,7 @@ public class RRThemeAttributes {
 
 		rrCommentHeaderBoldCol = appearance.getColor(0, 255);
 		rrCommentHeaderAuthorCol = appearance.getColor(1, 255);
-		rrPostSubtitleUpvoteCol = appearance.getColor(2, 255);
+		rrPostSubtitleLikeCol = appearance.getColor(2, 255);
 		rrPostSubtitleDownvoteCol = appearance.getColor(3, 255);
 		rrFlairBackCol = appearance.getColor(4, 0);
 		rrFlairTextCol = appearance.getColor(5, 255);

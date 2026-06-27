@@ -48,7 +48,7 @@ public class ScreenreaderPronunciation {
 				return "giffy cat dot com";
 		}
 
-		return pronounceSubreddit(textLowercase);
+		return pronounceFeed(textLowercase);
 	}
 
 	public static String getAccessibilityString(
@@ -70,26 +70,26 @@ public class ScreenreaderPronunciation {
 	}
 
 	@NonNull
-	private static String pronounceSubreddit(@NonNull final String nameLowercase) {
+	private static String pronounceFeed(@NonNull final String nameLowercase) {
 
 		if(nameLowercase.startsWith("/r/") || nameLowercase.startsWith("/u/")) {
 			return nameLowercase.charAt(1)
 					+ " slash "
-					+ pronounceSubredditStripped(nameLowercase.substring(3));
+					+ pronounceFeedStripped(nameLowercase.substring(3));
 
 		} else if(nameLowercase.startsWith("r/") || nameLowercase.startsWith("u/")) {
 			return nameLowercase.charAt(0)
 					+ " slash "
-					+ pronounceSubredditStripped(nameLowercase.substring(2));
+					+ pronounceFeedStripped(nameLowercase.substring(2));
 
 		} else {
-			return pronounceSubredditStripped(nameLowercase);
+			return pronounceFeedStripped(nameLowercase);
 		}
 	}
 
 	@SuppressWarnings("SpellCheckingInspection")
 	@NonNull
-	private static String pronounceSubredditStripped(@NonNull final String nameLowercase) {
+	private static String pronounceFeedStripped(@NonNull final String nameLowercase) {
 
 		switch(nameLowercase) {
 			case "iama":

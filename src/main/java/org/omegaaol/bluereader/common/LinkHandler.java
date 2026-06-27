@@ -59,9 +59,9 @@ import org.omegaaol.bluereader.image.RedditVideosAPI;
 import org.omegaaol.bluereader.image.RedgifsAPI;
 import org.omegaaol.bluereader.image.RedgifsAPIV2;
 import org.omegaaol.bluereader.image.StreamableAPI;
-import org.omegaaol.bluereader.reddit.kthings.RedditPost;
-import org.omegaaol.bluereader.reddit.url.ComposeMessageURL;
-import org.omegaaol.bluereader.reddit.url.RedditURLParser;
+import org.omegaaol.bluereader.bluesky.kthings.RedditPost;
+import org.omegaaol.bluereader.bluesky.url.ComposeMessageURL;
+import org.omegaaol.bluereader.bluesky.url.RedditURLParser;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -235,8 +235,8 @@ public class LinkHandler {
 
 			switch(redditURL.pathType()) {
 
-				case RedditURLParser.SUBREDDIT_POST_LISTING_URL:
-				case RedditURLParser.MULTIREDDIT_POST_LISTING_URL:
+				case RedditURLParser.FEED_POST_LISTING_URL:
+				case RedditURLParser.LIST_POST_LISTING_URL:
 				case RedditURLParser.USER_POST_LISTING_URL:
 				case RedditURLParser.SEARCH_POST_LISTING_URL:
 				case RedditURLParser.UNKNOWN_POST_LISTING_URL: {
@@ -1254,11 +1254,11 @@ public class LinkHandler {
 			result.add(urlMatcher.group(1));
 		}
 
-		final Matcher subredditMatcher = Pattern.compile("(?<!\\w)(/?[ru]/\\w+)\\b")
+		final Matcher feedMatcher = Pattern.compile("(?<!\\w)(/?[ru]/\\w+)\\b")
 				.matcher(text);
 
-		while(subredditMatcher.find()) {
-			result.add(subredditMatcher.group(1));
+		while(feedMatcher.find()) {
+			result.add(feedMatcher.group(1));
 		}
 
 		return result;

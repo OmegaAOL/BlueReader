@@ -27,7 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import org.omegaaol.bluereader.activities.BugReportActivity;
 import org.omegaaol.bluereader.common.UpdateNotifier;
-import org.omegaaol.bluereader.reddit.api.RedditOAuth;
+import org.omegaaol.bluereader.bluesky.api.RedditOAuth;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

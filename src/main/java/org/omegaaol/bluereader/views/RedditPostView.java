@@ -60,9 +60,9 @@ import org.omegaaol.bluereader.common.SharedPrefsWrapper;
 import org.omegaaol.bluereader.common.datastream.SeekableInputStream;
 import org.omegaaol.bluereader.common.time.TimestampUTC;
 import org.omegaaol.bluereader.fragments.PostListingFragment;
-import org.omegaaol.bluereader.reddit.api.RedditPostActions;
-import org.omegaaol.bluereader.reddit.prepared.RedditParsedPost;
-import org.omegaaol.bluereader.reddit.prepared.RedditPreparedPost;
+import org.omegaaol.bluereader.bluesky.api.RedditPostActions;
+import org.omegaaol.bluereader.bluesky.prepared.RedditParsedPost;
+import org.omegaaol.bluereader.bluesky.prepared.RedditPreparedPost;
 import org.omegaaol.bluereader.views.liststatus.ErrorView;
 
 import java.io.IOException;

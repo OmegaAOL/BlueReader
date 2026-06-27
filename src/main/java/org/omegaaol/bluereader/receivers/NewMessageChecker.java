@@ -48,14 +48,13 @@ import org.omegaaol.bluereader.common.SharedPrefsWrapper;
 import org.omegaaol.bluereader.common.datastream.SeekableInputStream;
 import org.omegaaol.bluereader.common.time.TimestampUTC;
 import org.omegaaol.bluereader.http.FailedRequestBody;
-import org.omegaaol.bluereader.receivers.announcements.AnnouncementDownloader;
-import org.omegaaol.bluereader.reddit.kthings.JsonUtils;
-import org.omegaaol.bluereader.reddit.kthings.RedditComment;
-import org.omegaaol.bluereader.reddit.kthings.RedditIdAndType;
-import org.omegaaol.bluereader.reddit.kthings.RedditListing;
-import org.omegaaol.bluereader.reddit.kthings.RedditMessage;
-import org.omegaaol.bluereader.reddit.kthings.RedditThing;
-import org.omegaaol.bluereader.reddit.kthings.UrlEncodedString;
+import org.omegaaol.bluereader.bluesky.kthings.JsonUtils;
+import org.omegaaol.bluereader.bluesky.kthings.RedditComment;
+import org.omegaaol.bluereader.bluesky.kthings.RedditIdAndType;
+import org.omegaaol.bluereader.bluesky.kthings.RedditListing;
+import org.omegaaol.bluereader.bluesky.kthings.RedditMessage;
+import org.omegaaol.bluereader.bluesky.kthings.RedditThing;
+import org.omegaaol.bluereader.bluesky.kthings.UrlEncodedString;
 
 import java.io.IOException;
 import java.net.URI;
@@ -188,7 +187,7 @@ public class NewMessageChecker extends BroadcastReceiver {
 														message.getAuthor(),
 														UrlEncodedString::getDecoded),
 												General.mapIfNotNull(
-														message.getSubreddit_name_prefixed(),
+														message.getFeed_name_prefixed(),
 														UrlEncodedString::getDecoded),
 												unknownUser));
 

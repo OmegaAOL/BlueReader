@@ -17,12 +17,10 @@
 
 package org.omegaaol.bluereader.common
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.net.ConnectivityManager
@@ -48,7 +46,7 @@ import org.omegaaol.bluereader.common.PrefsUtility.AppearanceTwopane
 import org.omegaaol.bluereader.fragments.AccountListDialog
 import org.omegaaol.bluereader.fragments.ErrorPropertiesDialog
 import org.omegaaol.bluereader.http.FailedRequestBody
-import org.omegaaol.bluereader.reddit.APIResponseHandler.APIFailureType
+import org.omegaaol.bluereader.bluesky.APIResponseHandler.APIFailureType
 import java.io.*
 import java.net.URI
 import java.nio.charset.Charset
@@ -421,9 +419,9 @@ object General {
                 message = R.string.error_bad_captcha_message
             }
 
-            APIFailureType.SUBREDDIT_REQUIRED -> {
-                title = R.string.error_subreddit_required_title
-                message = R.string.error_subreddit_required_message
+            APIFailureType.FEED_REQUIRED -> {
+                title = R.string.error_feed_required_title
+                message = R.string.error_feed_required_message
             }
 
             APIFailureType.URL_REQUIRED -> {

@@ -29,13 +29,13 @@ import org.omegaaol.bluereader.common.LinkHandler;
 import org.omegaaol.bluereader.common.PrefsUtility;
 import org.omegaaol.bluereader.common.RRError;
 import org.omegaaol.bluereader.fragments.postsubmit.PostSubmitContentFragment;
-import org.omegaaol.bluereader.fragments.postsubmit.PostSubmitSubredditSelectionFragment;
-import org.omegaaol.bluereader.reddit.things.InvalidSubredditNameException;
-import org.omegaaol.bluereader.reddit.things.SubredditCanonicalId;
+import org.omegaaol.bluereader.fragments.postsubmit.PostSubmitFeedSelectionFragment;
+import org.omegaaol.bluereader.bluesky.things.InvalidFeedNameException;
+import org.omegaaol.bluereader.bluesky.things.FeedCanonicalId;
 
 
 public class PostSubmitActivity extends BaseActivity implements
-		PostSubmitSubredditSelectionFragment.Listener,
+		PostSubmitFeedSelectionFragment.Listener,
 		PostSubmitContentFragment.Listener {
 
 	@NonNull private static final String TAG = "PostSubmitActivity";
@@ -50,20 +50,20 @@ public class PostSubmitActivity extends BaseActivity implements
 
 		super.onCreate(savedInstanceState);
 
-		SubredditCanonicalId intentSubreddit = null;
+		FeedCanonicalId intentFeed = null;
 
 		final Intent intent = getIntent();
 
 		if(intent != null) {
 
-			final String subreddit = intent.getStringExtra("subreddit");
+			final String feed = intent.getStringExtra("feed");
 
-			if(subreddit != null) {
+			if(feed != null) {
 				try {
-					intentSubreddit = new SubredditCanonicalId(subreddit);
+					intentFeed = new FeedCanonicalId(feed);
 
-				} catch(final InvalidSubredditNameException e) {
-					Log.e(TAG, "Invalid subreddit name", e);
+				} catch(final InvalidFeedNameException e) {
+					Log.e(TAG, "Invalid feed name", e);
 				}
 			}
 
@@ -79,8 +79,8 @@ public class PostSubmitActivity extends BaseActivity implements
 				.setReorderingAllowed(false)
 				.add(
 						R.id.single_fragment_container,
-						PostSubmitSubredditSelectionFragment.class,
-						new PostSubmitSubredditSelectionFragment.Args(intentSubreddit).toBundle())
+						PostSubmitFeedSelectionFragment.class,
+						new PostSubmitFeedSelectionFragment.Args(intentFeed).toBundle())
 				.commit();
 	}
 
@@ -92,9 +92,9 @@ public class PostSubmitActivity extends BaseActivity implements
 	}
 
 	@Override
-	public void onSubredditSelected(
+	public void onFeedSelected(
 			@NonNull final String username,
-			@NonNull final SubredditCanonicalId subreddit) {
+			@NonNull final FeedCanonicalId feed) {
 
 		getSupportFragmentManager().beginTransaction()
 				.setReorderingAllowed(false)
@@ -103,9 +103,9 @@ public class PostSubmitActivity extends BaseActivity implements
 						PostSubmitContentFragment.class,
 						new PostSubmitContentFragment.Args(
 								username,
-								subreddit,
+								feed,
 								mIntentUrl).toBundle())
-				.addToBackStack("Subreddit selected")
+				.addToBackStack("Feed selected")
 				.commit();
 	}
 
@@ -126,21 +126,21 @@ public class PostSubmitActivity extends BaseActivity implements
 	}
 
 	@Override
-	public void onContentFragmentSubredditDoesNotExist() {
+	public void onContentFragmentFeedDoesNotExist() {
 
 		onBackPressed();
 
 		final Context applicationContext = getApplicationContext();
 
 		General.showResultDialog(this, new RRError(
-				applicationContext.getString(R.string.error_subreddit_does_not_exist_title),
-				applicationContext.getString(R.string.error_subreddit_does_not_exist_message),
+				applicationContext.getString(R.string.error_feed_does_not_exist_title),
+				applicationContext.getString(R.string.error_feed_does_not_exist_message),
 				false,
 				new RuntimeException()));
 	}
 
 	@Override
-	public void onContentFragmentSubredditPermissionDenied() {
+	public void onContentFragmentFeedPermissionDenied() {
 
 		onBackPressed();
 
@@ -148,9 +148,9 @@ public class PostSubmitActivity extends BaseActivity implements
 
 		General.showResultDialog(this, new RRError(
 				applicationContext.getString(
-						R.string.error_subreddit_info_permission_denied_title),
+						R.string.error_feed_info_permission_denied_title),
 				applicationContext.getString(
-						R.string.error_subreddit_info_permission_denied_message),
+						R.string.error_feed_info_permission_denied_message),
 				false,
 				new RuntimeException()));
 	}

@@ -1,0 +1,323 @@
+/*******************************************************************************
+ * This file is part of BlueReader.
+ *
+ * BlueReader is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BlueReader is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with BlueReader.  If not, see <http://www.gnu.org/licenses/>.
+ ******************************************************************************/
+
+package org.omegaaol.bluereader.fragments.postsubmit;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import org.omegaaol.bluereader.R;
+import org.omegaaol.bluereader.account.RedditAccount;
+import org.omegaaol.bluereader.account.RedditAccountManager;
+import org.omegaaol.bluereader.common.AndroidCommon;
+import org.omegaaol.bluereader.common.General;
+import org.omegaaol.bluereader.common.RRError;
+import org.omegaaol.bluereader.common.StringUtils;
+import org.omegaaol.bluereader.common.streams.Stream;
+import org.omegaaol.bluereader.bluesky.FeedHistory;
+import org.omegaaol.bluereader.bluesky.things.InvalidFeedNameException;
+import org.omegaaol.bluereader.bluesky.things.FeedCanonicalId;
+import org.omegaaol.bluereader.viewholders.VH1Text;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Objects;
+
+public class PostSubmitFeedSelectionFragment extends Fragment {
+
+	public static class Args {
+
+		@NonNull private static final String KEY_FEED = "feed";
+
+		@Nullable public final FeedCanonicalId feed;
+
+		public Args(@Nullable final FeedCanonicalId feed) {
+			this.feed = feed;
+		}
+
+		@NonNull
+		public Bundle toBundle() {
+			final Bundle result = new Bundle(1);
+			if(feed != null) {
+				result.putParcelable(KEY_FEED, feed);
+			}
+			return result;
+		}
+
+		@NonNull
+		public static Args fromBundle(@NonNull final Bundle bundle) {
+			return new Args(bundle.getParcelable(KEY_FEED));
+		}
+	}
+
+	public interface Listener {
+
+		void onFeedSelected(
+				@NonNull String username,
+				@NonNull FeedCanonicalId feed);
+
+		void onNotLoggedIn();
+	}
+
+	private static class AutocompleteEntry {
+
+		public final long listId;
+		@NonNull public final String nameWithoutPrefix;
+
+		private AutocompleteEntry(final long listId, @NonNull final String nameWithoutPrefix) {
+			this.listId = listId;
+			this.nameWithoutPrefix = nameWithoutPrefix;
+		}
+	}
+
+	private class AutocompleteAdapter extends RecyclerView.Adapter<VH1Text> {
+
+		@NonNull private final ArrayList<AutocompleteEntry>
+				mAllSuggestions = new ArrayList<>();
+
+		@NonNull private final ArrayList<AutocompleteEntry> mCurrentSuggestions = new ArrayList<>();
+
+		public AutocompleteAdapter(final Context context) {
+
+			super();
+
+			setHasStableIds(true);
+
+			final ArrayList<FeedCanonicalId> allSuggestions
+					= FeedHistory.getFeedsSorted(
+					RedditAccountManager.getInstance(context)
+							.getDefaultAccount());
+
+			for(int i = 0; i < allSuggestions.size(); i++) {
+				mAllSuggestions.add(new AutocompleteEntry(
+						i,
+						allSuggestions.get(i).toString()));
+			}
+
+			mCurrentSuggestions.addAll(mAllSuggestions);
+		}
+
+		@SuppressLint("NotifyDataSetChanged")
+		public void updateSuggestions() {
+
+			mCurrentSuggestions.clear();
+
+			final String currentText = StringUtils.asciiLowercase(
+					mFeedBox.getText().toString().trim());
+
+			final String searchString = currentText;
+
+			final ArrayList<AutocompleteEntry> possibleSuggestions
+					= new ArrayList<>(mAllSuggestions);
+
+			{
+				final Iterator<AutocompleteEntry> it = possibleSuggestions.iterator();
+
+				while(it.hasNext()) {
+					final AutocompleteEntry entry = it.next();
+
+					if(entry.nameWithoutPrefix.startsWith(searchString)) {
+						mCurrentSuggestions.add(entry);
+						it.remove();
+					}
+				}
+			}
+
+			{
+				final Iterator<AutocompleteEntry> it = possibleSuggestions.iterator();
+
+				while(it.hasNext()) {
+					final AutocompleteEntry entry = it.next();
+
+					if(entry.nameWithoutPrefix.contains(searchString)) {
+						mCurrentSuggestions.add(entry);
+						it.remove();
+					}
+				}
+			}
+
+			mCurrentSuggestions.addAll(possibleSuggestions);
+
+			notifyDataSetChanged();
+			scrollToTop();
+		}
+
+		@NonNull
+		@Override
+		public VH1Text onCreateViewHolder(@NonNull final ViewGroup viewGroup, final int i) {
+
+			final View view = LayoutInflater.from(viewGroup.getContext())
+					.inflate(R.layout.list_item_1_text, viewGroup, false);
+
+			final VH1Text result = new VH1Text(view);
+
+			view.setOnClickListener(v -> mFeedBox.setText(result.text.getText()));
+
+			return result;
+		}
+
+		@Override
+		public void onBindViewHolder(
+				@NonNull final VH1Text viewHolder,
+				final int i) {
+
+			viewHolder.text.setText(mCurrentSuggestions.get(i).nameWithoutPrefix);
+		}
+
+		@Override
+		public int getItemCount() {
+			return mCurrentSuggestions.size();
+		}
+
+		@Override
+		public long getItemId(final int position) {
+			return mCurrentSuggestions.get(position).listId;
+		}
+	}
+
+	private Spinner mUsernameSpinner;
+	private EditText mFeedBox;
+
+	private RecyclerView mAutocompleteSuggestions;
+	private RecyclerView.LayoutManager mAutocompleteSuggestionsLayout;
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		final FragmentActivity activity = getActivity();
+
+		if(activity != null) {
+			activity.setTitle(R.string.feed_selector_title);
+		}
+	}
+
+	@Nullable
+	@Override
+	public View onCreateView(
+			@NonNull final LayoutInflater inflater,
+			@Nullable final ViewGroup container,
+			@Nullable final Bundle savedInstanceState) {
+
+		final Args args = Args.fromBundle(requireArguments());
+
+		final Context context = Objects.requireNonNull(container).getContext();
+
+		final View root = inflater.inflate(R.layout.feed_selection, container, false);
+
+		mUsernameSpinner = root.findViewById(R.id.feed_selection_account);
+		mFeedBox = root.findViewById(R.id.feed_selection_textbox);
+
+		mAutocompleteSuggestions = root.findViewById(R.id.feed_selection_autocomplete);
+		mAutocompleteSuggestionsLayout
+				= new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
+
+		mAutocompleteSuggestions.setLayoutManager(mAutocompleteSuggestionsLayout);
+
+		final AutocompleteAdapter adapter = new AutocompleteAdapter(context);
+
+		mAutocompleteSuggestions.setAdapter(adapter);
+
+		AndroidCommon.onTextChanged(mFeedBox, adapter::updateSuggestions);
+		AndroidCommon.onSelectedItemChanged(mUsernameSpinner, adapter::updateSuggestions);
+
+		final RedditAccountManager accountManager = RedditAccountManager.getInstance(context);
+
+		final ArrayList<String> usernames = new ArrayList<>();
+
+		Stream.from(accountManager.getAccounts())
+				.filter(RedditAccount::isNotAnonymous)
+				.forEach(account -> usernames.add(account.username));
+
+		if(usernames.isEmpty()) {
+			final FragmentActivity activity = getActivity();
+
+			if(activity != null) {
+				((Listener)activity).onNotLoggedIn();
+			}
+
+			return null;
+		}
+
+		mUsernameSpinner.setAdapter(new ArrayAdapter<>(
+				context,
+				android.R.layout.simple_list_item_1,
+				usernames));
+
+		{
+			final Button continueButton
+					= root.findViewById(R.id.feed_selection_button_continue);
+
+			continueButton.setOnClickListener(v -> {
+
+				final FragmentActivity activity = getActivity();
+
+				if(activity == null) {
+					return;
+				}
+
+				final FeedCanonicalId feed;
+
+
+				try {
+					feed = new FeedCanonicalId(mFeedBox.getText().toString());
+
+				} catch(final InvalidFeedNameException e) {
+
+					final Context applicationContext = activity.getApplicationContext();
+
+					General.showResultDialog((AppCompatActivity)activity, new RRError(
+							applicationContext.getString(R.string.invalid_feed_name),
+							applicationContext.getString(R.string.invalid_feed_name_message),
+							false,
+							e));
+
+					return;
+				}
+
+				((Listener)activity).onFeedSelected(
+						(String)mUsernameSpinner.getSelectedItem(),
+						feed);
+			});
+		}
+
+		if(args.feed != null) {
+			mFeedBox.setText(args.feed.toString());
+			adapter.updateSuggestions();
+		}
+
+		return root;
+	}
+
+	private void scrollToTop() {
+		mAutocompleteSuggestionsLayout.smoothScrollToPosition(mAutocompleteSuggestions, null, 0);
+	}
+}

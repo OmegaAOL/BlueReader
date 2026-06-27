@@ -23,8 +23,8 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import org.omegaaol.bluereader.R;
 import org.omegaaol.bluereader.activities.BaseActivity;
-import org.omegaaol.bluereader.reddit.kthings.RedditFieldEdited;
-import org.omegaaol.bluereader.reddit.kthings.RedditPost;
+import org.omegaaol.bluereader.bluesky.kthings.RedditFieldEdited;
+import org.omegaaol.bluereader.bluesky.kthings.RedditPost;
 
 public final class PostPropertiesDialog extends PropertiesDialog {
 
@@ -91,8 +91,8 @@ public final class PostPropertiesDialog extends PropertiesDialog {
 
 		items.addView(propView(
 				context,
-				R.string.props_subreddit,
-				post.getSubreddit().getDecoded(),
+				R.string.props_feed,
+				post.getFeed().getDecoded(),
 				false));
 		items.addView(propView(
 				context,

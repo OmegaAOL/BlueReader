@@ -23,7 +23,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import org.omegaaol.bluereader.R;
 import org.omegaaol.bluereader.common.LinkHandler;
-import org.omegaaol.bluereader.reddit.url.PostCommentListingURL;
+import org.omegaaol.bluereader.bluesky.url.PostCommentListingURL;
 
 public final class CommentSubThreadView extends StatusListItemView {
 

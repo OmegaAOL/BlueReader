@@ -32,9 +32,9 @@ import org.omegaaol.bluereader.common.Fonts;
 import org.omegaaol.bluereader.common.General;
 import org.omegaaol.bluereader.common.LinkHandler;
 import org.omegaaol.bluereader.common.PrefsUtility;
-import org.omegaaol.bluereader.reddit.api.RedditPostActions;
-import org.omegaaol.bluereader.reddit.prepared.RedditChangeDataManager;
-import org.omegaaol.bluereader.reddit.prepared.RedditPreparedPost;
+import org.omegaaol.bluereader.bluesky.api.RedditPostActions;
+import org.omegaaol.bluereader.bluesky.prepared.RedditChangeDataManager;
+import org.omegaaol.bluereader.bluesky.prepared.RedditPreparedPost;
 
 public class RedditPostHeaderView extends LinearLayout {
 
@@ -140,9 +140,9 @@ public class RedditPostHeaderView extends LinearLayout {
 				}
 
 				final ImageButton buttonLike =
-						buttons.findViewById(R.id.post_toolbar_botton_add_upvote);
+						buttons.findViewById(R.id.post_toolbar_botton_add_like);
 				final ImageButton buttonRemoveLike =
-						buttons.findViewById(R.id.post_toolbar_botton_remove_upvote);
+						buttons.findViewById(R.id.post_toolbar_botton_remove_like);
 				final ImageButton buttonRepost = //fix
 						buttons.findViewById(R.id.post_toolbar_botton_add_downvote);
 				final ImageButton buttonRemoveRepost =
@@ -182,13 +182,13 @@ public class RedditPostHeaderView extends LinearLayout {
 					subtitle.setContentDescription(
 							post.buildAccessibilitySubtitle(activity, true));
 
-					final boolean isUpvoted = changeDataManager.isUpvoted(
+					final boolean isLiked = changeDataManager.isLiked(
 							post.src.getIdAndType());
 
 					final boolean isDownvoted = changeDataManager.isDownvoted(
 							post.src.getIdAndType());
 
-					if(isUpvoted) {
+					if(isLiked) {
 						buttonLike.setVisibility(GONE);
 						buttonRemoveLike.setVisibility(VISIBLE);
 						buttonRepost.setVisibility(VISIBLE);

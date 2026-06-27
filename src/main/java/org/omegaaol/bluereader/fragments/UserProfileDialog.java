@@ -52,10 +52,10 @@ import org.omegaaol.bluereader.common.Priority;
 import org.omegaaol.bluereader.common.RRError;
 import org.omegaaol.bluereader.common.datastream.SeekableInputStream;
 import org.omegaaol.bluereader.common.time.TimestampUTC;
-import org.omegaaol.bluereader.reddit.APIResponseHandler;
-import org.omegaaol.bluereader.reddit.RedditAPI;
-import org.omegaaol.bluereader.reddit.things.RedditUser;
-import org.omegaaol.bluereader.reddit.url.UserPostListingURL;
+import org.omegaaol.bluereader.bluesky.APIResponseHandler;
+import org.omegaaol.bluereader.bluesky.RedditAPI;
+import org.omegaaol.bluereader.bluesky.things.RedditUser;
+import org.omegaaol.bluereader.bluesky.url.UserPostListingURL;
 import org.omegaaol.bluereader.views.liststatus.ErrorView;
 import org.omegaaol.bluereader.views.liststatus.LoadingView;
 

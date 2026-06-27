@@ -67,7 +67,7 @@ dependencies {
 	implementation("com.google.android.exoplayer:exoplayer-core:2.9.3")
 	implementation("com.google.android.exoplayer:exoplayer-ui:2.9.3")
 	//noinspection Aligned16KB
-	implementation("com.github.luben:zstd-jni:1.5.1-1")
+	implementation("com.github.luben:zstd-jni:1.5.5-11")
 
 	testImplementation("junit:junit:4.13.2")
 

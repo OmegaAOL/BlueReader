@@ -465,7 +465,7 @@ public abstract class BaseActivity extends AppCompatActivity
 
 		if(key.startsWith(getString(R.string.pref_menus_appbar_prefix))
 				|| key.equals(getString(R.string.pref_menus_quick_account_switcher_key))
-				|| key.equals(getString(R.string.pref_pinned_subreddits_key))) {
+				|| key.equals(getString(R.string.pref_pinned_feeds_key))) {
 			invalidateOptionsMenu();
 		}
 

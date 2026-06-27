@@ -17,12 +17,10 @@
 
 package org.omegaaol.bluereader.cache;
 
-import android.app.Activity;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import org.omegaaol.bluereader.activities.BugReportActivity;
 import org.omegaaol.bluereader.common.Constants;
-import org.omegaaol.bluereader.common.DialogUtils;
 import org.omegaaol.bluereader.common.General;
 import org.omegaaol.bluereader.common.Optional;
 import org.omegaaol.bluereader.common.PrioritisedCachedThreadPool;
@@ -33,7 +31,7 @@ import org.omegaaol.bluereader.common.time.TimestampUTC;
 import org.omegaaol.bluereader.http.FailedRequestBody;
 import org.omegaaol.bluereader.http.HTTPBackend;
 import org.omegaaol.bluereader.image.RedgifsAPIV2;
-import org.omegaaol.bluereader.reddit.api.RedditOAuth;
+import org.omegaaol.bluereader.bluesky.api.RedditOAuth;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,6 +48,18 @@ public final class CacheDownload extends PrioritisedCachedThreadPool.Task {
 
 	private volatile boolean mCancelled = false;
 	private static final AtomicBoolean resetUserCredentials = new AtomicBoolean(false);
+
+	private static final boolean ZSTD_AVAILABLE;
+	static {
+		boolean ok = false;
+		try {
+			com.github.luben.zstd.Zstd.compress(new byte[0]);
+			ok = true;
+		} catch(final Throwable t) {
+			Log.w(TAG, "zstd-jni not available on this arch, falling back to no compression", t);
+		}
+		ZSTD_AVAILABLE = ok;
+	}
 	private final HTTPBackend.Request mRequest;
 
 	public CacheDownload(
@@ -285,12 +295,14 @@ public final class CacheDownload extends PrioritisedCachedThreadPool.Task {
 						case Constants.FileType.COMMENT_LIST:
 						case Constants.FileType.IMAGE_INFO:
 						case Constants.FileType.INBOX_LIST:
-						case Constants.FileType.MULTIREDDIT_LIST:
+						case Constants.FileType.LIST_LIST:
 						case Constants.FileType.POST_LIST:
-						case Constants.FileType.SUBREDDIT_ABOUT:
-						case Constants.FileType.SUBREDDIT_LIST:
+						case Constants.FileType.FEED_ABOUT:
+						case Constants.FileType.FEED_LIST:
 						case Constants.FileType.USER_ABOUT:
-							cacheCompressionType = CacheCompressionType.ZSTD;
+							cacheCompressionType = ZSTD_AVAILABLE
+									? CacheCompressionType.ZSTD
+									: CacheCompressionType.NONE;
 							break;
 
 						default:

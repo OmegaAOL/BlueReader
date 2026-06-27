@@ -23,13 +23,13 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import org.omegaaol.bluereader.common.PrefsUtility;
 import org.omegaaol.bluereader.fragments.PostListingFragment;
-import org.omegaaol.bluereader.reddit.PostSort;
-import org.omegaaol.bluereader.reddit.things.InvalidSubredditNameException;
-import org.omegaaol.bluereader.reddit.things.SubredditCanonicalId;
-import org.omegaaol.bluereader.reddit.url.PostListingURL;
-import org.omegaaol.bluereader.reddit.url.RedditURLParser;
-import org.omegaaol.bluereader.reddit.url.SubredditPostListURL;
-import org.omegaaol.bluereader.reddit.url.UserPostListingURL;
+import org.omegaaol.bluereader.bluesky.PostSort;
+import org.omegaaol.bluereader.bluesky.things.InvalidFeedNameException;
+import org.omegaaol.bluereader.bluesky.things.FeedCanonicalId;
+import org.omegaaol.bluereader.bluesky.url.PostListingURL;
+import org.omegaaol.bluereader.bluesky.url.RedditURLParser;
+import org.omegaaol.bluereader.bluesky.url.FeedPostListURL;
+import org.omegaaol.bluereader.bluesky.url.UserPostListingURL;
 
 import java.util.UUID;
 
@@ -49,27 +49,27 @@ public class PostListingController {
 
 	public PostListingController(PostListingURL url, final Context context) {
 
-		if(url.pathType() == RedditURLParser.SUBREDDIT_POST_LISTING_URL) {
-			if(url.asSubredditPostListURL().order == null) {
+		if(url.pathType() == RedditURLParser.FEED_POST_LISTING_URL) {
+			if(url.asFeedPostListURL().order == null) {
 
 				PostSort order = PrefsUtility.pref_behaviour_postsort();
 
 				if(order == PostSort.BEST
-						&& url.asSubredditPostListURL().type
-						!= SubredditPostListURL.Type.FEED_DISCOVER) {
+						&& url.asFeedPostListURL().type
+						!= FeedPostListURL.Type.FEED_DISCOVER) {
 
 					order = PostSort.HOT;
 				}
 
-				//url = url.asSubredditPostListURL().sort(order); // TODO sort
+				//url = url.asFeedPostListURL().sort(order); // TODO sort
 			}
 		} else if(url.pathType() == RedditURLParser.USER_POST_LISTING_URL) {
 			if(url.asUserPostListURL().order == null) {
 				url = url.asUserPostListURL().sort(PrefsUtility.pref_behaviour_user_postsort());
 			}
-		} else if(url.pathType() == RedditURLParser.MULTIREDDIT_POST_LISTING_URL) {
-			if(url.asMultiredditPostListURL().order == null) {
-				url = url.asMultiredditPostListURL()
+		} else if(url.pathType() == RedditURLParser.LIST_POST_LISTING_URL) {
+			if(url.asListPostListURL().order == null) {
+				url = url.asListPostListURL()
 						.sort(PrefsUtility.pref_behaviour_multi_postsort());
 			}
 		}
@@ -81,23 +81,23 @@ public class PostListingController {
 		if(url.pathType() == RedditURLParser.USER_POST_LISTING_URL) {
 			return (url.asUserPostListURL().type == UserPostListingURL.Type.SUBMITTED);
 		}
-		return (url.pathType() == RedditURLParser.SUBREDDIT_POST_LISTING_URL)
-				|| (url.pathType() == RedditURLParser.MULTIREDDIT_POST_LISTING_URL)
+		return (url.pathType() == RedditURLParser.FEED_POST_LISTING_URL)
+				|| (url.pathType() == RedditURLParser.LIST_POST_LISTING_URL)
 				|| (url.pathType() == RedditURLParser.SEARCH_POST_LISTING_URL);
 	}
 
 	public boolean isFrontPage() {
-		return url.pathType() == RedditURLParser.SUBREDDIT_POST_LISTING_URL
-				&& url.asSubredditPostListURL().type
-				== SubredditPostListURL.Type.FEED_DISCOVER;
+		return url.pathType() == RedditURLParser.FEED_POST_LISTING_URL
+				&& url.asFeedPostListURL().type
+				== FeedPostListURL.Type.FEED_DISCOVER;
 	}
 
 	public final void setSort(final PostSort order) {
-		if(url.pathType() == RedditURLParser.SUBREDDIT_POST_LISTING_URL) {
-			// url = url.asSubredditPostListURL().sort(order); // TODO sort
+		if(url.pathType() == RedditURLParser.FEED_POST_LISTING_URL) {
+			// url = url.asFeedPostListURL().sort(order); // TODO sort
 
-		} else if(url.pathType() == RedditURLParser.MULTIREDDIT_POST_LISTING_URL) {
-			url = url.asMultiredditPostListURL().sort(order);
+		} else if(url.pathType() == RedditURLParser.LIST_POST_LISTING_URL) {
+			url = url.asListPostListURL().sort(order);
 
 		} else if(url.pathType() == RedditURLParser.SEARCH_POST_LISTING_URL) {
 			url = url.asSearchPostListURL().sort(order);
@@ -112,12 +112,12 @@ public class PostListingController {
 
 	public final PostSort getSort() {
 
-		if(url.pathType() == RedditURLParser.SUBREDDIT_POST_LISTING_URL) {
-			return url.asSubredditPostListURL().order;
+		if(url.pathType() == RedditURLParser.FEED_POST_LISTING_URL) {
+			return url.asFeedPostListURL().order;
 		}
 
-		if(url.pathType() == RedditURLParser.MULTIREDDIT_POST_LISTING_URL) {
-			return url.asMultiredditPostListURL().order;
+		if(url.pathType() == RedditURLParser.LIST_POST_LISTING_URL) {
+			return url.asListPostListURL().order;
 		}
 
 		if(url.pathType() == RedditURLParser.SEARCH_POST_LISTING_URL) {
@@ -150,58 +150,58 @@ public class PostListingController {
 				force);
 	}
 
-	public final boolean isSubreddit() {
-		return url.pathType() == RedditURLParser.SUBREDDIT_POST_LISTING_URL
-				&& url.asSubredditPostListURL().type
-				== SubredditPostListURL.Type.SUBREDDIT;
+	public final boolean isFeed() {
+		return url.pathType() == RedditURLParser.FEED_POST_LISTING_URL
+				&& url.asFeedPostListURL().type
+				== FeedPostListURL.Type.FEED;
 	}
 
-	public final boolean isSubredditCombination() {
-		return url.pathType() == RedditURLParser.SUBREDDIT_POST_LISTING_URL
-				&& url.asSubredditPostListURL().type
-				== SubredditPostListURL.Type.SUBREDDIT_COMBINATION;
+	public final boolean isFeedCombination() {
+		return url.pathType() == RedditURLParser.FEED_POST_LISTING_URL
+				&& url.asFeedPostListURL().type
+				== FeedPostListURL.Type.FEED_COMBINATION;
 	}
 
-	public final boolean isRandomSubreddit() {
-		return url.pathType() == RedditURLParser.SUBREDDIT_POST_LISTING_URL
-				&& url.asSubredditPostListURL().type == SubredditPostListURL.Type.RANDOM;
+	public final boolean isRandomFeed() {
+		return url.pathType() == RedditURLParser.FEED_POST_LISTING_URL
+				&& url.asFeedPostListURL().type == FeedPostListURL.Type.RANDOM;
 	}
 
-	public final boolean isMultireddit() {
-		return url.pathType() == RedditURLParser.MULTIREDDIT_POST_LISTING_URL;
+	public final boolean isList() {
+		return url.pathType() == RedditURLParser.LIST_POST_LISTING_URL;
 	}
 
 	public final boolean isSearchResults() {
 		return url.pathType() == RedditURLParser.SEARCH_POST_LISTING_URL;
 	}
 
-	public final boolean isSubredditSearchResults() {
-		return isSearchResults() && url.asSearchPostListURL().subreddit != null;
+	public final boolean isFeedSearchResults() {
+		return isSearchResults() && url.asSearchPostListURL().feed != null;
 	}
 
 	public final boolean isUserPostListing() {
 		return url.pathType() == RedditURLParser.USER_POST_LISTING_URL;
 	}
 
-	public final SubredditCanonicalId subredditCanonicalName() {
+	public final FeedCanonicalId feedCanonicalName() {
 
-		if(url.pathType() == RedditURLParser.SUBREDDIT_POST_LISTING_URL
-				&& (url.asSubredditPostListURL().type
-				== SubredditPostListURL.Type.SUBREDDIT
-				|| url.asSubredditPostListURL().type
-				== SubredditPostListURL.Type.RANDOM
-				|| url.asSubredditPostListURL().type
-				== SubredditPostListURL.Type.SUBREDDIT_COMBINATION)) {
+		if(url.pathType() == RedditURLParser.FEED_POST_LISTING_URL
+				&& (url.asFeedPostListURL().type
+				== FeedPostListURL.Type.FEED
+				|| url.asFeedPostListURL().type
+				== FeedPostListURL.Type.RANDOM
+				|| url.asFeedPostListURL().type
+				== FeedPostListURL.Type.FEED_COMBINATION)) {
 			try {
-				return new SubredditCanonicalId(url.asSubredditPostListURL().subreddit);
-			} catch(final InvalidSubredditNameException e) {
+				return new FeedCanonicalId(url.asFeedPostListURL().feed);
+			} catch(final InvalidFeedNameException e) {
 				throw new RuntimeException(e);
 			}
 		} else if(url.pathType() == RedditURLParser.SEARCH_POST_LISTING_URL
-				&& url.asSearchPostListURL().subreddit != null) {
+				&& url.asSearchPostListURL().feed != null) {
 			try {
-				return new SubredditCanonicalId(url.asSearchPostListURL().subreddit);
-			} catch(final InvalidSubredditNameException e) {
+				return new FeedCanonicalId(url.asSearchPostListURL().feed);
+			} catch(final InvalidFeedNameException e) {
 				throw new RuntimeException(e);
 			}
 		}
@@ -209,17 +209,17 @@ public class PostListingController {
 		return null;
 	}
 
-	public final String multiredditName() {
-		if(url.pathType() == RedditURLParser.MULTIREDDIT_POST_LISTING_URL) {
-			return url.asMultiredditPostListURL().name;
+	public final String listName() {
+		if(url.pathType() == RedditURLParser.LIST_POST_LISTING_URL) {
+			return url.asListPostListURL().name;
 		}
 
 		return null;
 	}
 
-	public final String multiredditUsername() {
-		if(url.pathType() == RedditURLParser.MULTIREDDIT_POST_LISTING_URL) {
-			return url.asMultiredditPostListURL().username;
+	public final String listUsername() {
+		if(url.pathType() == RedditURLParser.LIST_POST_LISTING_URL) {
+			return url.asListPostListURL().username;
 		}
 
 		return null;

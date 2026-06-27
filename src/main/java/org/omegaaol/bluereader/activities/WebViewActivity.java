@@ -29,9 +29,9 @@ import org.omegaaol.bluereader.common.General;
 import org.omegaaol.bluereader.common.LinkHandler;
 import org.omegaaol.bluereader.common.PrefsUtility;
 import org.omegaaol.bluereader.fragments.WebViewFragment;
-import org.omegaaol.bluereader.reddit.kthings.RedditPost;
-import org.omegaaol.bluereader.reddit.prepared.RedditPreparedPost;
-import org.omegaaol.bluereader.reddit.url.PostCommentListingURL;
+import org.omegaaol.bluereader.bluesky.kthings.RedditPost;
+import org.omegaaol.bluereader.bluesky.prepared.RedditPreparedPost;
+import org.omegaaol.bluereader.bluesky.url.PostCommentListingURL;
 import org.omegaaol.bluereader.views.RedditPostView;
 
 public class WebViewActivity extends BaseActivity

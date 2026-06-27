@@ -58,10 +58,10 @@ import org.omegaaol.bluereader.common.Optional;
 import org.omegaaol.bluereader.common.RRError;
 import org.omegaaol.bluereader.common.StringUtils;
 import org.omegaaol.bluereader.fragments.MarkdownPreviewDialog;
-import org.omegaaol.bluereader.reddit.APIResponseHandler;
-import org.omegaaol.bluereader.reddit.RedditAPI;
-import org.omegaaol.bluereader.reddit.RedditFlairChoice;
-import org.omegaaol.bluereader.reddit.things.SubredditCanonicalId;
+import org.omegaaol.bluereader.bluesky.APIResponseHandler;
+import org.omegaaol.bluereader.bluesky.RedditAPI;
+import org.omegaaol.bluereader.bluesky.RedditFlairChoice;
+import org.omegaaol.bluereader.bluesky.things.FeedCanonicalId;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -75,19 +75,19 @@ public class PostSubmitContentFragment extends Fragment {
 	public static class Args {
 
 		@NonNull private static final String KEY_USER = "user";
-		@NonNull private static final String KEY_SUBREDDIT = "subreddit";
+		@NonNull private static final String KEY_FEED = "feed";
 		@NonNull private static final String KEY_URL = "url";
 
 		@NonNull public final String username;
-		@NonNull public final SubredditCanonicalId subreddit;
+		@NonNull public final FeedCanonicalId feed;
 		@Nullable public final String url;
 
 		public Args(
 				@NonNull final String username,
-				@NonNull final SubredditCanonicalId subreddit,
+				@NonNull final FeedCanonicalId feed,
 				@Nullable final String url) {
 			this.username = username;
-			this.subreddit = subreddit;
+			this.feed = feed;
 			this.url = url;
 		}
 
@@ -95,7 +95,7 @@ public class PostSubmitContentFragment extends Fragment {
 		public Bundle toBundle() {
 			final Bundle result = new Bundle(3);
 			result.putString(KEY_USER, username);
-			result.putParcelable(KEY_SUBREDDIT, subreddit);
+			result.putParcelable(KEY_FEED, feed);
 			result.putString(KEY_URL, url);
 
 			return result;
@@ -105,15 +105,15 @@ public class PostSubmitContentFragment extends Fragment {
 		public static Args fromBundle(@NonNull final Bundle bundle) {
 			return new Args(
 					bundle.getString(KEY_USER),
-					bundle.getParcelable(KEY_SUBREDDIT),
+					bundle.getParcelable(KEY_FEED),
 					bundle.getString(KEY_URL));
 		}
 	}
 
 	public interface Listener {
 		void onContentFragmentSubmissionSuccess(@Nullable String redirectUrl);
-		void onContentFragmentSubredditDoesNotExist();
-		void onContentFragmentSubredditPermissionDenied();
+		void onContentFragmentFeedDoesNotExist();
+		void onContentFragmentFeedPermissionDenied();
 		void onContentFragmentFlairRequestError(@NonNull RRError error);
 	}
 
@@ -133,7 +133,7 @@ public class PostSubmitContentFragment extends Fragment {
 	private Context mContext;
 
 	private RedditAccount mSelectedAccount;
-	private SubredditCanonicalId mSelectedSubreddit;
+	private FeedCanonicalId mSelectedFeed;
 
 	private View mLoadingSpinnerView;
 	private View mMainControls;
@@ -200,7 +200,7 @@ public class PostSubmitContentFragment extends Fragment {
 			return null;
 		}
 
-		mSelectedSubreddit = args.subreddit;
+		mSelectedFeed = args.feed;
 
 		final View root = inflater.inflate(R.layout.post_submit, container, false);
 
@@ -229,7 +229,7 @@ public class PostSubmitContentFragment extends Fragment {
 		heading.setText(String.format(
 				Locale.US,
 				getString(R.string.post_submit_heading),
-				args.subreddit.toString(),
+				args.feed.toString(),
 				args.username));
 
 		mTypeSpinner.setAdapter(new ArrayAdapter<>(
@@ -268,7 +268,7 @@ public class PostSubmitContentFragment extends Fragment {
 			}
 		});
 
-		requestSubredditDetails();
+		requestFeedDetails();
 
 		return root;
 	}
@@ -356,13 +356,13 @@ public class PostSubmitContentFragment extends Fragment {
 		}
 	}
 
-	private void requestSubredditDetails() {
+	private void requestFeedDetails() {
 
 		RedditAPI.flairSelectorForNewLink(
 				mContext,
 				CacheManager.getInstance(mContext),
 				mSelectedAccount,
-				mSelectedSubreddit,
+				mSelectedFeed,
 				new RedditAPI.FlairSelectorResponseHandler() {
 					@Override
 					public void onSuccess(@NonNull final Collection<RedditFlairChoice> choices) {
@@ -386,7 +386,7 @@ public class PostSubmitContentFragment extends Fragment {
 					}
 
 					@Override
-					public void onSubredditDoesNotExist() {
+					public void onFeedDoesNotExist() {
 
 						AndroidCommon.runOnUiThread(() -> {
 
@@ -394,12 +394,12 @@ public class PostSubmitContentFragment extends Fragment {
 								return;
 							}
 
-							ifActivityNotNull(Listener::onContentFragmentSubredditDoesNotExist);
+							ifActivityNotNull(Listener::onContentFragmentFeedDoesNotExist);
 						});
 					}
 
 					@Override
-					public void onSubredditPermissionDenied() {
+					public void onFeedPermissionDenied() {
 
 						AndroidCommon.runOnUiThread(() -> {
 
@@ -407,7 +407,7 @@ public class PostSubmitContentFragment extends Fragment {
 								return;
 							}
 
-							ifActivityNotNull(Listener::onContentFragmentSubredditPermissionDenied);
+							ifActivityNotNull(Listener::onContentFragmentFeedPermissionDenied);
 						});
 					}
 
@@ -445,7 +445,7 @@ public class PostSubmitContentFragment extends Fragment {
 
 		if(item.getTitle().equals(getString(R.string.comment_reply_send))) {
 
-			String subreddit = mSelectedSubreddit.toString();
+			String feed = mSelectedFeed.toString();
 			final String postTitle = mTitleEdit.getText().toString();
 			final String text = mTextEdit.getText().toString();
 
@@ -574,7 +574,7 @@ public class PostSubmitContentFragment extends Fragment {
 						handler,
 						mSelectedAccount,
 						isSelfPost,
-						subreddit,
+						feed,
 						postTitle,
 						text,
 						sendRepliesToInbox,

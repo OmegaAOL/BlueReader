@@ -24,10 +24,10 @@ import org.omegaaol.bluereader.activities.OptionsMenuUtility;
 import org.omegaaol.bluereader.common.General;
 import org.omegaaol.bluereader.common.PrefsUtility;
 import org.omegaaol.bluereader.fragments.CommentListingFragment;
-import org.omegaaol.bluereader.reddit.PostCommentSort;
-import org.omegaaol.bluereader.reddit.UserCommentSort;
-import org.omegaaol.bluereader.reddit.url.CommentListingURL;
-import org.omegaaol.bluereader.reddit.url.RedditURLParser;
+import org.omegaaol.bluereader.bluesky.PostCommentSort;
+import org.omegaaol.bluereader.bluesky.UserCommentSort;
+import org.omegaaol.bluereader.bluesky.url.CommentListingURL;
+import org.omegaaol.bluereader.bluesky.url.RedditURLParser;
 
 import java.util.UUID;
 

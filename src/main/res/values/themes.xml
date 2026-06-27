@@ -71,7 +71,7 @@
 		<item name="rrPostTitleReadCol">#909090</item>
 		<item name="rrPostSubtitleCol">#909090</item>
 		<item name="rrPostSubtitleBoldCol">#BBBBBB</item>
-		<item name="rrPostSubtitleUpvoteCol">#FF9B76</item>
+		<item name="rrPostSubtitleLikeCol">#FF9B76</item>
 		<item name="rrPostSubtitleDownvoteCol">#9494FF</item>
 		<item name="rrPostCommentsButtonBackCol">#444444</item>
 		<item name="rrPostCommentsButtonHighlightCol">#777777</item>
@@ -176,7 +176,7 @@
 		<item name="rrPostTitleReadCol">#666666</item>
 		<item name="rrPostSubtitleCol">#777777</item>
 		<item name="rrPostSubtitleBoldCol">#999999</item>
-		<item name="rrPostSubtitleUpvoteCol">#FF9B76</item>
+		<item name="rrPostSubtitleLikeCol">#FF9B76</item>
 		<item name="rrPostSubtitleDownvoteCol">#9494FF</item>
 		<item name="rrPostCommentsButtonBackCol">#444444</item>
 		<item name="rrPostCommentsButtonHighlightCol">#777777</item>
@@ -247,7 +247,7 @@
 		<item name="rrPostTitleReadCol">#909090</item>
 		<item name="rrPostSubtitleCol">#909090</item>
 		<item name="rrPostSubtitleBoldCol">#BBBBBB</item>
-		<item name="rrPostSubtitleUpvoteCol">#FF9B76</item>
+		<item name="rrPostSubtitleLikeCol">#FF9B76</item>
 		<item name="rrPostSubtitleDownvoteCol">#9494FF</item>
 		<item name="rrPostCommentsButtonBackCol">#000000</item>
 		<item name="rrPostCommentsButtonHighlightCol">#777777</item>
@@ -344,7 +344,7 @@
 		<item name="rrPostTitleReadCol">#909090</item>
 		<item name="rrPostSubtitleCol">#909090</item>
 		<item name="rrPostSubtitleBoldCol">#666666</item>
-		<item name="rrPostSubtitleUpvoteCol">#FF9B76</item>
+		<item name="rrPostSubtitleLikeCol">#FF9B76</item>
 		<item name="rrPostSubtitleDownvoteCol">#9494FF</item>
 		<item name="rrPostCommentsButtonBackCol">#EEEEEE</item>
 		<item name="rrPostCommentsButtonHighlightCol">#CCCCCC</item>

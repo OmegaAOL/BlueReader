@@ -24,7 +24,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.graphics.Paint
 import android.text.InputType
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -35,15 +34,14 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textview.MaterialTextView
 import org.omegaaol.bluereader.R
 import org.omegaaol.bluereader.account.RedditAccountManager
 import org.omegaaol.bluereader.activities.OAuthLoginActivity
 import org.omegaaol.bluereader.common.BetterSSB
 import org.omegaaol.bluereader.common.PrefsUtility
 import org.omegaaol.bluereader.common.RunnableOnce
-import org.omegaaol.bluereader.reddit.api.RedditOAuth
-import org.omegaaol.bluereader.reddit.api.RedditOAuth.needsRelogin
+import org.omegaaol.bluereader.bluesky.api.RedditOAuth
+import org.omegaaol.bluereader.bluesky.api.RedditOAuth.needsRelogin
 import org.omegaaol.bluereader.viewholders.VH1Text
 import java.util.*
 

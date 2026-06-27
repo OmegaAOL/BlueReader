@@ -25,8 +25,8 @@ import androidx.annotation.NonNull;
 import org.omegaaol.bluereader.R;
 import org.omegaaol.bluereader.activities.BaseActivity;
 import org.omegaaol.bluereader.common.General;
-import org.omegaaol.bluereader.reddit.prepared.markdown.MarkdownParagraphGroup;
-import org.omegaaol.bluereader.reddit.prepared.markdown.MarkdownParser;
+import org.omegaaol.bluereader.bluesky.prepared.markdown.MarkdownParagraphGroup;
+import org.omegaaol.bluereader.bluesky.prepared.markdown.MarkdownParser;
 
 public class MarkdownPreviewDialog extends PropertiesDialog {
 

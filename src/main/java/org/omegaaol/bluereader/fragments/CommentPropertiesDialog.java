@@ -23,8 +23,8 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import org.omegaaol.bluereader.R;
 import org.omegaaol.bluereader.activities.BaseActivity;
-import org.omegaaol.bluereader.reddit.kthings.RedditComment;
-import org.omegaaol.bluereader.reddit.kthings.RedditFieldEdited;
+import org.omegaaol.bluereader.bluesky.kthings.RedditComment;
+import org.omegaaol.bluereader.bluesky.kthings.RedditFieldEdited;
 
 public final class CommentPropertiesDialog extends PropertiesDialog {
 
@@ -99,8 +99,8 @@ public final class CommentPropertiesDialog extends PropertiesDialog {
 
 		items.addView(propView(
 				context,
-				R.string.props_subreddit,
-				comment.getSubreddit().getDecoded(),
+				R.string.props_feed,
+				comment.getFeed().getDecoded(),
 				false));
 
 		if(comment.getBody() != null && !comment.getBody().getDecoded().isEmpty()) {

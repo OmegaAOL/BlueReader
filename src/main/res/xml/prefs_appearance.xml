@@ -125,8 +125,8 @@
 				android:defaultValue="true"/>
 
 		<CheckBoxPreference
-				android:title="@string/pref_appearance_post_hide_subreddit_header_title"
-				android:key="@string/pref_appearance_post_hide_subreddit_header_key"
+				android:title="@string/pref_appearance_post_hide_feed_header_title"
+				android:key="@string/pref_appearance_post_hide_feed_header_key"
 				android:defaultValue="false"/>
 
 		<CheckBoxPreference

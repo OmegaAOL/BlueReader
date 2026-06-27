@@ -1,9 +1,9 @@
 package org.omegaaol.bluereader.test.markdown;
 
 import org.junit.Test;
-import org.omegaaol.bluereader.reddit.prepared.markdown.CharArrSubstring;
-import org.omegaaol.bluereader.reddit.prepared.markdown.IntArrayLengthPair;
-import org.omegaaol.bluereader.reddit.prepared.markdown.MarkdownTokenizer;
+import org.omegaaol.bluereader.bluesky.prepared.markdown.CharArrSubstring;
+import org.omegaaol.bluereader.bluesky.prepared.markdown.IntArrayLengthPair;
+import org.omegaaol.bluereader.bluesky.prepared.markdown.MarkdownTokenizer;
 
 import static org.junit.Assert.assertEquals;
 

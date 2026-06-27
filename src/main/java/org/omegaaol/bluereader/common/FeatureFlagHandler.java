@@ -46,11 +46,11 @@ public final class FeatureFlagHandler {
 
 	private enum FeatureFlag {
 
-		COMMENT_HEADER_SUBREDDIT_FEATURE("commentHeaderSubredditFeature"),
+		COMMENT_HEADER_FEED_FEATURE("commentHeaderFeedFeature"),
 		CONTROVERSIAL_DATE_SORTS_FEATURE("controversialDateSortsFeature"),
 		HIDE_STATUS_BAR_FOR_MEDIA_FEATURE("hideStatusBarForMediaFeature"),
 		REPLY_IN_POST_ACTION_MENU_FEATURE("replyInPostActionMenuFeature"),
-		MAIN_MENU_FIND_SUBREDDIT_FEATURE("mainMenuFindSubreddit");
+		MAIN_MENU_FIND_FEED_FEATURE("mainMenuFindFeed");
 
 		@NonNull private final String id;
 
@@ -102,10 +102,10 @@ public final class FeatureFlagHandler {
 
 		General.getSharedPrefs(context).performActionWithWriteLock(prefs -> {
 
-			if(getAndSetFeatureFlag(prefs, FeatureFlag.COMMENT_HEADER_SUBREDDIT_FEATURE)
+			if(getAndSetFeatureFlag(prefs, FeatureFlag.COMMENT_HEADER_FEED_FEATURE)
 					== FeatureFlagStatus.UPGRADE_NEEDED) {
 
-				Log.i(TAG, "Upgrading, show comment subreddit in header by default");
+				Log.i(TAG, "Upgrading, show comment feed in header by default");
 
 				final Set<String> existingCommentHeaderItems = getStringSet(
 						R.string.pref_appearance_comment_header_items_key,
@@ -113,7 +113,7 @@ public final class FeatureFlagHandler {
 						context,
 						prefs);
 
-				existingCommentHeaderItems.add("subreddit");
+				existingCommentHeaderItems.add("feed");
 
 				prefs.edit()
 						.putStringSet(
@@ -226,10 +226,10 @@ public final class FeatureFlagHandler {
 						.apply();
 			}
 
-			if(getAndSetFeatureFlag(prefs, FeatureFlag.MAIN_MENU_FIND_SUBREDDIT_FEATURE)
+			if(getAndSetFeatureFlag(prefs, FeatureFlag.MAIN_MENU_FIND_FEED_FEATURE)
 					== FeatureFlagStatus.UPGRADE_NEEDED) {
 
-				Log.i(TAG, "Upgrading, add find subreddit to main menu.");
+				Log.i(TAG, "Upgrading, add find feed to main menu.");
 
 				final Set<String> existingShortcutPreferences
 						= PrefsUtility.getStringSet(
@@ -237,7 +237,7 @@ public final class FeatureFlagHandler {
 								R.array.pref_menus_mainmenu_shortcutitems_items_default
 				);
 
-				existingShortcutPreferences.add("subreddit_search");
+				existingShortcutPreferences.add("feed_search");
 
 				prefs.edit().putStringSet(
 						context.getString(R.string.pref_menus_mainmenu_shortcutitems_key),
@@ -354,7 +354,7 @@ public final class FeatureFlagHandler {
 			if(lastVersion <= 77) {
 
 				// Upgrading from 77/1.9.7 or lower, enable pinning/subscribing/blocking a
-				// subreddit and editing self-posts in the post context menu
+				// feed and editing self-posts in the post context menu
 
 				final Set<String> existingPostContextItems
 						= PrefsUtility.getStringSet(

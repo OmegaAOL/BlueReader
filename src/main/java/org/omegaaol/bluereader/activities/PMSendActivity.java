@@ -38,8 +38,8 @@ import org.omegaaol.bluereader.common.General;
 import org.omegaaol.bluereader.common.PrefsUtility;
 import org.omegaaol.bluereader.common.RRError;
 import org.omegaaol.bluereader.fragments.MarkdownPreviewDialog;
-import org.omegaaol.bluereader.reddit.APIResponseHandler;
-import org.omegaaol.bluereader.reddit.RedditAPI;
+import org.omegaaol.bluereader.bluesky.APIResponseHandler;
+import org.omegaaol.bluereader.bluesky.RedditAPI;
 
 import java.util.ArrayList;
 

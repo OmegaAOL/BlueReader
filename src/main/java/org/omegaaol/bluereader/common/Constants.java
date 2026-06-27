@@ -22,7 +22,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import org.omegaaol.bluereader.BlueReader;
 import org.omegaaol.bluereader.common.collections.CollectionStream;
-import org.omegaaol.bluereader.reddit.things.SubredditCanonicalId;
+import org.omegaaol.bluereader.bluesky.things.FeedCanonicalId;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public final class Constants {
 
 	public static final class Bluesky {
 
-		public static final ArrayList<SubredditCanonicalId> DEFAULT_FEEDS;
+		public static final ArrayList<FeedCanonicalId> DEFAULT_FEEDS;
 
 		public static final HashSet<String> BOT_USERNAMES_LOWERCASE;
 
@@ -77,7 +77,7 @@ public final class Constants {
 			};
 
 			DEFAULT_FEEDS = new CollectionStream<>(defaultFeedStrings)
-					.mapRethrowExceptions(SubredditCanonicalId::new)
+					.mapRethrowExceptions(FeedCanonicalId::new)
 					.collect(new ArrayList<>(defaultFeedStrings.length));
 
 			BOT_USERNAMES_LOWERCASE = new HashSet<>();
@@ -103,10 +103,10 @@ public final class Constants {
 		public static final String PATH_SUBSCRIBE = "/api/subscribe";
 		public static final String PATH_FEEDS_SUGGESTED
 						= "/xrpc/app.bsky.feed.getSuggestedFeeds?limit=100";
-		public static final String PATH_SUBREDDITS_MINE_MODERATOR
-						= "/subreddits/mine/moderator.json?limit=100"; // TODO modded subreddits
-		public static final String PATH_SUBREDDITS_POPULAR = "/subreddits/popular.json";
-		public static final String PATH_LISTS_ACTOR = "/xrpc/app.bsky.graph.getLists?actor="; // TODO multiredits
+		public static final String PATH_FEEDS_MINE_MODERATOR
+						= "/feeds/mine/moderator.json?limit=100"; // TODO modded feeds
+		public static final String PATH_FEEDS_POPULAR = "/feeds/popular.json";
+		public static final String PATH_LISTS_ACTOR = "/xrpc/app.bsky.graph.getLists?actor="; // TODO lists (multireddits)
 		public static final String PATH_COMMENTS = "/comments/";
 		public static final String PATH_ME = "/xrpc/app.bsky.actor.getProfile";
 
@@ -145,13 +145,13 @@ public final class Constants {
 		}
 
 		public static boolean isApiErrorNotAllowed(final String str) {
-			return ".error.SUBREDDIT_NOTALLOWED.field-sr".equals(str)
+			return ".error.FEED_NOTALLOWED.field-sr".equals(str)
 					|| "you aren't allowed to post there.".equals(str);
 		}
 
-		public static boolean isApiErrorSubredditRequired(final String str) {
-			return ".error.SUBREDDIT_REQUIRED.field-sr".equals(str)
-					|| "you must specify a subreddit".equals(str);
+		public static boolean isApiErrorFeedRequired(final String str) {
+			return ".error.FEED_REQUIRED.field-sr".equals(str)
+					|| "you must specify a feed".equals(str);
 		}
 
 		public static boolean isApiErrorURLRequired(final String str) {
@@ -195,10 +195,10 @@ public final class Constants {
 	public static final class Priority {
 		public static final int CAPTCHA = -600;
 		public static final int API_ACTION = -500;
-		public static final int API_MULTIREDDIT_LIST = -200;
-		public static final int API_SUBREDDIT_LIST = -100;
-		public static final int API_SUBREDDIT_SEARCH = -500;
-		public static final int API_SUBREDDIT_INVIDIVUAL = -250;
+		public static final int API_LIST_LIST = -200;
+		public static final int API_FEED_LIST = -100;
+		public static final int API_FEED_SEARCH = -500;
+		public static final int API_FEED_INVIDIVUAL = -250;
 		public static final int API_POST_LIST = -200;
 		public static final int API_COMMENT_LIST = -300;
 		public static final int THUMBNAIL = 100;
@@ -213,9 +213,9 @@ public final class Constants {
 
 	public static final class FileType {
 		public static final int NOCACHE = -1;
-		public static final int SUBREDDIT_LIST = 100;
-		public static final int SUBREDDIT_ABOUT = 101;
-		public static final int MULTIREDDIT_LIST = 102;
+		public static final int FEED_LIST = 100;
+		public static final int FEED_ABOUT = 101;
+		public static final int LIST_LIST = 102;
 		public static final int POST_LIST = 110;
 		public static final int COMMENT_LIST = 120;
 		public static final int USER_ABOUT = 130;

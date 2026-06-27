@@ -30,9 +30,9 @@ import android.widget.TextView;
 import org.omegaaol.bluereader.R;
 import org.omegaaol.bluereader.activities.MoreCommentsListingActivity;
 import org.omegaaol.bluereader.common.General;
-import org.omegaaol.bluereader.reddit.RedditCommentListItem;
-import org.omegaaol.bluereader.reddit.url.PostCommentListingURL;
-import org.omegaaol.bluereader.reddit.url.RedditURLParser;
+import org.omegaaol.bluereader.bluesky.RedditCommentListItem;
+import org.omegaaol.bluereader.bluesky.url.PostCommentListingURL;
+import org.omegaaol.bluereader.bluesky.url.RedditURLParser;
 
 import java.util.ArrayList;
 

@@ -37,17 +37,16 @@ import org.omegaaol.bluereader.common.SharedPrefsWrapper;
 import org.omegaaol.bluereader.common.StringUtils;
 import org.omegaaol.bluereader.common.UnexpectedInternalStateException;
 import org.omegaaol.bluereader.fragments.AccountListDialog;
-import org.omegaaol.bluereader.reddit.PostCommentSort;
-import org.omegaaol.bluereader.reddit.PostSort;
-import org.omegaaol.bluereader.reddit.UserCommentSort;
-import org.omegaaol.bluereader.reddit.api.SubredditSubscriptionState;
+import org.omegaaol.bluereader.bluesky.PostCommentSort;
+import org.omegaaol.bluereader.bluesky.PostSort;
+import org.omegaaol.bluereader.bluesky.UserCommentSort;
+import org.omegaaol.bluereader.bluesky.api.FeedSubscriptionState;
 import org.omegaaol.bluereader.settings.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public final class OptionsMenuUtility {
 
@@ -80,7 +79,7 @@ public final class OptionsMenuUtility {
 		SUBMIT_POST,
 		SEARCH,
 		SEARCH_COMMENTS,
-		REFRESH_SUBREDDITS,
+		REFRESH_FEEDS,
 		REFRESH_POSTS,
 		REFRESH_COMMENTS,
 		PAST_POSTS,
@@ -100,7 +99,7 @@ public final class OptionsMenuUtility {
 	public static <E extends BaseActivity & OptionsMenuListener> void prepare(
 			final E activity,
 			final Menu menu,
-			final boolean subredditsVisible,
+			final boolean feedsVisible,
 			final boolean postsVisible,
 			final boolean commentsVisible,
 			final boolean areSearchResults,
@@ -109,24 +108,24 @@ public final class OptionsMenuUtility {
 			final boolean postsSortable,
 			final boolean commentsSortable,
 			final boolean isFrontPage,
-			final SubredditSubscriptionState subredditSubscriptionState,
-			final boolean subredditHasSidebar,
+			final FeedSubscriptionState feedSubscriptionState,
+			final boolean feedHasSidebar,
 			final boolean pastCommentsSupported,
-			final Boolean subredditPinned,
-			final Boolean subredditBlocked) {
+			final Boolean feedPinned,
+			final Boolean feedBlocked) {
 
 		final EnumMap<AppbarItemsPref, Integer> appbarItemsPrefs
 				= PrefsUtility.pref_menus_appbar_items();
 
-		if(subredditsVisible && !postsVisible && !commentsVisible) {
+		if(feedsVisible && !postsVisible && !commentsVisible) {
 			add(
 					activity,
 					menu,
-					Option.REFRESH_SUBREDDITS,
+					Option.REFRESH_FEEDS,
 					getOrThrow(appbarItemsPrefs, AppbarItemsPref.REFRESH),
 					false);
 
-		} else if(!subredditsVisible && postsVisible && !commentsVisible) {
+		} else if(!feedsVisible && postsVisible && !commentsVisible) {
 			if(postsSortable) {
 
 				if(areSearchResults) {
@@ -168,8 +167,8 @@ public final class OptionsMenuUtility {
 					getOrThrow(appbarItemsPrefs, AppbarItemsPref.SEARCH),
 					false);
 
-			if(subredditPinned != null) {
-				if(subredditPinned) {
+			if(feedPinned != null) {
+				if(feedPinned) {
 					add(
 							activity,
 							menu,
@@ -186,16 +185,16 @@ public final class OptionsMenuUtility {
 				}
 			}
 
-			if(subredditSubscriptionState != null) {
+			if(feedSubscriptionState != null) {
 				addSubscriptionItem(
 						activity,
 						menu,
 						getOrThrow(appbarItemsPrefs, AppbarItemsPref.SUBSCRIBE),
-						subredditSubscriptionState);
+						feedSubscriptionState);
 			}
 
-			if(subredditBlocked != null) {
-				if(subredditBlocked) {
+			if(feedBlocked != null) {
+				if(feedBlocked) {
 					add(
 							activity,
 							menu,
@@ -212,7 +211,7 @@ public final class OptionsMenuUtility {
 				}
 			}
 
-			if(subredditHasSidebar) {
+			if(feedHasSidebar) {
 				add(
 						activity,
 						menu,
@@ -221,7 +220,7 @@ public final class OptionsMenuUtility {
 						false);
 			}
 
-		} else if(!subredditsVisible && !postsVisible && commentsVisible) {
+		} else if(!feedsVisible && !postsVisible && commentsVisible) {
 			if(commentsSortable && !isUserCommentListing) {
 				addAllCommentSorts(
 						activity,
@@ -321,8 +320,8 @@ public final class OptionsMenuUtility {
 								appbarItemsPrefs,
 								AppbarItemsPref.REFRESH)));
 
-				if(subredditsVisible) {
-					add(activity, refreshMenu, Option.REFRESH_SUBREDDITS);
+				if(feedsVisible) {
+					add(activity, refreshMenu, Option.REFRESH_FEEDS);
 				}
 				if(postsVisible) {
 					add(activity, refreshMenu, Option.REFRESH_POSTS);
@@ -389,8 +388,8 @@ public final class OptionsMenuUtility {
 						getOrThrow(appbarItemsPrefs, AppbarItemsPref.SUBMIT_POST),
 						false);
 
-				if(subredditPinned != null) {
-					if(subredditPinned) {
+				if(feedPinned != null) {
+					if(feedPinned) {
 						add(
 								activity,
 								menu,
@@ -407,16 +406,16 @@ public final class OptionsMenuUtility {
 					}
 				}
 
-				if(subredditSubscriptionState != null) {
+				if(feedSubscriptionState != null) {
 					addSubscriptionItem(
 							activity,
 							menu,
 							getOrThrow(appbarItemsPrefs, AppbarItemsPref.SUBSCRIBE),
-							subredditSubscriptionState);
+							feedSubscriptionState);
 				}
 
-				if(subredditBlocked != null) {
-					if(subredditBlocked) {
+				if(feedBlocked != null) {
+					if(feedBlocked) {
 						add(
 								activity,
 								menu,
@@ -433,7 +432,7 @@ public final class OptionsMenuUtility {
 					}
 				}
 
-				if(subredditHasSidebar) {
+				if(feedHasSidebar) {
 					add(
 							activity,
 							menu,
@@ -463,7 +462,7 @@ public final class OptionsMenuUtility {
 
 		// Always show settings if the main menu is visible, to prevent user from being
 		// locked out of them
-		if(subredditsVisible
+		if(feedsVisible
 				&& getOrThrow(appbarItemsPrefs, AppbarItemsPref.SETTINGS)
 				== DO_NOT_SHOW) {
 			add(activity, menu, Option.SETTINGS, MenuItem.SHOW_AS_ACTION_NEVER, false);
@@ -483,7 +482,7 @@ public final class OptionsMenuUtility {
 				getOrThrow(appbarItemsPrefs, AppbarItemsPref.CLOSE_ALL),
 				false);
 
-		pruneMenu(activity, menu, appbarItemsPrefs, !subredditsVisible);
+		pruneMenu(activity, menu, appbarItemsPrefs, !feedsVisible);
 	}
 
 	public static void pruneMenu(
@@ -549,13 +548,13 @@ public final class OptionsMenuUtility {
 
 	private static void addSubscriptionItem(
 			final BaseActivity activity, final Menu menu, final int showAsAction,
-			final SubredditSubscriptionState subredditSubscriptionState) {
+			final FeedSubscriptionState feedSubscriptionState) {
 
-		if(subredditSubscriptionState == null) {
+		if(feedSubscriptionState == null) {
 			return;
 		}
 
-		switch(subredditSubscriptionState) {
+		switch(feedSubscriptionState) {
 			case NOT_SUBSCRIBED:
 				add(activity, menu, Option.SUBSCRIBE, showAsAction, false);
 				return;
@@ -781,21 +780,21 @@ public final class OptionsMenuUtility {
 
 				break;
 			}
-			case REFRESH_SUBREDDITS: {
-				final MenuItem refreshSubreddits = menu.add(
+			case REFRESH_FEEDS: {
+				final MenuItem refreshFeeds = menu.add(
 						Menu.NONE,
 						AppbarItemsPref.REFRESH.ordinal(),
 						Menu.NONE,
-						R.string.options_refresh_subreddits)
+						R.string.options_refresh_feeds)
 						.setOnMenuItemClickListener(item -> {
-							((OptionsMenuSubredditsListener)activity)
-									.onRefreshSubreddits();
+							((OptionsMenuFeedsListener)activity)
+									.onRefreshFeeds();
 							return true;
 						});
 
-				refreshSubreddits.setShowAsAction(showAsAction);
+				refreshFeeds.setShowAsAction(showAsAction);
 				if(!longText) {
-					refreshSubreddits.setIcon(R.drawable.ic_refresh_dark);
+					refreshFeeds.setIcon(R.drawable.ic_refresh_dark);
 				}
 
 				break;
@@ -1018,7 +1017,7 @@ public final class OptionsMenuUtility {
 						Menu.NONE,
 						AppbarItemsPref.PIN.ordinal(),
 						Menu.NONE,
-						R.string.pin_subreddit)
+						R.string.pin_feed)
 						.setOnMenuItemClickListener(item -> {
 							((OptionsMenuPostsListener)activity).onPin();
 							return true;
@@ -1034,7 +1033,7 @@ public final class OptionsMenuUtility {
 						Menu.NONE,
 						AppbarItemsPref.PIN.ordinal(),
 						Menu.NONE,
-						R.string.unpin_subreddit)
+						R.string.unpin_feed)
 						.setOnMenuItemClickListener(item -> {
 							((OptionsMenuPostsListener)activity).onUnpin();
 							return true;
@@ -1050,7 +1049,7 @@ public final class OptionsMenuUtility {
 						Menu.NONE,
 						AppbarItemsPref.BLOCK.ordinal(),
 						Menu.NONE,
-						R.string.block_subreddit)
+						R.string.block_feed)
 						.setOnMenuItemClickListener(item -> {
 							((OptionsMenuPostsListener)activity).onBlock();
 							return true;
@@ -1066,7 +1065,7 @@ public final class OptionsMenuUtility {
 						Menu.NONE,
 						AppbarItemsPref.BLOCK.ordinal(),
 						Menu.NONE,
-						R.string.unblock_subreddit)
+						R.string.unblock_feed)
 						.setOnMenuItemClickListener(item -> {
 							((OptionsMenuPostsListener)activity).onUnblock();
 							return true;
@@ -1477,8 +1476,8 @@ public final class OptionsMenuUtility {
 	private interface OptionsMenuListener {
 	}
 
-	public interface OptionsMenuSubredditsListener extends OptionsMenuListener {
-		void onRefreshSubreddits();
+	public interface OptionsMenuFeedsListener extends OptionsMenuListener {
+		void onRefreshFeeds();
 	}
 
 	public interface OptionsMenuPostsListener extends OptionsMenuListener {

@@ -55,7 +55,7 @@
 
     <!-- Constants. Do not change. -->
     <string-array name="pref_behaviour_fling_post_actions_return">
-        <item>upvote</item>
+        <item>like</item>
         <item>downvote</item>
         <item>save</item>
         <item>hide</item>
@@ -64,7 +64,7 @@
         <item>browser</item>
         <item>report</item>
         <item>save_image</item>
-        <item>goto_subreddit</item>
+        <item>goto_feed</item>
         <item>share</item>
         <item>share_comments</item>
         <item>share_image</item>
@@ -109,7 +109,7 @@
 
 	<!-- Constants. Do not change. -->
 	<string-array name="pref_behaviour_fling_comment_actions_return">
-		<item>upvote</item>
+		<item>like</item>
 		<item>downvote</item>
 		<item>save</item>
 		<item>report</item>
@@ -200,13 +200,13 @@
 		<item>date</item>
 	</string-array>
 
-	<string-array name="pref_behaviour_blocked_subredditsort_array">
-		<item>@string/sort_blocked_subreddit_name</item>
-		<item>@string/sort_blocked_subreddit_date</item>
+	<string-array name="pref_behaviour_blocked_feedsort_array">
+		<item>@string/sort_blocked_feed_name</item>
+		<item>@string/sort_blocked_feed_date</item>
 	</string-array>
 
 	<!-- Constants. Do not change. -->
-	<string-array name="pref_behaviour_blocked_subredditsort_array_return">
+	<string-array name="pref_behaviour_blocked_feedsort_array_return">
 		<item>name</item>
 		<item>date</item>
 	</string-array>
@@ -464,9 +464,9 @@
         <item>@string/action_selftext_links</item>
         <item>@string/action_save_media</item>
         <item>@string/action_toggle_search_feeds</item>
-		<item>@string/action_pin_subreddit</item>
-		<item>@string/action_subscribe_subreddit</item>
-		<item>@string/action_block_subreddit</item>
+		<item>@string/action_pin_feed</item>
+		<item>@string/action_subscribe_feed</item>
+		<item>@string/action_block_feed</item>
         <item>@string/action_share</item>
         <item>@string/action_share_comments</item>
         <item>@string/action_share_media</item>
@@ -479,7 +479,7 @@
 
     <!-- Constants. Do not change. -->
     <string-array name="pref_menus_post_context_items_return">
-        <item>upvote</item>
+        <item>like</item>
         <item>downvote</item>
 		<item>comments</item>
         <item>save</item>
@@ -490,7 +490,7 @@
         <item>external</item>
         <item>selftext_links</item>
         <item>save_image</item>
-        <item>goto_subreddit</item>
+        <item>goto_feed</item>
 		<item>pin</item>
 		<item>subscribe</item>
 		<item>block</item>
@@ -504,17 +504,17 @@
 		<item>edit</item>
     </string-array>
 
-	<string-array name="pref_menus_subreddit_context_items">
+	<string-array name="pref_menus_feed_context_items">
 		<item>@string/action_external</item>
 		<item>@string/action_share</item>
 		<item>@string/action_copy_link</item>
-		<item>@string/pin_subreddit</item>
+		<item>@string/pin_feed</item>
 		<item>@string/options_subscribe</item>
-		<item>@string/block_subreddit</item>
+		<item>@string/block_feed</item>
 	</string-array>
 
 	<!-- Constants. Do not change. -->
-	<string-array name="pref_menus_subreddit_context_items_return">
+	<string-array name="pref_menus_feed_context_items_return">
 		<item>external</item>
 		<item>share</item>
 		<item>copy_url</item>
@@ -523,7 +523,7 @@
 		<item>block</item>
 	</string-array>
 
-	<string-array name="pref_menus_subreddit_context_items_default">
+	<string-array name="pref_menus_feed_context_items_default">
 		<item>external</item>
 		<item>share</item>
 		<item>copy_url</item>
@@ -554,7 +554,7 @@
         <item>action_menu</item>
         <item>comments_switch</item>
         <item>link_switch</item>
-        <item>upvote</item>
+        <item>like</item>
         <item>downvote</item>
         <item>save</item>
         <item>hide</item>
@@ -599,7 +599,7 @@
         <item>@string/pref_appearance_comment_header_items_controversiality</item>
         <item>@string/pref_appearance_comment_header_items_age</item>
         <item>@string/pref_appearance_comment_header_items_gold</item>
-        <item>@string/pref_appearance_post_subtitle_items_subreddit</item>
+        <item>@string/pref_appearance_post_subtitle_items_feed</item>
     </string-array>
 
     <!-- Constants. Do not change. -->
@@ -610,7 +610,7 @@
         <item>controversiality</item>
         <item>age</item>
         <item>gold</item>
-        <item>subreddit</item>
+        <item>feed</item>
     </string-array>
 
     <!-- Constants. Do not change. -->
@@ -620,7 +620,7 @@
         <item>score</item>
         <item>age</item>
         <item>gold</item>
-        <item>subreddit</item>
+        <item>feed</item>
     </string-array>
 
     <!-- Constants. Do not change. -->
@@ -649,7 +649,7 @@
         <item>@string/mainmenu_submitted</item>
         <item>@string/mainmenu_saved</item>
         <item>@string/mainmenu_hidden</item>
-        <item>@string/mainmenu_upvoted</item>
+        <item>@string/mainmenu_liked</item>
         <item>@string/mainmenu_downvoted</item>
         <item>@string/mainmenu_modmail</item>
     </string-array>
@@ -662,7 +662,7 @@
         <item>submitted</item>
         <item>saved</item>
         <item>hidden</item>
-        <item>upvoted</item>
+        <item>liked</item>
         <item>downvoted</item>
         <item>modmail</item>
     </string-array>
@@ -673,7 +673,7 @@
         <item>inbox</item>
         <item>saved</item>
         <item>hidden</item>
-        <item>upvoted</item>
+        <item>liked</item>
     </string-array>
 
     <!-- 2015-06-20 -->
@@ -700,8 +700,8 @@
         <item>@string/options_submit_post</item>
         <item>@string/action_search</item>
         <item>@string/action_reply</item>
-        <item>@string/pin_subreddit</item>
-        <item>@string/block_subreddit</item>
+        <item>@string/pin_feed</item>
+        <item>@string/block_feed</item>
     </string-array>
 
     <!-- Constants. Do not change. -->
@@ -828,7 +828,7 @@
 	</string-array>
 
 	<string-array name="mainmenu_custom_destination_type">
-		<item>@string/mainmenu_custom_destination_subreddit</item>
+		<item>@string/mainmenu_custom_destination_feed</item>
 		<item>@string/mainmenu_custom_destination_user</item>
 		<item>@string/mainmenu_custom_destination_url</item>
 		<item>@string/mainmenu_custom_destination_search</item>
@@ -836,7 +836,7 @@
 
 	<!-- Constants. Do not change. -->
 	<string-array name="mainmenu_custom_destination_type_return">
-		<item>subreddit</item>
+		<item>feed</item>
 		<item>user</item>
 		<item>url</item>
 		<item>search</item>
@@ -859,7 +859,7 @@
 		<item>frontpage</item>
 		<item>popular</item>
 		<item>all</item>
-		<item>subreddit_search</item>
+		<item>feed_search</item>
 		<item>custom</item>
 		<item>random</item>
 		<item>random_nsfw</item>
@@ -869,7 +869,7 @@
 	<string-array name="pref_menus_mainmenu_shortcutitems_items_default">
 		<item>frontpage</item>
 		<item>all</item>
-		<item>subreddit_search</item>
+		<item>feed_search</item>
 		<item>custom</item>
 	</string-array>
 
@@ -879,11 +879,11 @@
 		<item>@string/pref_appearance_comment_header_items_author</item>
 		<item>@string/pref_appearance_comment_header_items_flair</item>
 		<item>@string/pref_appearance_comment_header_items_score</item>
-		<item>@string/pref_appearance_post_subtitle_items_upvote_ratio</item>
+		<item>@string/pref_appearance_post_subtitle_items_like_ratio</item>
 		<item>@string/pref_appearance_post_subtitle_items_comments</item>
 		<item>@string/pref_appearance_comment_header_items_age</item>
 		<item>@string/pref_appearance_comment_header_items_gold</item>
-		<item>@string/pref_appearance_post_subtitle_items_subreddit</item>
+		<item>@string/pref_appearance_post_subtitle_items_feed</item>
 		<item>@string/pref_appearance_post_subtitle_items_domain</item>
 		<item>@string/pref_appearance_post_subtitle_items_sticky</item>
 		<item>@string/pref_appearance_post_subtitle_items_spoiler</item>
@@ -895,11 +895,11 @@
 		<item>author</item>
 		<item>flair</item>
 		<item>score</item>
-		<item>upvote_ratio</item>
+		<item>like_ratio</item>
 		<item>comments</item>
 		<item>age</item>
 		<item>gold</item>
-		<item>subreddit</item>
+		<item>feed</item>
 		<item>domain</item>
 		<item>sticky</item>
 		<item>spoiler</item>
@@ -913,7 +913,7 @@
 		<item>score</item>
 		<item>age</item>
 		<item>gold</item>
-		<item>subreddit</item>
+		<item>feed</item>
 		<item>domain</item>
 		<item>sticky</item>
 		<item>spoiler</item>
@@ -1119,7 +1119,7 @@
 
 	<!-- Constants. Do not change. -->
 	<string-array name="pref_menus_post_context_items_default">
-		<item>upvote</item>
+		<item>like</item>
 		<item>downvote</item>
 		<item>save</item>
 		<item>hide</item>
@@ -1129,7 +1129,7 @@
 		<item>external</item>
 		<item>selftext_links</item>
 		<item>save_image</item>
-		<item>goto_subreddit</item>
+		<item>goto_feed</item>
 		<item>pin</item>
 		<item>subscribe</item>
 		<item>block</item>
@@ -1259,7 +1259,7 @@
 
 	<!-- Constants. Do not change. -->
 	<string-array name="pref_menus_comment_context_items_return">
-		<item>upvote</item>
+		<item>like</item>
 		<item>downvote</item>
 		<item>save</item>
 		<item>report</item>

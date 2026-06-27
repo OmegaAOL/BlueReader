@@ -22,7 +22,7 @@ import android.content.Context;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import org.omegaaol.bluereader.common.TriggerableThread;
-import org.omegaaol.bluereader.reddit.prepared.RedditChangeDataManager;
+import org.omegaaol.bluereader.bluesky.prepared.RedditChangeDataManager;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
