@@ -1,20 +1,23 @@
-BlueReader
-=========
+# BlueReader
 
-An unofficial, open source Android client for Bluesky.
+BlueReader is an unofficial, open source Android client for Bluesky. It is forked from [RedReader v1.22](https://github.com/QuantumBadger/RedReader/tree/v1.22), the last version to support Android 4.x. In addition to supporting Bluesky instead of Reddit, it has various improvements over the base application.
 
-![CI](https://github.com/QuantumBadger/BlueReader/workflows/CI/badge.svg?branch=master)
-[![Translation status](https://hosted.weblate.org/widgets/redreader/-/svg-badge.svg)](https://hosted.weblate.org/engage/redreader/?utm_source=widget)
+## Improvements over RedReader
 
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
-      alt="Get it on Google Play"
-      height="80">](https://play.google.com/store/apps/details?id=org.omegaaol.bluereader)
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
-     alt="Get it on F-Droid"
-     height="80">](https://f-droid.org/packages/org.omegaaol.bluereader/)
-
-Features
---------
+* Bluesky login support 
+* Greatly improved theming system
+	* Separates accent color and themes, allowing accents to be applied to light, dim, dark, and black themes
+	* Themes the Settings UI and some dialogs according to the default selected theme
+	* Adds status and nav bar theming to Android 4.4 KitKat (previously only worked on Android 5+)
+	* Allows themes to now be applied without restart
+* Decrease the minimum required Android version from 4.1 (Jelly Bean) to 4.0 (Ice Cream Sandwich)
+* Increase the target Android version from Android 12 to Android 14
+* Refactor and improve shipped icons for Material You adaptive design
+* Add TLS 1.2 and 1.3 support to the application on Android 4.x
+* Change dialogs from using forced Material Design to using the system style (Holo on Android 4.x, Material on Android 5+, Samsung's on TouchWiz/OneUI, etc...)
+* And much more
+  
+## Features
 
 * Free and open source, with no ads or tracking
 * Lightweight and fast
@@ -32,52 +35,32 @@ Features
 * Accessibility features and optimization for screen reader use
 
 
-Downloading
------------
+## Downloading
 
-BlueReader can be found for free on F-Droid:
-
-https://f-droid.org/app/org.omegaaol.bluereader
-
-The APK is also available here:
-
-https://github.com/OmegaAOL/BlueReader/releases
+Currently if you want to get BlueReader you will have to download from 
+releases, GitHub Actions, or build from source.
 
 
-Translating
------------
-
-Please help us translate BlueReader into new languages, or improve the
-translations for existing languages!
-
-https://hosted.weblate.org/projects/redreader/strings/
-
-[![Translation status](https://hosted.weblate.org/widgets/redreader/-/287x66-grey.png)](https://hosted.weblate.org/engage/redreader/?utm_source=widget)
-
-
-Pull Requests
--------------
+## Pull requests
 
 Please see the contribution guidelines in
  [CONTRIBUTING.md](CONTRIBUTING.md). 
 
 
-Building
---------
+## Building
 
 BlueReader is built using Gradle. On Linux, simply run:
 
     ./gradlew installDebug
 
 
-License
--------
+## License
 
-BlueReader is licensed under the GPL, version 3. A copy of the license is
-included in [LICENSE.txt](LICENSE.txt).
+BlueReader, like RedReader, is licensed under the GPLv3. A copy of 
+the license is included in [LICENSE.txt](LICENSE.txt).
 
 
-Thanks
-------
+## Thanks
 
-A full list of contributors is included in the [changelog](src/main/assets/changelog.txt).
+A full list of contributors is included in the 
+[changelog](src/main/assets/changelog.txt).
