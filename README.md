@@ -9,7 +9,7 @@ BlueReader is an unofficial, open source Android client for Bluesky. It is forke
 	* Separates accent color and themes, allowing accents to be applied to light, dim, dark, and black themes
 	* Themes the Settings UI and some dialogs according to the default selected theme
 	* Adds status and nav bar theming to Android 4.4 KitKat (previously only worked on Android 5+)
-	* Allows themes to now be applied without restart
+* Allows some preferences to now be applied without restarting the application
 * Decrease the minimum required Android version from 4.1 (Jelly Bean) to 4.0 (Ice Cream Sandwich)
 * Increase the target Android version from Android 12 to Android 14
 * Refactor and improve shipped icons for Material You adaptive design
